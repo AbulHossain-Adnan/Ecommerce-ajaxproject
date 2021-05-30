@@ -33,3 +33,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
     Route::post('category/updated',[CategoryController::class,'udpated']);
     Route::resource('category', CategoryController::class);
 });
+
+// All Product Route
+Route::get('/admin/product/add', [App\Http\Controllers\Admin\Product\ProductController::class, 'create'])->name('add.product');
+Route::get('/admin/product/all', [App\Http\Controllers\Admin\Product\ProductController::class, 'index'])->name('all.product');

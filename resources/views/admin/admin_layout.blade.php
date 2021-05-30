@@ -124,17 +124,7 @@
         <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
         <li class="nav-item"><a href="typography.html" class="nav-link">Typography</a></li>
       </ul>
-      <a href="#" class="sl-menu-link">
-        <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-          <span class="menu-item-label">Product</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
-        </div><!-- menu-item -->
-      </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
-        <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
-      </ul>
+    
       <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
@@ -155,7 +145,7 @@
       <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
-          <span class="menu-item-label">Pages</span>
+          <span class="menu-item-label">Pagesg</span>
           <i class="menu-item-arrow fa fa-angle-down"></i>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
@@ -165,6 +155,18 @@
         <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
         <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
       </ul>
+      <a href="#" class="sl-menu-link">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+          <span class="menu-item-label">Product</span>
+          <i class="menu-item-arrow fa fa-angle-down"></i>
+        </div><!-- menu-item -->
+      </a><!-- sl-menu-link -->
+      <ul class="sl-menu-sub nav flex-column">
+        <li class="nav-item"><a href="{{ route('add.product') }}" class="nav-link">Add product</a></li>
+        <li class="nav-item"><a href="{{ route('all.product') }}" class="nav-link">All product</a></li>
+      </ul>
+
 =======
 
         <a href="#" class="sl-menu-link">
@@ -180,7 +182,7 @@
           <li class="nav-item"><a href="#" class="nav-link">Brands</a></li>
         </ul>
         {{-- category start here --}}
-
+       
 
 >>>>>>> 03bdbaf908f7df1fdea4aa0ddaa98353d22414ca
     </div><!-- sl-sideleft-menu -->
