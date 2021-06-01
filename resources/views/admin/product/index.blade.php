@@ -1,3 +1,4 @@
-@extends('admin.admin_layout')
-@section('adminMain')
-@endsection
+
+@foreach ($products as $item)
+    {{$item}}
+@endforeach

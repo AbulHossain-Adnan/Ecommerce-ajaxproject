@@ -23,6 +23,7 @@
                   @error('Product_name')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                    
                   <input class="form-control" type="text" name="Product_name"  placeholder="Enter Product name">
                 </div>
               </div><!-- col-4 -->
@@ -48,12 +49,18 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose country">
-                    <option label="Choose country"></option>
-                    <option value="USA">United States of America</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="China">China</option>
-                    <option value="Japan">Japan</option>
+                  <select class="form-control select2" data-placeholder="Choose country" name="category_id">
+                    <option label="Choose category"></option>
+
+                   
+                        @foreach ($categories as $item)
+                            
+                      
+                    
+                    <option value="{{$item->id}}">{{$item->category_name}}</option>
+
+                    @endforeach
+                 
                   </select>
                 </div>
               </div><!-- col-4 -->
@@ -72,12 +79,15 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose country">
-                    <option label="Choose country"></option>
-                    <option value="USA">United States of America</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="China">China</option>
-                    <option value="Japan">Japan</option>
+                  <select class="form-control select2" data-placeholder="Choose country" name="brand_id">
+                    <option label="Choose brand"></option>
+                    @foreach ($brands as $item)
+                        
+                    
+                    <option value="{{$item->id}}">{{$item->brand_name}}</option>
+
+                    @endforeach
+                   
                   </select>
                 </div>
               </div><!-- col-4 -->

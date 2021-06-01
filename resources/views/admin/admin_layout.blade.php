@@ -70,7 +70,7 @@
           <span class="menu-item-label">Dashboard</span>
         </div><!-- menu-item -->
         
-<<<<<<< HEAD
+
       </a><!-- sl-menu-link -->
       <a href="widgets.html" class="sl-menu-link">
         <div class="sl-menu-item">
@@ -187,7 +187,7 @@
         {{-- category start here --}}
        
 
->>>>>>> 03bdbaf908f7df1fdea4aa0ddaa98353d22414ca
+
     </div><!-- sl-sideleft-menu -->
 
     <br>

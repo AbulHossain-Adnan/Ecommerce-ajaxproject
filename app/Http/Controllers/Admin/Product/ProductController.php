@@ -5,19 +5,35 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Admin\Category;
+use App\Models\Admin\Brand;
 use Image;
+use DB;
 
 class ProductController extends Controller
 {
     public function index(){
-        return view('admin.product.index');
+
+        $products = DB::table('products')
+                        ->join('categories','products.category_id','categories.id')
+                        ->join('brands','products.brand_id','brands.id')  
+                        ->select('products.*','categories.category_name','brands.brand_name')->get();
+
+                       
+                        return response()->json($products);  
+
+        return view('admin.product.index',compact('products'));
         
     }
     public function create(){
-        return view('admin.product.create');
+        $categories =Category::all();
+        $brands =Brand::all();
+       
+        return view('admin.product.create', compact('categories','brands'));
 
     }
     public function store(request $request){
+        
         $validated = $request->validate([
             'Product_name' => 'required',
             'Product_code' => 'required',
@@ -34,6 +50,8 @@ class ProductController extends Controller
             'image_three'=>'required|mimes:jpg,bmp,png',
         ]);
         $product = new product();
+        $product->category_id=$request->category_id;
+        $product->brand_id=$request->brand_id;
         $product->product_name=$request->Product_name;
         $product->product_code=$request->Product_code;
         $product->product_quantity=$request->Product_quantity;
