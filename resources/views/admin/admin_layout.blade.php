@@ -43,6 +43,8 @@
   <link href="{{ asset('backend') }}/lib/select2/css/select2.min.css" rel="stylesheet">
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
+  <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+ 
 </head>
 
 <body>
@@ -67,6 +69,7 @@
           <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
           <span class="menu-item-label">Dashboard</span>
         </div><!-- menu-item -->
+        
 <<<<<<< HEAD
       </a><!-- sl-menu-link -->
       <a href="widgets.html" class="sl-menu-link">
@@ -450,6 +453,24 @@
   <script src="{{ asset('backend') }}/lib/Flot/jquery.flot.pie.js"></script>
   <script src="{{ asset('backend') }}/lib/Flot/jquery.flot.resize.js"></script>
   <script src="{{ asset('backend') }}/lib/flot-spline/jquery.flot.spline.js"></script>
+
+  <script src="{{ asset('backend') }}/lib/medium-editor/medium-editor.js"></script>
+    <script src="{{ asset('backend') }}/lib/summernote/summernote-bs4.min.js"></script>
+
+    <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
   @yield('script')
 
   <script src="{{ asset('backend') }}/js/starlight.js"></script>
@@ -503,6 +524,7 @@
                       });
                   });
   </script>
+  
 
 </body>
 

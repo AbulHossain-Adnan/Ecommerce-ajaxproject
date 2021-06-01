@@ -1,4 +1,5 @@
 @extends('admin.admin_layout')
+<link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet"/>
 @section('adminMain')
 
 <!-- ########## START: MAIN PANEL ########## -->
@@ -9,42 +10,41 @@
         <span class="breadcrumb-item active">Form Layouts</span>
       </nav>
 
-      <div class="sl-pagebody">
-        <div class="sl-page-title">
-          <h5>Form Layouts</h5>
-          <p>Forms are used to collect user information with different element types of input, select, checkboxes, radios and more.</p>
-        </div><!-- sl-page-title -->
-
         <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">Top Label Layout</h6>
-          <p class="mg-b-20 mg-sm-b-30">A form with a label on top of each form control.</p>
-
+          <h6 class="card-body-title">New product Add</h6>
+          <p class="mg-b-20 mg-sm-b-30">New Product Add Form</p>
+        <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
           <div class="form-layout">
             <div class="row mg-b-25">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="firstname" value="John Paul" placeholder="Enter firstname">
+                  <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
+                  @error('Product_name')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="Product_name"  placeholder="Enter Product name">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="lastname" value="McDoe" placeholder="Enter lastname">
+                  <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
+                  @error('Product_code')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="Product_code"  placeholder="Enter product code">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="email" value="johnpaul@yourdomain.com" placeholder="Enter email address">
+                  <label class="form-control-label">Quantity<span class="tx-danger">*</span></label>
+                  @error('Product_quantity')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="Product_quantity" placeholder="Enter product quantity">
                 </div>
               </div><!-- col-4 -->
-              <div class="col-lg-8">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Mail Address: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="address" value="Market St. San Francisco" placeholder="Enter address">
-                </div>
-              </div><!-- col-8 -->
+             
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
@@ -57,7 +57,211 @@
                   </select>
                 </div>
               </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  <select class="form-control select2" data-placeholder="Choose country">
+                    <option label="Choose country"></option>
+                    <option value="USA">United States of America</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                  </select>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  <select class="form-control select2" data-placeholder="Choose country">
+                    <option label="Choose country"></option>
+                    <option value="USA">United States of America</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                  </select>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Product size<span class="tx-danger">*</span></label>
+                  @error('product_size')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="product_size" id="size" data-role="tagsinput" placeholder="Enter product size">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Product color<span class="tx-danger">*</span></label>
+                  @error('Product_color')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="Product_color" id="color" data-role="tagsinput" placeholder="Enter product color">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Selling price<span class="tx-danger">*</span></label>
+                  @error('selling_price')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="selling_price" placeholder="Enter product selling price">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Video link<span class="tx-danger">*</span></label>
+                  @error('video_link')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control"  name="video_link" placeholder="video link">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">discount price<span class="tx-danger">*</span></label>
+                  @error('discount_price')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="discount_price" placeholder="Enter product discount price">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">status<span class="tx-danger">*</span></label>
+                  @error('status')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="text" name="status" value="1">
+                </div>
+              </div><!-- col-4 -->
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-control-label">Product details<span class="tx-danger">*</span></label>
+                  @error('product_details')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <textarea class="form-control" type="text" name="product_details" id="summernote"></textarea>
+                 
+                </div>
+              </div><!-- col-4 -->
+           
+             
+           
+            
+      
+            
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label"> image one (main slider)<span class="tx-danger">*</span></label>
+                  @error('image_one')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="file" id="file" name="image_one" onchange="readURL(this)" >
+                  <img src="#" alt="" id="one">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label"> image two (main slider)<span class="tx-danger">*</span></label>
+                  @error('image_two')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="file" onchange="readURL2(this)" name="image_two" >
+                  <img src="#" alt="" id="two">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label"> image three (main slider)<span class="tx-danger">*</span></label>
+                  @error('image_three')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  <input class="form-control" type="file" name="image_three" onchange="readURL3(this)" >
+                  <img src="#" alt="" id="three">
+                </div>
+              </div><!-- col-4 -->
+              <br> <br>
+           
+            
+             
+              
             </div><!-- row -->
+            <br> <br> <br>
+            <hr>
+            <br>
+                   <br>
+                  
+                
+              
+            <div class="row">
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="main_slider" value="1">
+              <span>Main slider</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="main_slider" value="1">
+              <span>Mid slider</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="hot_deal" value="1">
+              <span>hot deal</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="hot_new" value="1">
+              <span>hot new</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+          
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="trend" value="1">
+              <span>trend product</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="best_rated" value="1">
+              <span>best rated</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+            
+            </div><!-- row -->
+            <br>
+            <br>
 
             <div class="form-layout-footer">
               <button class="btn btn-info mg-r-5">Submit Form</button>
@@ -65,115 +269,61 @@
             </div><!-- form-layout-footer -->
           </div><!-- form-layout -->
         </div><!-- card -->
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+        
 
-        <div class="row row-sm mg-t-20">
-          <div class="col-xl-6">
-            <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-              <h6 class="card-body-title">Left Label Alignment</h6>
-              <p class="mg-b-20 mg-sm-b-30">A basic form where labels are aligned in left.</p>
-              <div class="row">
-                <label class="col-sm-4 form-control-label">Firstname: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter firstname">
-                </div>
-              </div><!-- row -->
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Lastname: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter lastname">
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Email: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter email address">
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Address: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <textarea rows="2" class="form-control" placeholder="Enter your address"></textarea>
-                </div>
-              </div>
-              <div class="form-layout-footer mg-t-30">
-                <button class="btn btn-info mg-r-5">Submit Form</button>
-                <button class="btn btn-secondary">Cancel</button>
-              </div><!-- form-layout-footer -->
-            </div><!-- card -->
-          </div><!-- col-6 -->
-          <div class="col-xl-6 mg-t-25 mg-xl-t-0">
-            <div class="card pd-20 pd-sm-40 form-layout form-layout-5">
-              <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Right Label Alignment</h6>
-              <p class="mg-b-30 tx-gray-600">A basic form where labels are aligned in right.</p>
-              <div class="row row-xs">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Firstname:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter firstname">
-                </div>
-              </div><!-- row -->
-              <div class="row row-xs mg-t-20">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Lastname:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter lastname">
-                </div>
-              </div>
-              <div class="row row-xs mg-t-20">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Email:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter email address">
-                </div>
-              </div>
-              <div class="row row-xs mg-t-20">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Address:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <textarea rows="2" class="form-control" placeholder="Enter your address"></textarea>
-                </div>
-              </div><!-- row -->
-              <div class="row row-xs mg-t-30">
-                <div class="col-sm-8 mg-l-auto">
-                  <div class="form-layout-footer">
-                    <button class="btn btn-info mg-r-5">Submit Form</button>
-                    <button class="btn btn-secondary">Cancel</button>
-                  </div><!-- form-layout-footer -->
-                </div><!-- col-8 -->
-              </div>
-            </div><!-- card -->
-          </div><!-- col-6 -->
-        </div><!-- row -->
+        <script type="text/javascript">
+        function readURL(input){
+          if(input.files && input.files[0]){
+            let reader = new FileReader();
+               reader.onload = function(e){
+              $('#one')
+              .attr('src', e.target.result)
+              .width(100)
+              .height(100);
 
-        <div class="card pd-20 pd-sm-40 mg-t-20">
-          <h6 class="card-body-title">Form Alignment</h6>
-          <p class="mg-b-20 mg-sm-b-30">An inline form that is centered align and right aligned.</p>
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+        </script>
 
-          <div class="d-flex align-items-center justify-content-center bg-gray-100 ht-md-80 bd pd-x-20">
-            <div class="d-md-flex pd-y-20 pd-md-y-0">
-              <input type="text" class="form-control" placeholder="Email address">
-              <input type="password" class="form-control mg-md-l-10 mg-t-10 mg-md-t-0" placeholder="Password">
-              <button class="btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0">Sign In</button>
-            </div>
-          </div><!-- d-flex -->
 
-          <div class="d-flex align-items-center justify-content-end bg-gray-100 ht-md-80 bd pd-x-20 mg-t-10">
-            <div class="d-md-flex pd-y-20 pd-md-y-0">
-              <input type="text" class="form-control" placeholder="Email address">
-              <input type="password" class="form-control mg-md-l-10 mg-t-10 mg-md-t-0" placeholder="Password">
-              <button class="btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0">Sign In</button>
-            </div>
-          </div><!-- d-flex -->
-        </div><!-- card -->
+        <script type="text/javascript">
+        function readURL2(input){
+          if(input.files && input.files[0]){
+            let reader = new FileReader();
+               reader.onload = function(e){
+              $('#two')
+              .attr('src', e.target.result)
+              .width(100)
+              .height(100);
 
-      </div><!-- sl-pagebody -->
-      <footer class="sl-footer">
-        <div class="footer-left">
-          <div class="mg-b-2">Copyright &copy; 2017. Starlight. All Rights Reserved.</div>
-          <div>Made by ThemePixels.</div>
-        </div>
-        <div class="footer-right d-flex align-items-center">
-          <span class="tx-uppercase mg-r-10">Share:</span>
-          <a target="_blank" class="pd-x-5" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//themepixels.me/starlight"><i class="fa fa-facebook tx-20"></i></a>
-          <a target="_blank" class="pd-x-5" href="https://twitter.com/home?status=Starlight,%20your%20best%20choice%20for%20premium%20quality%20admin%20template%20from%20Bootstrap.%20Get%20it%20now%20at%20http%3A//themepixels.me/starlight"><i class="fa fa-twitter tx-20"></i></a>
-        </div>
-      </footer>
-    </div><!-- sl-mainpanel -->
-    <!-- ########## END: MAIN PANEL ########## -->
-    @endsection
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+        </script>
+
+
+        <script type="text/javascript">
+        function readURL3(input){
+          if(input.files && input.files[0]){
+            let reader = new FileReader();
+               reader.onload = function(e){
+              $('#three')
+              .attr('src', e.target.result)
+              .width(100)
+              .height(100);
+
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+        </script>
+        @endsection
