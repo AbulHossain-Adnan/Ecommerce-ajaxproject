@@ -2,6 +2,7 @@
 <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet"/>
 @section('adminMain')
 
+
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
@@ -49,6 +50,9 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  @error('category_id')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   <select class="form-control select2" data-placeholder="Choose country" name="category_id">
                     <option label="Choose category"></option>
 
@@ -79,6 +83,9 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  @error('brand_id')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   <select class="form-control select2" data-placeholder="Choose country" name="brand_id">
                     <option label="Choose brand"></option>
                     @foreach ($brands as $item)
@@ -265,10 +272,6 @@
               <span>best rated</span>
             </label>
             </div><!-- col-4 -->
-
-
-
-            
             </div><!-- row -->
             <br>
             <br>
@@ -335,5 +338,6 @@
           }
         }
         
-        </script>
-        @endsection
+    </script>
+
+@endsection

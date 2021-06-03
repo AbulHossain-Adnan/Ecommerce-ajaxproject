@@ -34,7 +34,7 @@ class CreateProductsTable extends Migration
             $table->integer('hot_new')->nullable();
             $table->string('trend')->nullable();
             $table->string('image_one')->nullable();
-            $table->string('iamge_two')->nullable();
+            $table->string('image_two')->nullable();
             $table->string('image_three')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();

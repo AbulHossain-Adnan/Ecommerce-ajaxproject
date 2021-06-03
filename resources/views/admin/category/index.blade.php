@@ -15,7 +15,7 @@
                 <a href="#" class="btn btn-warning btn-sm " style="float: right" data-toggle="modal"
                     data-target="#modaldemo3">Add New</a>
             </h6>
-            {{$categories}}
+          
             <div class="table-wrapper">
                 <table id="datatable1" class="table display responsive nowrap text-center">
                     <thead>
