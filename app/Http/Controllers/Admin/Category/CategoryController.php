@@ -32,6 +32,8 @@ class CategoryController extends Controller
 
     public function edit ($id) 
     {
+        
+
         $category = Category::findOrFail($id);
         return $category;
     } 
@@ -39,7 +41,7 @@ class CategoryController extends Controller
     public function udpated (Request $request) 
     {
        
-     
+    
         $category = Category::findOrFail($request->id);
         $category->category_name = $request->category_name;
         if($category->save()) {
@@ -47,6 +49,7 @@ class CategoryController extends Controller
         }
     } 
     public function destroy($id){
-        return $id;
+       Category::find($id)->delete();
+       return back()->with('message','category deleted success');
     }
 }

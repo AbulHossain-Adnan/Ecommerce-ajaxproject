@@ -34,11 +34,14 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $category->category_name }}</td>
                             <td>
-                            <button class="btn btn-warning btn-sm " id="edit" data-id="{{ $category->id }}">edit</button>
-                            <button class="btn btn-warning btn-sm  " id="delete" data-id="{{ $category->id }}">delete</button>
+                                <form method="post" action="{{ route('admin.category.destroy',$category->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $category->id }}">edit</a>
+                          
+                           <button type="submit" class="btn btn-danger btn-sm ">delete</button>
                         
-                                <!-- <button class="btn btn-sm btn-warning">edit</button> -->
-                                <!-- <button class="btn btn-sm btn-danger" id='delete'>delete</button> -->
+                             </form>
                             </td>
 
                         </tr>
@@ -139,19 +142,21 @@
 @section('script')
 
 <script>
-         $(document).ready(function() {
+    $(document).ready(function(){
+         
+        $("body").on('click',"#edit",function(){
+            let id = $(this).data('id')
+            $.get(`/admin/category/${id}/edit`,function(data){
+                $("#dataid").val(id)
+                $("#category_name").val(data.category_name)
+                $("#modaldemo4").modal('show')
 
-$("body").on('click',"#edit",function() {
-    let id = $(this).data('id')
-    $.get(`/admin/category/${id}/edit`,function(data) {
-        $("#dataid").val(id)
-        $("#category_name").val(data.category_name)
-        $("#modaldemo4").modal('show')
+            })
+        })
     })
 
-})
 
-}) 
+   
         </script>
 
 @endsection
