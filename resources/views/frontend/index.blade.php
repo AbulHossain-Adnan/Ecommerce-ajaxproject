@@ -1,3 +1,4 @@
+
 @extends('layouts.frontend_layout')
 
 @section('frontendContent')

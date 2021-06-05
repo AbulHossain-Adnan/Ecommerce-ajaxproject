@@ -142,21 +142,18 @@
 @section('script')
 
 <script>
-    $(document).ready(function(){
-         
-        $("body").on('click',"#edit",function(){
-            let id = $(this).data('id')
-            $.get(`/admin/category/${id}/edit`,function(data){
-                $("#dataid").val(id)
-                $("#category_name").val(data.category_name)
-                $("#modaldemo4").modal('show')
+   $(document).ready(function(){
 
-            })
+    $('body').on('click',"#edit",function(){
+        let id = $(this).data('id')
+        $.get(`/admin/category/${id}/edit`,function(data){
+            $("#dataid").val(id)
+            $("#category_name").val(data.category_name)
+            $("#modaldemo4").modal('show')
         })
     })
-
-
+   })
    
-        </script>
+</script>
 
 @endsection

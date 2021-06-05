@@ -48,14 +48,22 @@
                 <td>{{$item->category_name}}</td>
                 <td>{{$item->brand_name}}</td>
                 <td>{{$item->product_quantity}}</td>
-                <td>{{$item->status}}</td>
+                <td>
+                  @if($item->status == 1)
+                  <span class="badge badge-success">Active</span>
+                  @else
+                  <span class="badge badge-danger">Deactive</span>
+                  @endif
+                </td>
                 <td>
                   <form method="post" action="{{ route('product.delete') }}">
                     @csrf
                     <input type="hidden" value="{{$item->id}}" name="product_id">
-                  <a class="btn btn-primary" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-edit"></i></a>
-                  <a class="btn btn-warning" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-eye"></i></a>
-                  <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                  <a class="btn btn-primary btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-edit"></i></a>
+                  <a class="btn btn-warning btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-eye"></i></a>
+                  <a class="btn btn-primary btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-thumbs-up"></i></a>
+                 
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                 </form>
                 </td>
              

@@ -10,7 +10,8 @@
         <a class="breadcrumb-item" href="index.html">Forms</a>
         <span class="breadcrumb-item active">Form Layouts</span>
       </nav>
-
+<a class="btn btn-primary" href="{{ route('all.product') }}">All product</a>
+<a class="btn btn-primary" href="{{ route('admin.home') }}" class="nav-link">Home</a>
         <div class="card pd-20 pd-sm-40">
           <h6 class="card-body-title">New product Add</h6>
           <p class="mg-b-20 mg-sm-b-30">New Product Add Form</p>
