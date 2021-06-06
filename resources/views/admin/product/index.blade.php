@@ -59,9 +59,13 @@
                   <form method="post" action="{{ route('product.delete') }}">
                     @csrf
                     <input type="hidden" value="{{$item->id}}" name="product_id">
-                  <a class="btn btn-primary btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-edit"></i></a>
+                  <a class="btn btn-success btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-edit"></i></a>
                   <a class="btn btn-warning btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-eye"></i></a>
-                  <a class="btn btn-primary btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-thumbs-up"></i></a>
+                  @if($item->status == 1)
+                  <a class="btn btn-primary btn-sm" href="{{ route('status.active',$item->id) }}"><i class="fa fa-thumbs-up"></i></a>
+                  @else
+                    <a class="btn btn-warning btn-sm" href="{{ route('status.deactive',$item->id) }}"><i class="fa fa-thumbs-down"></i></a>
+                    @endif
                  
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                 </form>
