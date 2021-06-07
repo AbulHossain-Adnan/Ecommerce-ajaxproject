@@ -1,0 +1,300 @@
+@extends('admin.admin_layout')
+<link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet"/>
+@section('adminMain')
+
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="sl-mainpanel">
+      <nav class="breadcrumb sl-breadcrumb">
+        <a class="breadcrumb-item" href="index.html">Starlight</a>
+        <a class="breadcrumb-item" href="index.html">Forms</a>
+        <span class="breadcrumb-item active">Form Layouts</span>
+      </nav>
+
+        <div class="card pd-20 pd-sm-40">
+          <h2 class="card-body-title"></h2>
+          <h2 class="mg-b-20 mg-sm-b-30">Product view</h2>
+       
+        
+          <div class="form-layout">
+            <div class="row mg-b-25">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label><br>
+                   
+                   <b> {{$product->product_name}}</b>
+              
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label><br>
+                 
+                 <b>{{$product->product_code}}</b>
+                </div>
+              </div><!-- col-4 -->
+          
+
+                <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Quantity<span class="tx-danger">*</span></label><br>
+                 
+
+                 <b>{{$product->product_quantity}}</b>
+                </div>
+              </div><!-- col-4 -->
+
+                <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Category Name<span class="tx-danger">*</span></label><br>
+                 
+
+                 <b>{{$product->category_name}}</b>
+                </div>
+              </div><!-- col-4 -->
+
+                <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Brand Name<span class="tx-danger">*</span></label><br>
+                 
+
+                 <b>{{$product->brand_name}}</b>
+                </div>
+              </div><!-- col-4 -->
+
+
+
+
+
+             
+             
+            
+        
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Product size<span class="tx-danger">*</span></label><br>
+                
+              <b> {{$product->product_size}}</b>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Product color<span class="tx-danger">*</span></label><br>
+                 
+             <b>{{$product->product_color}}</b>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Selling price<span class="tx-danger">*</span></label><br>
+               <b>{{$product->selling_price}}</b>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Video link<span class="tx-danger">*</span></label><br>
+                  
+                  <b>{{$product->video_link}}</b>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">discount price<span class="tx-danger">*</span></label><br>
+                
+                <b>{{$product->discount_price}}</b>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">status<span class="tx-danger">*</span></label><br>
+                  @if($product->status == '1')
+                  <span class="badge badge-success">Active</span>
+                  @else
+                  <span class="badge badge-danger">Dactive</span>
+                  @endif
+                </div>
+              </div><!-- col-4 -->
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-control-label">Product details<span class="tx-danger">*</span></label>
+                
+               <b>{{$product->product_details}}</b>
+                 
+                </div>
+              </div><!-- col-4 -->
+        
+           
+             
+           
+            
+      
+            
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label"> Old image one (main slider)<span class="tx-danger">*</span></label><br>
+              
+           
+                  <img src="{{asset('product_images/'.$product->image_one)}}" width="100">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label"> Old image two (main slider)<span class="tx-danger">*</span></label><br>
+               
+                 
+                 
+                  <img src="{{asset('product_images/'.$product->image_two)}}" alt="" width="100">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label"> image three (main slider)<span class="tx-danger">*</span></label><br>
+               
+                 <img src="{{asset('product_images/'.$product->image_three)}}" alt="" width="100">
+                      
+                 
+                </div>
+              </div><!-- col-4 -->
+              <br> <br>
+           
+            
+             
+              
+            </div><!-- row -->
+            <br> <br> <br>
+            <hr>
+            <br>
+                   <br>
+                  
+                
+              
+            <div class="row">
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="main_slider" value="1">
+              <span>Main slider</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="main_slider" value="1">
+              <span>Mid slider</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="hot_deal" value="1">
+              <span>hot deal</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="hot_new" value="1">
+              <span>hot new</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+          
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="trend" value="1">
+              <span>trend product</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="best_rated" value="1">
+              <span>best rated</span>
+            </label>
+            </div><!-- col-4 -->
+            </div><!-- row -->
+            <br>
+            <br>
+
+            <div class="form-layout-footer">
+               <a class="btn btn-success" href="{{ route('all.product') }}" class="nav-link">Back</a>
+              
+            </div><!-- form-layout-footer -->
+          </div><!-- form-layout -->
+        </div><!-- card -->
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+        
+
+        <script type="text/javascript">
+        function readURL(input){
+          if(input.files && input.files[0]){
+            let reader = new FileReader();
+               reader.onload = function(e){
+              $('#one')
+              .attr('src', e.target.result)
+              .width(100)
+              .height(100);
+
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+        </script>
+
+
+        <script type="text/javascript">
+        function readURL2(input){
+          if(input.files && input.files[0]){
+            let reader = new FileReader();
+               reader.onload = function(e){
+              $('#two')
+              .attr('src', e.target.result)
+              .width(100)
+              .height(100);
+
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+        </script>
+
+
+        <script type="text/javascript">
+        function readURL3(input){
+          if(input.files && input.files[0]){
+            let reader = new FileReader();
+               reader.onload = function(e){
+              $('#three')
+              .attr('src', e.target.result)
+              .width(100)
+              .height(100);
+
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+        
+    </script>
+
+@endsection

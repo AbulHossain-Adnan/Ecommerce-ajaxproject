@@ -144,15 +144,7 @@
                   <input class="form-control" type="text" name="discount_price" placeholder="Enter product discount price">
                 </div>
               </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">status<span class="tx-danger">*</span></label>
-                  @error('status')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                  <input class="form-control" type="text" name="status" value="1">
-                </div>
-              </div><!-- col-4 -->
+            
 
               <div class="col-lg-12">
                 <div class="form-group">

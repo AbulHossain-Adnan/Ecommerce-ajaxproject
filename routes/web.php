@@ -39,6 +39,7 @@ Route::get('/admin/product/add', [App\Http\Controllers\Admin\Product\ProductCont
 Route::get('/admin/product/all', [App\Http\Controllers\Admin\Product\ProductController::class, 'index'])->name('all.product');
 Route::POST('/admin/product/store', [App\Http\Controllers\Admin\Product\ProductController::class, 'store'])->name('product.store');
 Route::get('admin/product/edit/{id}', [App\Http\Controllers\Admin\Product\ProductController::class, 'edit'])->name('product.edit');
+Route::get('admin/product/show/{id}', [App\Http\Controllers\Admin\Product\ProductController::class, 'show'])->name('product.show');
 Route::POST('admin/product/update', [App\Http\Controllers\Admin\Product\ProductController::class, 'update'])->name('product.update');
 Route::POST('admin/product/delete', [App\Http\Controllers\Admin\Product\ProductController::class, 'destroy'])->name('product.delete');
 

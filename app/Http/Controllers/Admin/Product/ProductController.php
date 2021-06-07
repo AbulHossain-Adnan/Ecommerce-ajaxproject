@@ -20,7 +20,7 @@ class ProductController extends Controller
                         ->select('products.*','categories.category_name','brands.brand_name')->get();
 
                        
-                    //    return response()->json($products);
+                     // return response()->json($products);
 
         return view('admin.product.index',compact('products'));
         
@@ -33,7 +33,7 @@ class ProductController extends Controller
 
     }
     public function store(request $request){
-        
+
         $validated = $request->validate([
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -45,7 +45,7 @@ class ProductController extends Controller
             'selling_price' => 'required|integer',
             'video_link' => 'required',
             'discount_price' => 'required',
-            'status' => 'required',
+            
             'product_details' => 'required',
             'image_one'=>'mimes:jpg,bmp,png,jpeg',
             'image_two'=>'mimes:jpg,bmp,png,jpeg',
@@ -72,7 +72,6 @@ class ProductController extends Controller
         $image_one=$request->image_one;
         $image_two=$request->image_two;
         $image_three=$request->image_three;
-
         if($image_one){
             // image_one
             $image_name1=hexdec(uniqid()).'.'.$image_one->extension();
@@ -92,6 +91,7 @@ class ProductController extends Controller
             $product->image_three=$image_name3;
       }
        $product->save();
+       // return response()->json($product);
         return redirect()->route('all.product')->with('message','product created successfully');
     }
     public function edit($id){
@@ -99,12 +99,10 @@ class ProductController extends Controller
             'product'=>Product::find($id),
             'categories'=>Category::all(),
             'brands'=>Brand::all(),
-        ]);
-       
+        ]);       
     }
     public function update( request $request)
     {
-      
         $product =Product::find($request->id);
         $product->category_id=$request->category_id;
         $product->brand_id=$request->brand_id;
@@ -144,8 +142,13 @@ class ProductController extends Controller
               Image::make($image_three)->resize(300, 300)->save(public_path('product_images/'.$image_name3));
               $product->image_three=$image_name3;
         }
-       $product->save();
+    if($product->save()){
         return back()->with('message','product updated successfully');
+    }
+
+
+
+       
 
     }
     public function destroy(request $request){
@@ -168,6 +171,18 @@ class ProductController extends Controller
     $product_id->delete();
     return redirect()->back()->with('message','product deleted succesfully');
     
+
+    }
+    public function show($id){
+
+
+        $product = DB::table('products')
+                    ->join('categories','products.category_id','categories.id')
+                    ->join('brands','products.brand_id','brands.id')
+                    ->select('products.*','categories.category_name','brands.brand_name')
+                    ->where('products.id',$id)->first();
+                    // return response()->json($product);
+                    return view('Admin/product/show',compact('product'));
 
     }
   

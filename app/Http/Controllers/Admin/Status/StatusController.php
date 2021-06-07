@@ -23,6 +23,7 @@ class StatusController extends Controller
       
     }
      public function deactive($id){
+       
         $product = Product::find($id);
 
         if($product->status == '0'){
@@ -32,7 +33,7 @@ class StatusController extends Controller
             'status'=>'1'
 
            ]);
-            return back()->with('message','status updated successfully');
+           return back()->with('message','status updated successfully');
 
         }
         
