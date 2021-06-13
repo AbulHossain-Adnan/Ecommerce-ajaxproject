@@ -1,5 +1,4 @@
 @extends('admin.admin_layout')
-<link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet"/>
 @section('adminMain')
 
 
@@ -71,19 +70,16 @@
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose country">
-                    <option label="Choose country"></option>
-                    <option value="USA">United States of America</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="China">China</option>
-                    <option value="Japan">Japan</option>
+                  <label class="form-control-label">Subcategory: <span class="tx-danger">*</span></label>
+                  <select class="form-control select2" data-placeholder="Choose country" name="subcategory_id">
+                  
+                  
                   </select>
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  <label class="form-control-label">Brand: <span class="tx-danger">*</span></label>
                   @error('brand_id')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -330,7 +326,36 @@
             reader.readAsDataURL(input.files[0]);
           }
         }
-        
     </script>
+    <script type="text/javascript">
+      
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
+
+      $(document).ready(function(){
+        $('select[name="category_id"]').on('change',function(){
+          var category_id = $(this).val();
+          if(category_id){
+            $.ajax({
+              type:"GET",
+              dataType:"json",
+              url:"/get_subcategory/"+category_id,
+              success:function(data){
+                $('select[name="subcategory_id"]').empty();
+                $.each(data, function(key, value){
+                  $('select[name="subcategory_id"]').append('<option value ="'+ value.id + '">' + value.sub_category_name + '</option>');
+                });
+              },
+            });
+          }else{
+            alert('danger');
+          }
+
+        });
+      });
+    </script>
 @endsection

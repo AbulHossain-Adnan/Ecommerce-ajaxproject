@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
+use App\Models\Sub_category;
+use App\Http\Controllers\Admin\Product\ProductController;
 use Image;
 use DB;
 
@@ -34,6 +36,8 @@ class ProductController extends Controller
     }
     public function store(request $request){
 
+      
+
         $validated = $request->validate([
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -44,8 +48,7 @@ class ProductController extends Controller
             'Product_color' => 'required',
             'selling_price' => 'required|integer',
             'video_link' => 'required',
-            'discount_price' => 'required',
-            
+            'discount_price' => 'required',       
             'product_details' => 'required',
             'image_one'=>'mimes:jpg,bmp,png,jpeg',
             'image_two'=>'mimes:jpg,bmp,png,jpeg',
@@ -103,6 +106,7 @@ class ProductController extends Controller
     }
     public function update( request $request)
     {
+
         $product =Product::find($request->id);
         $product->category_id=$request->category_id;
         $product->brand_id=$request->brand_id;
@@ -118,7 +122,7 @@ class ProductController extends Controller
         $product->main_slider=$request->main_slider;
         $product->hot_deal=$request->hot_deal;
         $product->best_rated=$request->best_rated;
-        $product->mid_slider=$request->product_name;
+        $product->mid_slider=$request->mid_slider;
         $product->hot_new=$request->hot_new;
         $product->trend=$request->trend;    
         $image_one=$request->image_one;
@@ -142,13 +146,13 @@ class ProductController extends Controller
               Image::make($image_three)->resize(300, 300)->save(public_path('product_images/'.$image_name3));
               $product->image_three=$image_name3;
         }
+
+    
+
+        
     if($product->save()){
         return back()->with('message','product updated successfully');
     }
-
-
-
-       
 
     }
     public function destroy(request $request){
@@ -183,6 +187,14 @@ class ProductController extends Controller
                     ->where('products.id',$id)->first();
                     // return response()->json($product);
                     return view('Admin/product/show',compact('product'));
+
+    }
+    public function getsubcat($id){
+        // $cat = Sub_category::find($id)->where('category_id',$id)->get();
+       $cat = DB::table('sub_categories')->where('category_id',$id)->get();
+       
+    return json_encode($cat);
+    // return response()->json($cat);
 
     }
   

@@ -28,10 +28,12 @@
   <!-- Meta -->
   <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
   <meta name="author" content="ThemePixels">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <title>Starlight Responsive Bootstrap 4 Admin Template</title>
 
   <!-- vendor css -->
+  <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet"/>
   <link href="{{ asset('backend') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="{{ asset('backend') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
   <link href="{{ asset('backend') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
@@ -44,6 +46,9 @@
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
   <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
+
  
 </head>
 
@@ -445,6 +450,7 @@
     
           });
   </script>
+
   <script src="{{ asset('backend') }}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
   <script src="{{ asset('backend') }}/lib/d3/d3.js"></script>
   <script src="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.js"></script>
@@ -472,7 +478,7 @@
       });
     </script>
   @yield('script')
-
+ 
   <script src="{{ asset('backend') }}/js/starlight.js"></script>
   <script src="{{ asset('backend') }}/js/ResizeSensor.js"></script>
   <script src="{{ asset('backend') }}/js/dashboard.js"></script>
@@ -480,6 +486,7 @@
   </script>
 
   <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+
         
 
 

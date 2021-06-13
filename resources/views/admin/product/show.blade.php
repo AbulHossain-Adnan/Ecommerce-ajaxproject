@@ -171,20 +171,29 @@
               
             <div class="row">
             <div class="col-lg-4">
-            <label class="ckbox">
-              <input type="checkbox" name="main_slider" value="1">
-              <span>Main slider</span>
+              @if($product->main_slider == '1')
+              
+              <span class="badge badge-success">Active</span>
+              @else
+              <span class="badge badge-danger">Inactive</span>
+              @endif
+              <span>Main Slider</span>
             </label>
             </div><!-- col-4 -->
 
 
 
             <div class="col-lg-4">
-            <label class="ckbox">
-              <input type="checkbox" name="main_slider" value="1">
-              <span>Mid slider</span>
+            
+               @if($product->mid_slider == '1')
+              
+              <span class="badge badge-success">Active</span>
+              @else
+              <span class="badge badge-danger">Inactive</span>
+              @endif
+              <span>Mid Slider</span>
             </label>
-            </div><!-- col-4 -->
+            </div><!-- col-4 --><br>
 
 
 
@@ -192,21 +201,29 @@
 
 
             <div class="col-lg-4">
-            <label class="ckbox">
-              <input type="checkbox" name="hot_deal" value="1">
-              <span>hot deal</span>
+             @if($product->hot_deal == '1')
+              
+              <span class="badge badge-success">Active</span>
+              @else
+              <span class="badge badge-danger">Inactive</span>
+              @endif
+              <span>Hot Deal</span>
             </label>
-            </div><!-- col-4 -->
+            </div><!-- col-4 --><br>
 
 
 
 
             <div class="col-lg-4">
-            <label class="ckbox">
-              <input type="checkbox" name="hot_new" value="1">
-              <span>hot new</span>
+             @if($product->hot_new == '1')
+              
+              <span class="badge badge-success">Active</span>
+              @else
+              <span class="badge badge-danger">Inactive</span>
+              @endif
+              <span>Hot New</span>
             </label>
-            </div><!-- col-4 -->
+            </div><!-- col-4 --><br>
 
 
 
@@ -215,17 +232,23 @@
 
 
             <div class="col-lg-4">
-            <label class="ckbox">
-              <input type="checkbox" name="trend" value="1">
+             @if($product->trend == '1')
+              
+              <span class="badge badge-success">Active</span>
+              @else
+              <span class="badge badge-danger">Inactive</span>
+              @endif
               <span>trend product</span>
             </label>
             </div><!-- col-4 -->
 
-
-
             <div class="col-lg-4">
-            <label class="ckbox">
-              <input type="checkbox" name="best_rated" value="1">
+             @if($product->best_rated == '1')
+              
+              <span class="badge badge-success">Active</span>
+              @else
+              <span class="badge badge-danger">Inactive</span>
+              @endif
               <span>best rated</span>
             </label>
             </div><!-- col-4 -->

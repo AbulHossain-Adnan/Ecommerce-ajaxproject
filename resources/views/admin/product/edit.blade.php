@@ -62,7 +62,14 @@
                             
                       
                     
-                    <option value="{{$item->id}}">{{$item->category_name}}</option>
+                    <option value="{{$item->id}}" <?php 
+
+                    if($item->id == $product->category_id){
+                      echo "selected";
+                    }
+
+
+                  ?>>{{$item->category_name}}</option>
 
                     @endforeach
                  
@@ -88,17 +95,18 @@
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   <select class="form-control select2" data-placeholder="Choose country" name="brand_id" value="{{$product->brand_id}}">
+
                     <option label="Choose brand"></option>
+                    @foreach ($brands as $item)  
+                    <option value="{{$item->id}}" <?php 
 
-                   
+                    if($item->id == $product->brand_id){
+                      echo "selected";
+                    }
 
-                    @foreach ($brands as $item)
-                        
-                    
-                    <option value="{{$item->id}}" >{{$item->brand_name}}</option>
 
+                  ?>>{{$item->brand_name}}</option>
                     @endforeach
-                   
                    
                   </select>
                 </div>
@@ -225,7 +233,11 @@
             <div class="row">
             <div class="col-lg-4">
             <label class="ckbox">
+              @if($product->main_slider == '1')
+              <input type="checkbox" name="main_slider" value="1" checked>
+              @else
               <input type="checkbox" name="main_slider" value="1">
+              @endif
               <span>Main slider</span>
             </label>
             </div><!-- col-4 -->
@@ -234,7 +246,11 @@
 
             <div class="col-lg-4">
             <label class="ckbox">
-              <input type="checkbox" name="main_slider" value="1">
+               @if($product->mid_slider == '1')
+              <input type="checkbox" name="mid_slider" value="1" checked>
+              @else
+              <input type="checkbox" name="mid_slider" value="1">
+              @endif
               <span>Mid slider</span>
             </label>
             </div><!-- col-4 -->
@@ -246,7 +262,11 @@
 
             <div class="col-lg-4">
             <label class="ckbox">
+               @if($product->hot_deal == '1')
+              <input type="checkbox" name="hot_deal" value="1" checked>
+              @else
               <input type="checkbox" name="hot_deal" value="1">
+              @endif
               <span>hot deal</span>
             </label>
             </div><!-- col-4 -->
@@ -256,7 +276,11 @@
 
             <div class="col-lg-4">
             <label class="ckbox">
+               @if($product->hot_new == '1')
+              <input type="checkbox" name="hot_new" value="1" checked>
+              @else
               <input type="checkbox" name="hot_new" value="1">
+              @endif
               <span>hot new</span>
             </label>
             </div><!-- col-4 -->
@@ -269,7 +293,11 @@
 
             <div class="col-lg-4">
             <label class="ckbox">
+              @if($product->trend == '1')
+              <input type="checkbox" name="trend" value="1" checked>
+              @else
               <input type="checkbox" name="trend" value="1">
+              @endif
               <span>trend product</span>
             </label>
             </div><!-- col-4 -->
@@ -278,7 +306,11 @@
 
             <div class="col-lg-4">
             <label class="ckbox">
+                @if($product->best_rated == '1')
+              <input type="checkbox" name="best_rated" value="1" checked>
+              @else
               <input type="checkbox" name="best_rated" value="1">
+              @endif
               <span>best rated</span>
             </label>
             </div><!-- col-4 -->
