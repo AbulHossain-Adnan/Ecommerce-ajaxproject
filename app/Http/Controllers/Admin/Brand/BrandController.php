@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Brand;
 
+
 class BrandController extends Controller
 {
     /**
@@ -38,7 +39,30 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+   $request->validate([
+            'brand_name'=>'required',
+            'brand_photo'=>'required',
+
+        ]);
+
+       
+     
+
+        $data= new Brand();
+        $data->brand_name=$request->brand_name;
+      
+          if ($request->hasFile('brand_photo')) {
+            $image=$request->file('brand_photo');
+            $imagename=time().'.'.$image->extension();
+            $image->move(public_path('images'),$imagename);
+            $data->brand_photo=$imagename;
+}
+       
+        
+        $data->save();
+        return back()->with('message','brand added succefully');
+
     }
 
     /**
@@ -60,7 +84,8 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Brand::findOrFail($id);
+        return response()->json($data);
     }
 
     /**
@@ -70,6 +95,24 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+public function updated(Request $request){
+    $data=Brand::findOrFail($request->id);
+      if ($request->hasFile('brand_photo')) {
+            $image=$request->file('brand_photo');
+            $imagename=time().'.'.$image->extension();
+            $image->move(public_path('images'),$imagename);
+            $data->brand_photo=$imagename;
+
+}
+$data->brand_name=$request->brand_name;
+$data->save();
+return back()->with('message','brand updated successfully');
+  
+}
+
+
+
     public function update(Request $request, $id)
     {
         //
@@ -83,6 +126,11 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data=Brand::findOrFail($id);
+    unlink('images/'.$data->brand_photo);
+
+    $data->delete();
+    return back()->with('message','brand deleted succesfully');
+
     }
 }

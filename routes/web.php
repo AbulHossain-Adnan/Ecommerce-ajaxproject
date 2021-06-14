@@ -64,5 +64,6 @@ Route::get('/get_subcategory/{id}',[App\Http\Controllers\Admin\Product\ProductCo
 
 
    // Route for Brand 
+   Route::post('/brand/updated',[App\Http\Controllers\Admin\Brand\BrandController::class,'updated']);
    Route::resource('brand', BrandController::class);
  
