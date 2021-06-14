@@ -46,7 +46,9 @@
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
   <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  
 
  
@@ -186,8 +188,8 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('admin.category.index') }}" class="nav-link">Category</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Sub Category</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Brands</a></li>
+          <li class="nav-item"><a href="{{ url('/sub_category/index') }}" class="nav-link">Sub Category</a></li>
+          <li class="nav-item"><a href="{{ route('brand.index') }}" class="nav-link">Brands</a></li>
         </ul>
         {{-- category start here --}}
        

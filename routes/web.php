@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,16 @@ Route::get('status/deactive/{id}',[App\Http\Controllers\Admin\Status\StatusContr
 
 // Roote for subcategory selecte
 Route::get('/get_subcategory/{id}',[App\Http\Controllers\Admin\Product\ProductController::class,'getsubcat']);
+
+ //  Route for subcategory 
+ Route::get('/sub_category/index',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'index']);
+ Route::get('/sub_category/alldata',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'alldata']);
+  Route::post('/subcategory/store/',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'store']);
+  Route::get('/subcategory/edit/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'edit']);
+  Route::get('/subcategory/update/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'update']);
+   Route::get('/subcategory/delete/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'delete']);
+
+
+   // Route for Brand 
+   Route::resource('brand', BrandController::class);
+ 

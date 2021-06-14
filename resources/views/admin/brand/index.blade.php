@@ -27,33 +27,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $key=>$category)
-
-
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $category->category_name }}</td>
-                            <td>
-                                <form method="post" action="{{ route('admin.category.destroy',$category->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $category->id }}">edit</a>
-                          
-                           <button type="submit" class="btn btn-danger btn-sm ">delete</button>
-                        
-                             </form>
-                            </td>
-
-                        </tr>
-                        @endforeach
+                      
                     </tbody>
                 </table>
             </div><!-- table-wrapper -->
         </div><!-- card -->
-
-
-
-
 
 
 
