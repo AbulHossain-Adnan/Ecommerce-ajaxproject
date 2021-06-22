@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th class="wd-15p">Serial</th>
-                            <th class="wd-15p">brand name</th>
+                                     <th class="wd-15p">brand name</th>
                             <th class="wd-15p">brand image</th>
                             <th class="wd-20p">Action</th>
 
@@ -93,6 +93,8 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                     
+                 
                     <div class="form-group">
                         <label for="exampleInputEmail1">brand photo</label>
                         <input name="brand_photo" type="file" class="form-control" id="exampleInputEmail1"
@@ -102,8 +104,6 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-
-
 
                 </div><!-- modal-body -->
                 <div class="modal-footer">

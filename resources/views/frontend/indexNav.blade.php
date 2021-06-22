@@ -16,33 +16,23 @@
                         </div>
 
                         <ul class="cat_menu">
-                            <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-                            <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
+                           
+                            @foreach($categories as $item) 
+
                             <li class="hassubs">
-                                <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
+                                <a href="#">{{ $item->category_name }}<i class="fas fa-chevron-right"></i></a>
                                 <ul>
-                                    <li class="hassubs">
-                                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                                        <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                    @php
+                                    $subcategories=DB::table('sub_categories')->where('category_id',$item->id)->get()
+                                    @endphp
+
+                                    @foreach($subcategories as $item)
+                                        <a href="#">{{ $item->sub_category_name }}<i class="fas fa-chevron-right"></i></a>
+                                        @endforeach
+                                     
                                 </ul>
                             </li>
-                            <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a>
-                            </li>
-                            <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a>
-                            </li>
-                            <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                             @endforeach
                         </ul>
                     </div>
 
@@ -52,7 +42,8 @@
                         <ul class="standard_dropdown main_nav_dropdown">
                             <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
                             <li class="hassubs">
-                                <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
+                                <a href="#">Super De
+                                    s<i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li>
                                         <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
@@ -73,20 +64,22 @@
                             <li class="hassubs">
                                 <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
                                 <ul>
+                                    @foreach($brands as $item)
                                     <li>
-                                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                        <a href="#">{{ $item->brand_name }}<i class="fas fa-chevron-down"></i></a>
                                         <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                            @php
+                                            $brand_products=DB::table('products')->where('brand_id',$item->id)->get();
+                                            @endphp
+                                            @foreach($brand_products as $item)
+                                            <li><a href="#">{{ $item->product_name }}<i class="fas fa-chevron-down"></i></a>
                                             </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
+                                            @endforeach
+                                           
                                         </ul>
                                     </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                    @endforeach
+                                  
                                 </ul>
                             </li>
                             <li class="hassubs">
@@ -182,10 +175,9 @@
                         <li class="page_menu_item has-children">
                             <a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
                             <ul class="page_menu_selection">
+                                @foreach($brands as $item)
                                 <li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                               @endforeach
                             </ul>
                         </li>
                         <li class="page_menu_item has-children">
@@ -222,18 +214,23 @@
 </header>
 
 <!-- Banner -->
-
+{{ $main_sliders->selling_price }}
 <div class="banner">
     <div class="banner_background" style="background-image:url({{ asset('frontend') }}/images/banner_background.jpg)">
     </div>
     <div class="container fill_height">
         <div class="row fill_height">
-            <div class="banner_product_image"><img src="{{ asset('frontend') }}/images/banner_product.png" alt=""></div>
+            <div class="banner_product_image"> <img src="{{asset('product_images/'.$main_sliders->image_one)}}" height="450"></div>
             <div class="col-lg-5 offset-lg-4 fill_height">
                 <div class="banner_content">
                     <h1 class="banner_text">new era of smartphones</h1>
-                    <div class="banner_price"><span>$530</span>$460</div>
-                    <div class="banner_product_name">Apple Iphone 6s</div>
+                    @if($main_sliders->discount_price==null)
+                    <div class="banner_price">${{ $main_sliders->selling_price }}</div>
+                    @else
+                    <div class="banner_price"><span>${{$main_sliders->selling_price}}</span>{{ $main_sliders->discount_price }}</div>
+                    @endif
+                    
+                    <div class="banner_product_name">{{ $main_sliders->brand->brand_name }}</div>
                     <div class="button banner_button"><a href="#">Shop Now</a></div>
                 </div>
             </div>

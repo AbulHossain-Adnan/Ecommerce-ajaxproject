@@ -15,7 +15,7 @@ use DB;
 class ProductController extends Controller
 {
     public function index(){
-
+        $brands=Brand::all();
         $products = DB::table('products')
                         ->join('categories','products.category_id','categories.id')
                         ->join('brands','products.brand_id','brands.id')  
@@ -24,7 +24,7 @@ class ProductController extends Controller
                        
                      // return response()->json($products);
 
-        return view('admin.product.index',compact('products'));
+        return view('admin.product.index',compact('products','brands'));
         
     }
     public function create(){

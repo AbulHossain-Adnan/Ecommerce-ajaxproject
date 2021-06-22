@@ -46,9 +46,9 @@
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
   <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ asset('backend') }}/js/jquery.min.js"></script>
+<script src="{{ asset('backend') }}/js/sweet.min.js"></script>
  
 
  
@@ -56,9 +56,9 @@
 
 <body>
 
-  @guest
+{{--   @guest
 
-  @else
+  @else --}}
   <!-- ########## START: LEFT PANEL ########## -->
   <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> starlight</a></div>
   <div class="sl-sideleft">
@@ -413,7 +413,7 @@
   </div><!-- sl-sideright -->
   <!-- ########## END: RIGHT PANEL ########## --->
 
-  @endguest
+ {{--  @endguest --}}
 
   @yield('adminMain')
 

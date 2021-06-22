@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Brand;
+use App\Models\Product;
 
 
 class BrandController extends Controller
@@ -17,7 +18,8 @@ class BrandController extends Controller
     public function index()
     {
         return view('admin/brand/index',[
-            'brands'=>Brand::all()
+            'brands'=>Brand::all(),
+            'products'=>Product::all(),
         ]);
     }
 
@@ -39,7 +41,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-
+        
    $request->validate([
             'brand_name'=>'required',
             'brand_photo'=>'required',
@@ -51,6 +53,7 @@ class BrandController extends Controller
 
         $data= new Brand();
         $data->brand_name=$request->brand_name;
+        $data->product_id=$request->product_id;                                
       
           if ($request->hasFile('brand_photo')) {
             $image=$request->file('brand_photo');

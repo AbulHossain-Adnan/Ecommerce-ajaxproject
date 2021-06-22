@@ -15,7 +15,8 @@ class SubcategoryController extends Controller
         ]);
     }
     public function alldata(){
-        $data=Sub_category::orderBy('id', 'DESC')->get();;
+        $data=Sub_category::orderBy('id', 'DESC')->get();
+        // $data = DB::table('sub_categories')->paginate(10);
         return response()->json($data);
     }
     public function store(Request $request){
