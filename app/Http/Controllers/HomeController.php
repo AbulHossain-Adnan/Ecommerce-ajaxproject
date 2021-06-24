@@ -36,4 +36,7 @@ class HomeController extends Controller
         );
         return redirect()->route('login')->with($data);
     }
+    public function change_password(){
+        return view('auth/passwords/reset');
+    }
 }

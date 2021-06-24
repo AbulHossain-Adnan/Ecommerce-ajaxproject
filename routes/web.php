@@ -11,7 +11,7 @@ use App\Models\Product;
 
 
 
-
+// Route for forntend*********************************
 
 Route::view('/', 'frontend.index',[
     'categories'=>Category::all(),
@@ -29,10 +29,12 @@ Route::view('/', 'frontend.index',[
 
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
+Route::get('change/password', [App\Http\Controllers\HomeController::class, 'change_password'])->name('change.password');
 
 // admin route 
 Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
@@ -88,3 +90,7 @@ Route::get('/subcategory/delete/{id}',[App\Http\Controllers\Admin\Category\Subca
    Route::post('/brand/updated',[App\Http\Controllers\Admin\Brand\BrandController::class,'updated']);
    Route::resource('brand', BrandController::class);
  
+
+ // Route for user login registration
+
+   Route::get('user/login',[App\Http\Controllers\customloginController::class,'login'])->name('user.login');
