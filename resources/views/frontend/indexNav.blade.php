@@ -20,7 +20,7 @@
                             @foreach($categories as $item) 
 
                             <li class="hassubs">
-                                <a href="#">{{ $item->category_name }}<i class="fas fa-chevron-right"></i></a>
+                                <a href="{{ route('category.show',$item->id) }}">{{ $item->category_name }}<i class="fas fa-chevron-right"></i></a>
                                 <ul>
                                     @php
                                     $subcategories=DB::table('sub_categories')->where('category_id',$item->id)->get()

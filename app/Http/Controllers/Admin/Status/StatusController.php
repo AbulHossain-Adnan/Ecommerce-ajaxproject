@@ -18,7 +18,12 @@ class StatusController extends Controller
            ]);
             
             
-            return back()->with('message','status updated successfully');
+            $notification=array(
+            'message'=>'status updated successfully',
+            'alert-type'=>'success'
+
+           );
+           return back()->with($notification);
         }
       
     }
@@ -33,7 +38,12 @@ class StatusController extends Controller
             'status'=>'1'
 
            ]);
-           return back()->with('message','status updated successfully');
+           $notification=array(
+            'message'=>'status updated successfully',
+            'alert-type'=>'success'
+
+           );
+           return back()->with($notification);
 
         }
         

@@ -53,7 +53,7 @@ class BrandController extends Controller
 
         $data= new Brand();
         $data->brand_name=$request->brand_name;
-        $data->product_id=$request->product_id;                                
+                                 
       
           if ($request->hasFile('brand_photo')) {
             $image=$request->file('brand_photo');

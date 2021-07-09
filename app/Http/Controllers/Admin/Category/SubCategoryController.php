@@ -46,7 +46,7 @@ class SubcategoryController extends Controller
     public function delete($id){
         $data=Sub_category::findOrFail($id);
         $data->delete();
-        // return response()->json($data);
+        return response()->json($data);
         
     }
 

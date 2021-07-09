@@ -254,6 +254,14 @@
             </div><!-- col-4 -->
 
 
+             <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="byeonegetone" value="1">
+              <span>byeonegetone</span>
+            </label>
+            </div><!-- col-4 -->
+
+
 
             <div class="col-lg-4">
             <label class="ckbox">
@@ -276,6 +284,7 @@
         <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
         
 
+
         <script type="text/javascript">
         function readURL(input){
           if(input.files && input.files[0]){
@@ -294,6 +303,7 @@
         </script>
 
 
+
         <script type="text/javascript">
         function readURL2(input){
           if(input.files && input.files[0]){
@@ -310,6 +320,7 @@
         }
         
         </script>
+
 
 
         <script type="text/javascript">

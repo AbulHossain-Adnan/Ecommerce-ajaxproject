@@ -179,17 +179,4 @@
    })
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection

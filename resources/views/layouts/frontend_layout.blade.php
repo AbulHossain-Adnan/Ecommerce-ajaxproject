@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.css">
     <link href="{{ asset('frontend') }}/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
         type="text/css">
@@ -17,6 +18,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
+     
+      
 
 </head>
 
@@ -84,7 +91,7 @@
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#">OneTech</a></div>
+                                <div class="logo"><a href="{{ route('front.home') }}">Home</a></div>
                             </div>
                         </div>
 
@@ -102,7 +109,7 @@
                                                     <i class="fas fa-chevron-down"></i>
                                                     <ul class="custom_list clc">
                                                         @foreach($categories as $item)
-                                                        <li><a class="clc" href="#">{{ $item->category_name }}</a></li>
+                                                        <li><a class="clc" href="{{ route('admin.category.show',$item->id) }}">{{ $item->category_name }}</a></li>
                                                        @endforeach
                                                     </ul>
                                                 </div>
@@ -119,25 +126,39 @@
                         <!-- Wishlist -->
                         <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                             <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                                <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+
+                                @guest
+                                @else
+                                  <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                                     <div class="wishlist_icon"><img src="{{ asset('frontend') }}/images/heart.png"
                                             alt=""></div>
                                     <div class="wishlist_content">
                                         <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                        <div class="wishlist_count">115</div>
+
+                                        @php
+                                        $wishlist=\App\models\Wishlist::where('user_id',Auth::id())->get();
+
+                                        @endphp
+
+
+                                        <div class="wishlist_count">{{ count($wishlist) }}</div>
                                     </div>
                                 </div>
+
+                                @endguest
+                              
+
 
                                 <!-- Cart -->
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
                                             <img src="{{ asset('frontend') }}/images/cart.png" alt="">
-                                            <div class="cart_count"><span>10</span></div>
+                                            <div class="cart_count"><span>{{ Cart::count() }}</span></div>
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="#">Cart</a></div>
-                                            <div class="cart_price">$85</div>
+                                            <div class="cart_text"><a href="{{ route('cart.show') }}">Cart</a></div>
+                                            <div class="cart_price">{{ Cart::subtotal() }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +180,7 @@
                         <div class="col-lg-3 footer_col">
                             <div class="footer_column footer_contact">
                                 <div class="logo_container">
-                                    <div class="logo"><a href="#">OneTech</a></div>
+                                    <div class="logo"><a href="{{ route('home') }}">OneTech</a></div>
                                 </div>
                                 <div class="footer_title">Got Question? Call Us 24/7</div>
                                 <div class="footer_phone">+38 068 005 3570</div>
@@ -280,6 +301,40 @@
     <script src="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.js"></script>
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+    @if(Session::has('message'))
+                var type="{{Session::get('alert-type','success')}}"
+                switch(type){
+                    case 'info':
+                         toastr.info("{{ Session::get('message') }}");
+                         break;
+                    case 'success':
+                        toastr.success("{{ Session::get('message') }}");
+                        break;
+                    case 'warning':
+                       toastr.warning("{{ Session::get('message') }}");
+                        break;
+                    case 'error':
+                        toastr.error("{{ Session::get('message') }}");
+                        break;
+                }
+              @endif
+  </script>
+
+  
+
+
+     
+
+
+        
+
+
+
+
+
 </body>
 
 </html>

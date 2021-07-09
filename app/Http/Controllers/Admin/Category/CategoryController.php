@@ -52,4 +52,5 @@ class CategoryController extends Controller
        Category::find($id)->delete();
        return back()->with('message','category deleted success');
     }
+  
 }

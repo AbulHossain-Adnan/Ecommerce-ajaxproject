@@ -3,13 +3,6 @@
 @section('adminMain')
 
 
-
-
-
-
-
-
-
 <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
         <a class="breadcrumb-item" href="index.html">Starlight</a>
@@ -87,16 +80,9 @@
 
 
 
-
-
-
-
-
-
-
      
     </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
     
@@ -112,16 +98,18 @@ $.ajaxSetup({
   $("#updatetitle").hide();
    $("#upbtn").hide();
 
-// Start Read data**********************************
 
-function alldataa(){
-  $.ajax({ 
-  type:"GET",
-  datatype:'json',
- url: "/sub_category/alldata", 
-  success:function(response){
-    let data = ""
-    $.each(response, function(key,value){
+
+function alldata(){
+
+  $.ajax({
+    type:"GET",
+    datatype:"json",
+    url:"/sub_category/alldata",
+    success:function(response){
+      let data=""
+
+        $.each(response, function(key,value){
       data = data + "<tr>"
       data = data + "<td>"+value.id+"</td>"
       data = data + "<td>"+value.sub_category_name+"</td>"
@@ -132,13 +120,15 @@ function alldataa(){
       data = data + "</td>"
       data = data + "</tr>"
     })
-    $('tbody').html(data);
-    
+ $('tbody').html(data);
     }
-   })
-  }
-  
-alldataa();
+
+  })
+}
+alldata();
+
+
+
 
 // End Read data*****************************************
 function cleardata(){
@@ -148,11 +138,24 @@ function cleardata(){
     $('#id_error').text('');
 }
 
-// Start create data************************************
+// // Start create data************************************
+
+
+
+
+
+
+
+
+
+
+
 
    function addbtn(){
-    let sub_category_name=$("#sub_category_name").val();
-    let category_id=$("#category_id").val();
+
+
+    var sub_category_name=$("#sub_category_name").val();
+    var category_id=$("#category_id").val();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -172,7 +175,7 @@ function cleardata(){
               showConfirmButton: false,
               timer: 1500
             })
-            alldataa();
+            alldata();
             cleardata();
             
         },
@@ -182,18 +185,11 @@ function cleardata(){
     
         }
     })
+  }
 
-   }
+   
 
    // End create data*****************************************
-
-
-
-
-
-
-
-
 
 function editData(id){
  $("#addtitle").hide();
@@ -256,33 +252,79 @@ function updata(){
 
 }
 
-function deletedata($id){
 
-swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-     $.ajax({
-    type:"GET",
-    datatype:"json",
-    url:"/subcategory/delete/"+$id,
-    success:function(data){
-        alldataa();
 
-    }
-   })
-    swal("Poof! Your imaginary file has been deleted!", {
-      icon: "success",
-    });
-  } else {
-    swal("Your imaginary file is safe!");
+
+function deletedata(id){
+
+
+
+$.ajax({
+type:"GET",
+datatype:"json",
+url:"/subcategory/delete/"+id,
+success:function(data){
+  alldata()
+
+  const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
-});
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'data deleted successfully'
+})
+
+}
+
+})
+
+}
+
+
+
+
+
+
+
+
+
+
+// function deletedata($id){
+
+// swal({
+//   title: "Are you sure?",
+//   text: "Once deleted, you will not be able to recover this imaginary file!",
+//   icon: "warning",
+//   buttons: true,
+//   dangerMode: true,
+// })
+// .then((willDelete) => {
+//   if (willDelete) {
+//      $.ajax({
+//     type:"GET",
+//     datatype:"json",
+//     url:"/subcategory/delete/"+$id,
+//     success:function(data){
+//         alldataa();
+
+//     }
+//    })
+//     swal("Poof! Your imaginary file has been deleted!", {
+//       icon: "success",
+//     });
+//   } else {
+//     swal("Your imaginary file is safe!");
+//   }
+// });
 
 
 
@@ -292,7 +334,7 @@ swal({
 
 
   
-}
+// }
 
 
 

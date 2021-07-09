@@ -48,7 +48,7 @@ class ProductController extends Controller
             'Product_color' => 'required',
             'selling_price' => 'required|integer',
             'video_link' => 'required',
-            'discount_price' => 'required',       
+                  
             'product_details' => 'required',
             'image_one'=>'mimes:jpg,bmp,png,jpeg',
             'image_two'=>'mimes:jpg,bmp,png,jpeg',
@@ -71,7 +71,8 @@ class ProductController extends Controller
         $product->best_rated=$request->best_rated;
         $product->mid_slider=$request->product_name;
         $product->hot_new=$request->hot_new;
-        $product->trend=$request->trend;    
+        $product->trend=$request->trend;
+        $product->byeonegetone=$request->byeonegetone;    
         $image_one=$request->image_one;
         $image_two=$request->image_two;
         $image_three=$request->image_three;
@@ -107,6 +108,7 @@ class ProductController extends Controller
     public function update( request $request)
     {
 
+
         $product =Product::find($request->id);
         $product->category_id=$request->category_id;
         $product->brand_id=$request->brand_id;
@@ -124,7 +126,8 @@ class ProductController extends Controller
         $product->best_rated=$request->best_rated;
         $product->mid_slider=$request->mid_slider;
         $product->hot_new=$request->hot_new;
-        $product->trend=$request->trend;    
+        $product->trend=$request->trend; 
+        $product->byeonegetone=$request->byeonegetone; 
         $image_one=$request->image_one;
         $image_two=$request->image_two;
         $image_three=$request->image_three;
@@ -151,7 +154,7 @@ class ProductController extends Controller
 
         
     if($product->save()){
-        return back()->with('message','product updated successfully');
+        return back()->with('info','product updated successfully');
     }
 
     }
@@ -197,5 +200,29 @@ class ProductController extends Controller
     // return response()->json($cat);
 
     }
+    public function singleproduct($id){
+        $single_products=Product::with('category','brand')->where('id',$id)->first();
+        $color=$single_products->product_color;
+        $product_color=explode(',', $color);
+        $size=$single_products->product_size;
+        $product_size=explode(',', $size);
+
+        return view('pages/single_product',compact('single_products','product_color','product_size'));
+    }
   
+  public function productview($id){
+    $product=Product::find($id)->with('brand','category')->where('status',1)->where('id',$id)->first();
+    $color=$product->product_color;
+    $quantity=$product->product_quantity;
+    $size=$product->product_size;
+    $product_color=explode(',',$color);
+    $product_size=explode(',',$size);
+    return response()->json(array(
+        'product' => $product,
+        'color' => $product_color,
+        'size' => $product_size,
+
+    ));
+
+  }
 }

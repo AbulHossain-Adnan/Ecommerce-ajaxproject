@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin\Category;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        return view('home',[
+            'categories'=>Category::all()
+
+        ]);
     }
 
     public function logout()
@@ -37,6 +42,6 @@ class HomeController extends Controller
         return redirect()->route('login')->with($data);
     }
     public function change_password(){
-        return view('auth/passwords/reset');
+        return view('auth/changePassword');
     }
 }

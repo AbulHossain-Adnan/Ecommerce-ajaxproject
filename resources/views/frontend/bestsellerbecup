@@ -1,0 +1,38 @@
+  @php
+                            $watch_cat=\App\Models\Admin\Category::skip(4)->first();
+                            $watch_catid=$watch_cat->id;
+                            $men_watchs=\App\Models\Product::with('brand','category')->where('category_id',$watch_catid)->where('status',1)->limit(8)->get();
+                            @endphp
+
+
+
+                            @foreach($men_watchs as $item)
+                            <!-- Best Sellers Item -->
+                            <div class="bestsellers_item discount">
+                                <div
+                                    class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
+                                    <div class="bestsellers_image"><img src="{{ asset('frontend') }}/images/best_1.png"
+                                            alt=""></div>
+                                    <div class="bestsellers_content">
+                                        <div class="bestsellers_category"><a href="#">{{ $item->category->category_name }}</a></div>
+                                        <div class="bestsellers_name"><a href="product.html">
+                                                {{ $item->product_name }}</a></div>
+                                        <div class="rating_r rating_r_4 bestsellers_rating">
+                                            <i></i><i></i><i></i><i></i><i></i></div>
+                                            @if($item->discount_price == null)
+                                             <div class="bestsellers_price discount">${{ $item->selling_price }}</div>
+                                            @else
+                                            <div class="bestsellers_price discount">${{ $item->discount_price }}<span>${{ $item->selling_price }}</span></div>
+                                            @endif
+                                      
+                                    </div>
+                                </div>
+                                 <button  class="addwish" data-id={{ $item->id }}>
+                                <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
+                            </button>
+                                <ul class="bestsellers_marks">
+                                    <li class="bestsellers_mark bestsellers_discount">-25%</li>
+                                    <li class="bestsellers_mark bestsellers_new">new</li>
+                                </ul>
+                            </div>
+                            @endforeach

@@ -11,14 +11,20 @@
     <link href="{{ asset('frontend') }}/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
         type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('frontend') }}/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css"href="{{ asset('frontend') }}/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/contact_styles.css">
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/contact_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/contact_responsive.css">
+
+<link rel="stylesheet" href="sweetalert2.min.css">
+{{--   <script src="sweetalert2.min.js"></script> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
 </head>
 
@@ -51,7 +57,8 @@
                                         <li>
                                             <a href="#">Profile<i class="fas fa-chevron-down"></i></a>
                                             <ul>
-                                                <li><a href="#">edit profile</a></li>
+                                                <li><a href="{{ route('change.password') }}">edit profile</a></li>
+                                                <li><a href="{{ route('wish.list') }}">Wish List</a></li>
                                                 <li><a href="{{ route('user.logout') }}">Logout</a></li>
                                                 <li><a href="#">JPY Japanese Yen</a></li>
                                             </ul>
@@ -60,6 +67,7 @@
                                 </div>
                               
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -258,7 +266,7 @@
             </div>
     </div>
 
-    <script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
+        <script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
     <script src="{{ asset('frontend') }}/styles/bootstrap4/popper.js"></script>
     <script src="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.js"></script>
     <script src="{{ asset('frontend') }}/plugins/greensock/TweenMax.min.js"></script>
@@ -270,6 +278,9 @@
     <script src="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.js"></script>
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
+    <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
+    <script src="{{ asset('frontend') }}/js/cart_custom.js"></script>
+     <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>

@@ -79,12 +79,8 @@
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Subcategory: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose country">
-                    <option label="Choose country"></option>
-                    <option value="USA">United States of America</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="China">China</option>
-                    <option value="Japan">Japan</option>
+                  <select class="form-control select2" data-placeholder="Choose country" name="subcategory_id">
+                   
                   </select>
                 </div>
               </div><!-- col-4 -->
@@ -304,6 +300,20 @@
 
 
 
+
+             <div class="col-lg-4">
+            <label class="ckbox">
+              @if($product->byeonegetone == '1')
+              <input type="checkbox" name="byeonegetone" value="1" checked>
+              @else
+              <input type="checkbox" name="byeonegetone" value="1">
+              @endif
+              <span>byeonegetone</span>
+            </label>
+            </div><!-- col-4 -->
+
+
+
             <div class="col-lg-4">
             <label class="ckbox">
                 @if($product->best_rated == '1')
@@ -380,6 +390,38 @@
           }
         }
         
+    </script>
+
+     <script type="text/javascript">
+      
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+      $(document).ready(function(){
+        $('select[name="category_id"]').on('change',function(){
+          var category_id = $(this).val();
+          if(category_id){
+            $.ajax({
+              type:"GET",
+              dataType:"json",
+              url:"/get_subcategory/"+category_id,
+              success:function(data){
+                $('select[name="subcategory_id"]').empty();
+                $.each(data, function(key, value){
+                  $('select[name="subcategory_id"]').append('<option value ="'+ value.id + '">' + value.sub_category_name + '</option>');
+                });
+              },
+            });
+          }else{
+            alert('danger');
+          }
+
+        });
+      });
     </script>
 
 @endsection
