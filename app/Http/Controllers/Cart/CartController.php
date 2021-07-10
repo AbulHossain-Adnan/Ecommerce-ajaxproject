@@ -176,6 +176,13 @@ class CartController extends Controller
         $data=Cart::content();
         return Response()->json($data);
     }
+
+    public function increment(request $request){
+
+        $data=$request->all();
+        return Response()->json($data);
+        
+    }
 }
            
 

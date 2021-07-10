@@ -169,10 +169,10 @@ $.ajaxSetup({
 				data= data + "<td>"+value.id+"</td>"
 				data= data + "<td>"+value.name+"</td>"
 				data= data + "<td>"
-				data= data + "<button class='btn btn-danger btn-sm'>-</button>"
-				data= data + "<input type='text' value='1' style='width:25px;'>"
+				data= data + "<button class='btn btn-success btn-sm' id='decrement' onclick='decrement("+value.rowId+")'>-</button>"
+				data= data + "<input type='text' id='quantity_id' name='quantity_name' value='1' style='width:25px;'>"
 
-				data= data + "<button class='btn btn-success btn-sm'>-</button>"
+				data= data + "<button class='btn btn-danger btn-sm' id='increment' onclick='increment("+value.rowId+")'>+</button>"
 
 				data= data + "</td>"
 
@@ -192,8 +192,75 @@ $.ajaxSetup({
 	});
 }
 alldata();
+
+
+
+
+
+function increment(rowId){
+	
+	
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+	var quantity_id = $("#increment").val();
+
+	$.ajax({
+		type:"POST",
+		datatype:"json",
+		data:{quantity_ide:quantity_id},
+		url:"/increment/",
+		success:function(response){
+
+		}
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -127,6 +127,7 @@ Route::resource('brand', BrandController::class);
 
 // cart ajax test
        Route::get('/cartdata/',[App\Http\Controllers\Cart\CartController::class,'alldata']);
+       Route::post('/increment/',[App\Http\Controllers\Cart\CartController::class,'increment']);
 
 
 
