@@ -12,9 +12,9 @@
 				<!-- Images -->
 				<div class="col-lg-2 order-lg-1 order-2">
 					<ul class="image_list">
-						<li data-image="images/single_4.jpg"><img src="{{ asset('product_images/'.$single_products->image_one) }}" alt=""></li>
-						<li data-image="images/single_2.jpg"><img src="{{ asset('product_images/'.$single_products->image_two) }}" alt=""></li>
-						<li data-image="images/single_3.jpg"><img src="{{ asset('product_images/'.$single_products->image_three) }}" alt=""></li>
+						<li data-image="images/single_4.jpg"><img src="" alt=""></li>
+						<li data-image="images/single_2.jpg"><img src="{{ asset('product_images/'.$single_products->image_one) }}" alt=""></li>
+						<li data-image="product_images/{{$single_products->image_one}}"><img src="{{ asset('product_images/'.$single_products->image_one) }}" alt=""></li>
 					</ul>
 				</div>
 

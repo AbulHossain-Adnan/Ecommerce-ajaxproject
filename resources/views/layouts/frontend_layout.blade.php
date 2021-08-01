@@ -21,6 +21,8 @@
     <script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="{{ asset('frontend') }}/js/jquery.min.js"></script>
     
      
       
@@ -129,8 +131,15 @@
 
                                 @guest
                                 @else
-                                  <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                                    <div class="wishlist_icon"><img src="{{ asset('frontend') }}/images/heart.png"
+
+
+
+                                  <div class="wishlist d-flex flex-row align-items-center justify-content-end" id="wishlistfield">
+
+
+
+
+                                   <!--  <div class="wishlist_icon"><img src="{{ asset('frontend') }}/images/heart.png"
                                             alt=""></div>
                                     <div class="wishlist_content">
                                         <div class="wishlist_text"><a href="#">Wishlist</a></div>
@@ -142,31 +151,43 @@
 
 
                                         <div class="wishlist_count">{{ count($wishlist) }}</div>
-                                    </div>
+                                    </div> -->
+
+
+
+
                                 </div>
 
                                 @endguest
                               
 
 
+
+
+
+
+
+
+
+
+
                                 <!-- Cart -->
-                                <div class="cart">
-                                    <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                        <div class="cart_icon">
-                                            <img src="{{ asset('frontend') }}/images/cart.png" alt="">
-                                            <div class="cart_count"><span>{{ Cart::count() }}</span></div>
-                                        </div>
-                                        <div class="cart_content">
-                                            <div class="cart_text"><a href="{{ route('cart.show') }}">Cart</a></div>
-                                            <div class="cart_price">{{ Cart::subtotal() }}</div>
-                                        </div>
-                                    </div>
+                                <div class="cart" id="cartfield">
+                            
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+               
+
+
+
+
+
+
+
+
 
 
 
@@ -290,6 +311,8 @@
     </div>
 
     <script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
+  
+
     <script src="{{ asset('frontend') }}/styles/bootstrap4/popper.js"></script>
     <script src="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.js"></script>
     <script src="{{ asset('frontend') }}/plugins/greensock/TweenMax.min.js"></script>
@@ -324,11 +347,88 @@
   </script>
 
   
-
+<
 
      
 
+<script type="text/javascript">
+    
+function minicart(){
 
+    $.ajax({
+        type:"GET",
+        datatype:"json",
+        url:"/minicart/",
+        success:function(data){
+
+                  $('#cartfield').html(`
+
+
+             <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                        <div class="cart_icon">
+                                            <img src="{{ asset('frontend') }}/images/cart.png" alt="">
+                                            <div class="cart_count"><span>${data.cart_count}</span></div>
+                                        </div>
+                                        <div class="cart_content">
+                                            <div class="cart_text"><a href="{{ route('cart.show') }}">Cart</a></div>
+                                            <div class="cart_price">${data.subtotal}</div>
+                                        </div>
+                                    </div>
+
+
+            `)
+
+  
+          
+
+        }
+
+    })
+}
+
+minicart(); 
+
+
+
+function miniwishlist(){
+
+    $.ajax({
+        type:"GET",
+        datatype:"json",
+        url:"/miniwishlist/",
+        success:function(data){
+            $('#wishlistfield').html(`
+
+                 <div class="wishlist_icon"><img src="{{ asset('frontend') }}/images/heart.png"
+                                            alt=""></div>
+                                    <div class="wishlist_content">
+                                        <div class="wishlist_text"><a href="#">Wishlist</a></div>
+
+                                        <div class="wishlist_count">${data.wishlist}</div>
+                                    </div>
+
+                `)
+        }
+    })
+}
+miniwishlist();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
         
 
 

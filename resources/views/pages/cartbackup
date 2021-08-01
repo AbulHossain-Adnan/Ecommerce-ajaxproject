@@ -136,3 +136,19 @@
 
 
 @endsection
+
+
+	@if(session()->has('coupon'))
+
+						     	@else
+						     		 <form method="post" action="{{ route('coupon.apply')}}">
+						      	@csrf
+								  <div class="form-group">
+								    <label for="exampleInputEmail1"><h2>Coupon</h2></label>
+								    <input type="text" class="form-control" id="coupon_name" name="coupon_name" aria-describedby="emailHelp" placeholder="Enter Coupon">
+								  
+								  </div>
+								
+								  <button type="submit" class="btn btn-primary">Apply coupon</button>
+								</form>
+						     	@endif

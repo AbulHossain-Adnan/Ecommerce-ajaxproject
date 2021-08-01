@@ -14,7 +14,10 @@ use App\Models\Admin\Category;
 class CartController extends Controller
 {
     public function addcart($id){
-
+       if(session::has('coupon')){
+        session::forget('coupon');
+       }
+       
         $product =Product::find($id)->where('id',$id)->first();
         $data=array();
         if($product->discount_price == null){
@@ -48,11 +51,11 @@ class CartController extends Controller
 
 
     }
-    public function check(){
-        $content=Cart::content();
-        return Response()->json($content);
-    }
+
+
+
     public function cart_show(){
+       
         $cart=Cart::content();
         $categories=Category::all();
        
@@ -60,31 +63,25 @@ class CartController extends Controller
         return view('pages/cart',compact('cart','categories'));
      
     }
-    public function cartremove($rowId){
-        Cart::remove($rowId);
-           return back()->with('message','cart remove succefully');  
-
-    }
-    public function cartupdate(Request $request){
-        $rowId=$request->product_id;
-        $qty=$request->qty;
-        Cart::update($rowId, $qty);
-        return redirect()->back()->with('message','cart updated successfully');
 
 
 
 
-       
 
-
-    }
     public function addtocart(Request $request){
+   
+
+         if(session::has('coupon')){
+        session::forget('coupon');
+       }
+
+
 
         $id=$request->product_id;
 
 
                 $product =Product::find($id)->where('id',$id)->first();
-                 $quantity=$request->qty;
+                 $quantity=$request->quantity;
                  $color=$request->color;
                  $size= $request->size;
 
@@ -101,14 +98,7 @@ class CartController extends Controller
              $data['options']['size']=$request->size;
             cart::add($data);
         
-          $notification=array(
-                'message'=>'Product Added To Cart succefully',
-                'alert-type'=>'success'
-
-            );
-           
-           
-            return redirect()->back()->with($notification);
+         return Response()->json(['success'=>'d']);
           
 
 
@@ -122,67 +112,223 @@ class CartController extends Controller
              $data['options']['color']=$request->color;
              $data['options']['size']=$request->size;
             cart::add($data);
-  
-            
-            $notification=array(
-                'message'=>'Product Added To Cart succefully',
-                'alert-type'=>'success'
-
-            );
-           
-           
-            return redirect()->back()->with($notification);
+       
+          return Response()->json(['success'=>'d']);
 
              
         }
        
     }
+
+
+
+
     public function couponcartremove($rowId){
+         if(session::has('coupon')){
+            session::forget('coupon');
+        }
       
         Cart::remove($rowId);
         return back();
     }
 
-       public function coupon(request $request){
-      
-       
-         $coupon=$request->coupon_name;
-        $check=Coupon::where('coupon',$coupon)->first();
-       
 
-     
-      if($check){
-     
-        session::put('coupon',[
-            'name'=>$check->coupon,
-            'discount'=>$check->discount,
-            'balance'=>Cart::subtotal()-$check->discount,
+
+
+
+
+  
+    public function appcoupon(Request $request){
+
+        $coupon_name=$request->coupon_name;
+
+        $check=Coupon::where('coupon',$coupon_name)->first();
+
+
+
+
+
+       
+        if($check){
+
+        Session::put('coupon',[
+                'name'=>$check->coupon,
+                'subtotal'=>Cart::subtotal(),
+                'discount_amount'=>Cart::subtotal()*$check->discount/100,
+                'discount'=>$check->discount,
+                'grand_total'=>Cart::subtotal()-Cart::subtotal()*$check->discount/100,
 
 
             ]);
+            return Response()->json(['success'=>'coupon added succefully']);
+         
 
-        return back()->with('message','coupon apply succefully');
-        
-
-
-      }
-        else{
            
-            return back()->with('message','invalid coupon');
         }
+        else{
+          
+            return Response()->json(['error'=>'invalid coupon']);
 
-    }
+        }
+     
+
+        }
+    // public function cartcalculation(){
+
+    //     if(Session::has('coupon')){
+    //         return Response()->json(array(
+               
+    //             'name'=>session()->get('coupon')['name'],
+    //             'discount'=>session()->get('coupon')['discount'],
+    //             'discount_amount'=>session()->get('coupon')['discount_amount'],
+    //             'subtotal'=>session()->get('coupon')['subtotal'],
+    //             'grand_total'=>session()->get('coupon')['grand_total'],
+
+    //         ));
+    //     }
+    //     else{
+    //         return Response()->json(array(
+    //             'total'=>Cart::subtotal(),
+
+    //         ));
+    //     }
+
+    // }
+
+  
+
+
+
     public function alldata(){
         $data=Cart::content();
         return Response()->json($data);
     }
 
-    public function increment(request $request){
+    public function increment($rowId){
+       
 
-        $data=$request->all();
-        return Response()->json($data);
+
+        $row=Cart::get($rowId);
+        Cart::update($rowId, $row->qty +1);
+         if(session::has('coupon')){
+            $coupon_name=session::get('coupon')['name'];
+            $check=Coupon::where('coupon',$coupon_name)->first();
+
+           session::put('coupon',[
+                'name'=>$check->coupon,
+                'subtotal'=>Cart::subtotal(),
+                'discount_amount'=>Cart::subtotal()*$check->discount/100,
+                'discount'=>$check->discount,
+                'grand_total'=>Cart::subtotal()-Cart::subtotal()*$check->discount/100,
+
+
+            ]);
+
+           return Response()->json('succefully');
+
+        }
+    
         
     }
+
+
+       public function decrement($rowId){
+       
+
+             $row=Cart::get($rowId);
+            Cart::update($rowId, $row->qty -1);
+          if(session::has('coupon')){
+            $coupon_name=session::get('coupon')['name'];
+            $check=Coupon::where('coupon',$coupon_name)->first();
+
+           session::put('coupon',[
+                'name'=>$check->coupon,
+                'subtotal'=>Cart::subtotal(),
+                'discount_amount'=>Cart::subtotal()*$check->discount/100,
+                'discount'=>$check->discount,
+                'grand_total'=>Cart::subtotal()-Cart::subtotal()*$check->discount/100,
+
+
+            ]);
+           
+        }
+
+        return Response()->json('succefully');
+        
+    }
+    public function destroy($rowId){
+       
+    
+
+        Cart::remove($rowId);
+          if(session::has('coupon')){
+           session::forget('coupon');
+
+        }
+        return Response()->json($rowId);
+
+    }
+    public function couponremove(){
+
+        if(session::has('coupon')){
+            session::forget('coupon');
+        }
+       
+        return Response()->json(['success'=>'coupon remove succefully']);
+    }
+
+public function minicart(){
+
+
+  
+return Response()->json(array(
+
+'subtotal'=>Cart::subtotal(),
+'cart_count'=>Cart::count(),
+
+));
+}
+public function cartcal(){
+
+    
+    
+    if(session::has('coupon'))
+    {
+        $coupon_name=session::get('coupon')['name'];
+        $check=Coupon::where('coupon',$coupon_name)->first();
+        return Response()->json(array(
+
+
+                'name'=>$check->coupon,
+                'subtotal'=>Cart::subtotal(),
+                'discount_amount'=>Cart::subtotal()*$check->discount/100,
+                'discount'=>$check->discount,
+                'grand_total'=>Cart::subtotal()-Cart::subtotal()*$check->discount/100,
+
+
+        )); 
+
+    }
+    else
+
+    {
+return Response()->json(array(
+
+'total'=>Cart::subtotal(),
+
+
+));
+
+    }
+
+
+
+
+
+
+
+}
+    
 }
            
 

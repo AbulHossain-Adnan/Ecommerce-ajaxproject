@@ -18,9 +18,13 @@
 							  <thead>
 							    <tr>
 							      <th scope="col">id</th>
+							      <th scope="col">image</th>
+
 							      <th scope="col">name</th>
 							      <th scope="col">quantity</th>
 							      <th scope="col">price</th>
+							      <th scope="col">action</th>
+
 
 							    </tr>
 							  </thead>
@@ -36,68 +40,88 @@
 						</div><br><br>
 
 						<div class="row">
-						  <div class="col-sm-6"> 
-						     	@if(session()->has('coupon'))
 
-						     	@else
-						     		 <form method="post" action="{{ route('coupon.apply')}}">
-						      	@csrf
+						  <div class="col-sm-6"> 
+						      	<div id="applycouponfield">
 								  <div class="form-group">
 								    <label for="exampleInputEmail1"><h2>Coupon</h2></label>
-								    <input type="text" class="form-control" name="coupon_name" aria-describedby="emailHelp" placeholder="Enter Coupon">
+								    <input type="text" class="form-control" id="coupon_name" name="coupon_name" aria-describedby="emailHelp" placeholder="Enter Coupon">
 								  
 								  </div>
 								
-								  <button type="submit" class="btn btn-primary">Apply coupon</button>
-								</form>
-						     	@endif
-						     
-						     
-						   
-						  </div>
-						  
-						  <div class="col-sm-6">
-						  	<form action="">
-						    	<div class="order_total_content text-md-right">
-								<div class="order_total_title">Order Total:</div>
+								  <button type="submit" class="btn btn-primary" onclick="applycoupon()">Apply coupon</button>
+							</div>
+						   </div>
+			
+						 
 						
-								@if(session()->has('coupon'))
+						
+						  <div class="col-sm-6">
 
-								<div class="order_total_amount">{{ session()->get('coupon')['balance'] }}$</div>
-								<div>
-								<div class="order_total_title">Applyed Coupon:</div>
-								<div class="order_total_amount">{{ session()->get('coupon')['name'] }}</div>
-							</div>
-							<div>
-								<div class="order_total_title">Discount Amount:</div>
-								<div class="order_total_amount">{{ session()->get('coupon')['discount'] }}$</div>
-							</div>
-							<div>
-								<div class="order_total_title">Shipping Charge:</div>
-								<div class="order_total_amount"><span class="badge badge-success">Free</span></div>
-							</div>
-								{{ session()->forget('coupon') }}
-								@else
-								<div class="order_total_amount">{{ Cart::subtotal() }}</div>
-								@endif
+
+						  	
+						    	<div class="order_total_content text-md-right" >
+						    		
+								<div class="order_total_title" id="cartcalculationfield">
+								
+
 
 								
-							</div>
-						     
+
+								</div>
+							
+
+						
+							
+
+								</div>
+								<form action="{{ route('checkout') }}" method="post">
+									@csrf
+
 						      <div class="cart_buttons">
+						      	@if(session()->has('coupon'))
+
+						      	<input type="hidden" value="{{session()->get('coupon')['name']}}" name="name">
+						      	<input type="hidden" value="{{session()->get('coupon')['discount']}}" name="discount">
+
+						      	<input type="hidden" value="{{session()->get('coupon')['discount_amount']}}" name="discount_amount">
+
+						      	<input type="hidden" value="{{session()->get('coupon')['subtotal']}}" name="subtotal">
+						      	<input type="hidden" value="{{session()->get('coupon')['grand_total']}}" name="grand_total">
+						      	<input type="hidden" value="{{session()->get('coupon')['discount_amount']}}" name="discount_amount">
+
+
+						     
+
+						      	@else
+						      		<input type="hidden" value="NULL" name="name">
+						      	<input type="hidden" value="Null" name="discount">
+
+						      	<input type="hidden" value="Null" name="discount_amount">
+
+						      	<input type="hidden" value="{{Cart::subtotal()}}" name="subtotal">
+
+						      		<input type="hidden" value="{{Cart::subtotal()}}" name="grand_total">
+						      	<input type="hidden" value="Null" name="discount_amount">
+
+						      	@endif
+						     
+
+
+
+						      	
 									<button type="button" class="button cart_button_clear">All Clear</button>
-									<a class="btn btn-primary btn-lg" href="{{ route('checkout') }}">Checkout</a>
+								
+									<button class="btn btn-primary btn-lg">Checkout</button>
+
 									
 								</div>
+
+								</form>
 						      </div>
 						   
 						 
 						</div>
-						</form>
-
-
-
-
 						
 					</div>
 				</div>
@@ -110,9 +134,18 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-	
+								
+
+
+
+
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
 <script type="text/javascript">
@@ -121,37 +154,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-
-
-// function alldataa(){
-//   $.ajax({ 
-//   type:"GET",
-//   datatype:'json',
-//  url: "/cartdata/", 
-//   success:function(response){
-//     let data = ""
-//     $.each(response, function(key,value){
-//       data = data + "<tr>"
-//       data = data + "<td>"+value.id+"</td>"
-//       data = data + "<td>"+value.name+"</td>"
-//       data = data + "<td>"+value.qty +"</td>"
-//       data = data + "<td>"+value.price +"</td>"
-//       data = data + "<td>"
-//       data= data +"<button class='btn btn-primary btn-sm' onclick='editData("+value.id+")'>edit</button>"
-//       data= data +"<button class='btn btn-danger btn-sm' onclick='deletedata("+value.id+")'>delete</button>"
-//       data = data + "</td>"
-//       data = data + "</tr>"
-//     })
-//     $('tbody').html(data);
-    
-//     }
-//    })
-//   }
-  
-// alldataa();
-
-
-
 
 
  function alldata(){
@@ -167,25 +169,31 @@ $.ajaxSetup({
 
 				data= data + "<tr>"
 				data= data + "<td>"+value.id+"</td>"
+				data = data + "<td>"
+				data= data +  '<img src=" +value.options.image + " />'
+				data = data + "</td>"
 				data= data + "<td>"+value.name+"</td>"
 				data= data + "<td>"
-				data= data + "<button class='btn btn-success btn-sm' id='decrement' onclick='decrement("+value.rowId+")'>-</button>"
-				data= data + "<input type='text' id='quantity_id' name='quantity_name' value='1' style='width:25px;'>"
 
-				data= data + "<button class='btn btn-danger btn-sm' id='increment' onclick='increment("+value.rowId+")'>+</button>"
+				data= data + "<button class='btn btn-success btn-sm' min='1'  max='100' id="+value.rowId+"   onclick='decrement(this.id)'>-</button>"
 
+
+
+
+				data= data + "<input type='text' id='quantity_name' name='quantity_name' value="+value.qty+" style='width:25px;'>"
+
+			
+				data= data + "<button class='btn btn-danger btn-sm' id="+value.rowId+" onclick='increment(this.id)'>+</button>"
 				data= data + "</td>"
-
-
-
-
-
-
-				data= data + "<td>"+value.price+"</td>"
+				data= data + "<td>"+value.subtotal+"</td>"
+				data= data +"<td>"
+				data= data + "<button class='btn btn-warning btn-sm' id="+value.rowId+" onclick='cart_remove(this.id)'>x</button>"
+				data=data + "</td>"
 				data= data + "</tr>"
 
 			})
 			$('tbody').html(data);
+
 
 		}
 
@@ -198,22 +206,28 @@ alldata();
 
 
 function increment(rowId){
-	
-	
+
+
 	$.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
-	var quantity_id = $("#increment").val();
+
+	// var rowId = $("#rowId").val();
+
 
 	$.ajax({
-		type:"POST",
+		type:"GET",
 		datatype:"json",
-		data:{quantity_ide:quantity_id},
-		url:"/increment/",
+		url:"/increment/"+rowId,
 		success:function(response){
+		
+		cartcalculation();
+		alldata();
+		minicart(); 
+
 
 		}
 	})
@@ -221,6 +235,138 @@ function increment(rowId){
 
 
 
+function decrement(rowId){
+
+
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+	// var rowId = $("#rowId").val();
+
+
+	$.ajax({
+		type:"GET",
+		datatype:"json",
+		url:"/decrement/"+rowId,
+		success:function(response){
+		
+		cartcalculation();
+		alldata();
+		minicart(); 
+
+		}
+	})
+}
+
+
+alldata();
+
+
+function cart_remove(id){
+
+
+
+	$.ajax({
+		type:"GET",
+		datatype:"json",
+		url:"/cartremove/"+id,
+		success:function(data){
+
+			cartcalculation();
+			alldata();
+			minicart(); 
+			$('#applycouponfield').show();
+
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'cart remove succesfully'
+})
+
+		}
+	})
+}
+
+
+
+function applycoupon(){
+
+var coupon_name = $('#coupon_name').val();
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+	$.ajax({
+		type:"POST",
+		datatype:"json",
+		data:{coupon_name:coupon_name},
+		url:"/applycouponn/",
+		success:function(data){
+		
+
+			cartcalculation();
+			
+
+			
+		
+			$('#coupon_name').val('');
+			
+
+			const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top-end',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			})
+
+
+			 if ($.isEmptyObject(data.error)){
+                      Toast.fire({
+                      icon: 'success',
+                      title: data.success
+                    })
+                      $('#applycouponfield').hide();
+
+                    }
+                    else{
+                        Toast.fire({
+                          icon: 'error',
+                          title: data.error
+                        })
+                    }
+
+                    location.reload()
+ 
+		}
+		
+		
+	});
+
+}
+ 
 
 
 
@@ -229,38 +375,209 @@ function increment(rowId){
 
 
 
+// function cartcalculation(){ 
+// $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+// });
+
+// 		$.ajax({
+// 			type:"GET",
+// 			datatype:"json",
+// 			url:"/cartcalculation/",
+// 			success:function(data){
+
+// 				if(data.total){
+// 				$("#cartcalculationfield").html(`
+// 					<tr>
+// 					<th>
+// 					<div class="order_total_title">Order Total:</div>
+
+// 					<div class="order_total_amount">{{Cart::subtotal()}}</div>
+// 					</th>
+// 					</tr>
+
+// 					`);
+// 			}
+// 			else{
+// 				$('#cartcalculationfield').html(`
+
+// 					<tr>
+// 					<th>
+
+// 					<div>
+// 								<div class="order_total_title">subtotal:</div>
+// 								<div class="order_total_amount">${data.subtotal}$</div>
+
+// 							</div>
+// 							<div>
+// 							<div class="order_total_title">Coupon name:</div>
+
+// 							<div class="order_total_amount">${data.name}</div>
+// 							<div>
+// 							<button type="submit" class="btn btn-danger" onclick="couponremove()"><h3>x</h3></button>
+// 						</div>
+							
+// 							<div>
+// 								<div class="order_total_title">discount:</div>
+// 								<div class="order_total_amount">${data.discount}% = ${data.discount_amount}$</div>
+// 							</div>
+							
+// 							<div>
+// 								<div class="order_total_title">Grand Total:</div>
+// 								<div class="order_total_amount">${data.grand_total}$</div>
+// 							</div>
+
+// 					</th>
+// 					</tr>
+
+
+
+// 					`)
+// 			}
+
+// 			}
+// 		});
+
+// 	}
+
+
+
+function cartcalculation(){
+
+	$.ajax({
+
+		type:"GET",
+		datatype:"json",
+		url:"/cartcal/",
+		success:function(data){
+	
+			if(data.total){
+				$("#cartcalculationfield").html(`
+					<tr>
+					<th>
+					<div class="order_total_title">Order Total:</div>
+
+					<div class="order_total_amount">${data.total}</div>
+					</th>
+					</tr>
+
+					`);
+			}
+			else{
+				$('#cartcalculationfield').html(`
+
+					<tr>
+					<th>
+
+					<div>
+								<div class="order_total_title">subtotal:</div>
+								<div class="order_total_amount">${data.subtotal}$</div>
+
+							</div>
+							<div>
+							<div class="order_total_title">Coupon name:</div>
+
+							<div class="order_total_amount">${data.name}</div>
+							<div>
+							<button type="submit" class="btn btn-danger" onclick="couponremove()"><h3>x</h3></button>
+						</div>
+							
+							<div>
+								<div class="order_total_title">discount:</div>
+								<div class="order_total_amount">${data.discount}% = ${data.discount_amount}$</div>
+							</div>
+							
+							<div>
+								<div class="order_total_title">Grand Total:</div>
+								<div class="order_total_amount">${data.grand_total}$</div>
+							</div>
+
+					</th>
+					</tr>
+
+
+
+					`)
+			}
+
+		}
+	})
+}
+cartcalculation();
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function couponremove(){
+
+	$.ajax({
+		type:"GET",
+		datatype:"json",
+		url:"/couponremove/",
+		success:function(data){
+			location.reload();
+			cartcalculation();
+			minicart(); 
+			$('#applycouponfield').show();
+			
+				const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'coupon remove succesfully'
+})
+
+
+
+		}
+	})
+}
 
 
 
 		
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

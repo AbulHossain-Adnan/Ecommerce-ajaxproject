@@ -283,11 +283,12 @@
                                                 <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
                                             </div>
                                         </div>
-                                        <button  class="addwish" data-id={{ $item->id }}>
+                                        <!-- <button  class="addwish" data-id={{ $item->id }}> -->
+                                        <button  class="addwish" id="{{$item->id}}"  onclick="addwish(this.id)">
+
                                         <div class="product_fav">
                                             
                                             <i class="fas fa-heart"></i>
-                                            
 
                                         </div>
                                        </button>
@@ -343,10 +344,17 @@
                                                     <input type="radio" name="product_color" style="background:#000000">
                                                     <input type="radio" name="product_color" style="background:#999999">
                                                 </div>
-                                                <button class="product_cart_button">Add to Cart</button>
+                                                <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                         <button  class="addwish" id="{{$item->id}}"  onclick="addwish(this.id)">
+
+                                        <div class="product_fav">
+                                            
+                                            <i class="fas fa-heart"></i>
+
+                                        </div>
+                                       </button>
                                         <ul class="product_marks">
 
                                             @if($item->discount_price == null)
@@ -399,10 +407,17 @@
                                                     <input type="radio" name="product_color" style="background:#000000">
                                                     <input type="radio" name="product_color" style="background:#999999">
                                                 </div>
-                                                <button class="product_cart_button">Add to Cart</button>
+                                                <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                         <button  class="addwish" id="{{$item->id}}"  onclick="addwish(this.id)">
+
+                                        <div class="product_fav">
+                                            
+                                            <i class="fas fa-heart"></i>
+
+                                        </div>
+                                       </button>
                                         <ul class="product_marks">
                                             @if($item->discount_price == null)
                                           <li class="product_mark product_discount " style="background:blue;">new</li>
@@ -583,7 +598,7 @@
                                                         <input type="radio" name="product_color"
                                                             style="background:#999999">
                                                     </div>
-                                                    <button class="product_cart_button">Add to Cart</button>
+                                                    <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
                                                 </div>
                                             </div>
                                             
@@ -691,7 +706,7 @@
                                                         <input type="radio" name="product_color"
                                                             style="background:#999999">
                                                     </div>
-                                                    <button class="product_cart_button">Add to Cart</button>
+                                                    <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
                                                 </div>
                                             </div>
                                             
@@ -2182,6 +2197,8 @@
     
 $(document).ready(function(){
     $(".addwish").on('click',function(){
+
+
         let $id =$(this).data('id');
         if($id){
             $.ajax({
@@ -2225,7 +2242,6 @@ $(document).ready(function(){
 </script>
 
 
-
 <div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModallevel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -2261,9 +2277,9 @@ $(document).ready(function(){
 </ul>
   </div>
 
-                <div class="col-sm-4">
-                     <form action="{{ route('addto.cart') }}" method="post">
-    @csrf
+<div class="col-sm-4">
+                    
+    
     <input type="hidden" id="product_id" name="product_id">
                  <div class="form-group">
                 <label for="exampleInputColor">Color </label>
@@ -2279,11 +2295,11 @@ $(document).ready(function(){
         </div>
           <div class="form-group">
                 <label for="exampleInputQuantity">Quantity </label>
-               <input type="number" name="qty" class="form-control" value="1" pattern="[0-9]"  >
+               <input type="number" name="qty" id="quantity" class="form-control" value="1" pattern="[0-9]"  >
         </div>
          
-    <button class="bth btn-primary btn-sm" type="submit">Add to card</button>
-        </form>
+    <button class="bth btn-primary btn-sm" type="submit" onclick="addtocart()">Add to card</button>
+        
   </div>
   
 </div>
@@ -2345,6 +2361,7 @@ $.ajaxSetup({
 
     }
 </script>
+
  <script>
     @if(Session::has('message'))
                 var type="{{Session::get('alert-type','success')}}"
@@ -2365,4 +2382,99 @@ $.ajaxSetup({
               @endif
   </script>
 
+
+
+
+
+<script type="text/javascript">
+    function addtocart(){
+       $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+       var id=$('#product_id').val();
+       var color=$('#pcolor').val();
+       var size=$('#size').val();
+       var quantity=$('#quantity').val();
+
+
+       $.ajax({
+        type:"POST",
+        datatype:'json',
+        data:{product_id:id,color:color,size:size,quantity:quantity},
+        url:"/addtocart/",
+        success:function(data){
+            minicart();
+           
+            $("#cartmodal").modal('hide')
+
+            const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'cart added successfully'
+})
+
+        }
+       })
+    }
+
+
+
+
+function addwish(id){
+   
+    $.ajax({
+        type:"GET",
+        datatype:"json",
+        url:"/addwishlistt/"+id,
+        success:function(data){
+            miniwishlist();
+              const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    })
+                    if ($.isEmptyObject(data.error)){
+                         Toast.fire({
+                      icon: 'success',
+                      title: data.success
+                    })
+
+                    }
+                    else{
+                        Toast.fire({
+                          icon: 'error',
+                          title: data.error
+                        })
+                    }
+
+        }
+    })
+
+
+
+}
+
+
+
+</script>
 @endsection

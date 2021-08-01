@@ -27,7 +27,7 @@ Route::view('/', 'frontend.index',[
 
 
 
-Auth::routes();
+Auth::routes(['varified=>true']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
 Route::get('change/password', [App\Http\Controllers\HomeController::class, 'change_password'])->name('change.password');
@@ -109,6 +109,12 @@ Route::resource('brand', BrandController::class);
    // Route for wishlist
    Route::get('/wishlist/added/{id}',[App\Http\Controllers\Wishlist\WishlistController::class,'addwishlist'])->name('wish.added');
    Route::get('/wishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'wishlist'])->name('wish.list');
+   Route::get('/wishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'wishlist'])->name('wish.list');
+   Route::get('/addwishlistt/{id}',[App\Http\Controllers\Wishlist\WishlistController::class,'wishlistt']);
+   Route::get('/miniwishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'miniwishlist']);
+
+   
+
 
 
 
@@ -120,14 +126,28 @@ Route::resource('brand', BrandController::class);
     Route::get('/coupon_cart/remove/{rowId}',[App\Http\Controllers\Admin\Coupon\CouponController::class,'cartremove'])->name('coupon_cart.delete');
 
     Route::post('/cart/update/',[App\Http\Controllers\Cart\CartController::class,'cartupdate'])->name('cart.update');
-    Route::post('/cart/add/',[App\Http\Controllers\Cart\CartController::class,'addtocart'])->name('addto.cart');
-      Route::post('/coupon/apply',[App\Http\Controllers\Cart\CartController::class,'coupon'])->name('coupon.apply');
+    Route::post('/addtocart/',[App\Http\Controllers\Cart\CartController::class,'addtocart'])->name('addto.cart');
+      Route::POST('/applycouponn/',[App\Http\Controllers\Cart\CartController::class,'appcoupon']);
 
 
 
 // cart ajax test
        Route::get('/cartdata/',[App\Http\Controllers\Cart\CartController::class,'alldata']);
-       Route::post('/increment/',[App\Http\Controllers\Cart\CartController::class,'increment']);
+       Route::get('/increment/{rowId}',[App\Http\Controllers\Cart\CartController::class,'increment']);
+       Route::get('/decrement/{rowId}',[App\Http\Controllers\Cart\CartController::class,'decrement']);
+
+       Route::get('/cartremove/{rowId}',[App\Http\Controllers\Cart\CartController::class,'destroy']);
+        // Route::get('/cartcalculation/',[App\Http\Controllers\Cart\CartController::class,'cartcalculation']);
+        // Route::get('/cartcalculation/',[App\Http\Controllers\Cart\CartController::class,'cartcalculation']);
+        Route::get('/cartcal/',[App\Http\Controllers\Cart\CartController::class,'cartcal']);
+
+        Route::get('/couponremove/',[App\Http\Controllers\Cart\CartController::class,'couponremove']);
+        Route::get('/minicart/',[App\Http\Controllers\Cart\CartController::class,'minicart']);
+
+        
+
+        
+
 
 
 
@@ -145,7 +165,17 @@ Route::resource('brand', BrandController::class);
 
      // route for checkout Controller 
 
-     Route::get('/checkout/',[App\Http\Controllers\Checkout\CheckoutController::class,'checkout'])->name('checkout');
+     Route::post('/checkout/',[App\Http\Controllers\Checkout\CheckoutController::class,'checkout'])->name('checkout');
+     Route::post('/final_step/',[App\Http\Controllers\Checkout\CheckoutController::class,'payment'])->name('final_step');
+
+     
     
+
+
+     // Route for stripe payment 
+
+
+     Route::get('stripe',[App\Http\Controllers\StripePaymentController::class,'stripe']);
+     Route::post('stripe',[App\Http\Controllers\StripePaymentController::class,'stripePost'])->name('stripe.post');
 
 

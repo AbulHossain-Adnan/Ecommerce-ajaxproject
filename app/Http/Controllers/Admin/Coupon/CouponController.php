@@ -8,7 +8,7 @@ use App\Models\Coupon;
 use App\Models\Admin\Category;
 use Cart;
 use Session;
-use App\Models\Admin\Category;
+
 
 class CouponController extends Controller
 {
@@ -77,13 +77,13 @@ class CouponController extends Controller
         }
 
     }
-      public function cartremove($rowId){
-        Cart::remove($rowId);
+    //   public function cartremove($rowId){
+    //     Cart::remove($rowId);
        
        
            
-           return back()->with('message','cart remove succefully');
+    //        return back()->with('message','cart remove succefully');
         
 
-    }
+    // }
 }

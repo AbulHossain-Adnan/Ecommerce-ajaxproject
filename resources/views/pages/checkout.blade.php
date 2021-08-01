@@ -1,114 +1,165 @@
 @extends('layouts.frontend_layout')
 @section('frontendContent')
-
-
   <div class="col-sm-10 m-auto " >
    <div class="row">
   <div class="col-sm-6" >
+       <div><h3>Shipping Area</h3></div>
+
     <div class="card" style="border-radius: 25px;">
       <div class="card-body">
-       <form>
+       
+       <form method="post" action="{{route('final_step')}}">
+        @csrf
+
   <div class="form-row">
     <div class="form-group col-md-6">
+      <label for="inputEmail4">Full Name</label>
+      <input type="text" class="form-control" name="name" id="inputEmail4" placeholder="name">
+    </div>
+
+    <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <input type="password" class="form-control" id="inputPassword4" name="password" placeholder="Password">
     </div>
   </div>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
+
   <div class="form-group">
     <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    <input type="text" class="form-control" name="address" id="inputAddress2" >
   </div>
   <div class="form-row">
     <div class="form-group col-md-">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+      <input type="text" class="form-control" name="city" id="inputCity">
     </div>
-    <div class="form-group col-md-4">
+   <!--  <div class="form-group col-md-4">
       <label for="inputState">State</label>
       <select id="inputState" class="form-control">
         <option selected>Choose...</option>
         <option>...</option>
       </select>
-    </div>
+    </div> -->
     <div class="form-group col-md-2">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+      <input type="text" name="zip" class="form-control" id="inputZip">
     </div>
   </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+ 
+
       </div>
-    </div>
+
+
+    </div><br>
+     <div><h3>Payment Process</h3></div><br>
+   <div class="row">
+            <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="radio" name="payment" value="1" checked="">
+             <img src="{{ asset('frontend') }}/payments/cashon1.jpg" width="100" 
+                                            alt="">
+            </label>
+            </div><!-- col-4 -->
+
+         
+
+          <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="radio" name="payment" value="2">
+            <img src="{{ asset('frontend') }}/payments/bkash.jpg" width="100" 
+                                            alt="">
+            </label>
+            </div>
+
+              <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="radio" name="payment" value="3">
+            <img src="{{ asset('frontend') }}/payments/stripe.jpg" width="100" 
+                                      alt="">
+            </label>
+            </div>
+            <br><br>
+            <!-- col-4 -->
+            
+  </div><br>
+
   </div>
+
+
   <div class="col-sm-6">
+     <div><h3>Order Details</h3></div>
     <div class="card" style="border-radius: 25px;">
       <div class="card-body">
+
 
       	<table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+     <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">price</th>
+      <th scope="col">color</th>
+      <th scope="col">size</th>
     </tr>
   </thead>
   <tbody>
+
   	@foreach($cart as $item)
+
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>{{$item->id}}</td>
+      <td>{{$item->name}}</td>
+
+      <td>{{$item->price*$item->qty}}</td>
+
+      <td>{{$item->options->color}}</td>
+      <td>{{$item->options->size}}</td>
     </tr>
-    
+
+    @endforeach
      </tbody>
 </table>
 
+       <ul class="list-group" style="border: 2px solid red;border-radius: 10px">
+		  <li class="list-group-item"><h4>Subtotal:: {{$carts['subtotal']}}$</h4></li>
+      <li class="list-group-item"><h4>Discount=>   {{$carts['discount']}}%({{$carts['discount_amount']}}$)</h4></li>
+
+      <li class="list-group-item"><h4>Coupon Name: {{$carts['name']}}</h4></li>
+      <li class="list-group-item"><h4>Grand Total:: {{$carts['grand_total']}}$</h4></li>
 
 
+@if($carts['name'] == "NULL")
+
+      <input type="hidden" value="{{Cart::subtotal()}}" name="subtotal">
+
+      @else
+
+      <input type="hidden" value="{{$carts['grand_total']}}" name="subtotal">
 
 
+      @endif
 
 
+     
 
 
-       <ul class="list-group">
-
-       	{{ $cart }}
-		  <li class="list-group-item">Cras justo odio</li>
-		  <li class="list-group-item">Dapibus ac facilisis in</li>
-		  <li class="list-group-item">Morbi leo risus</li>
-		  <li class="list-group-item">Porta ac consectetur ac</li>
-		  <li class="list-group-item">Vestibulum at eros</li>
 		</ul>
-		
-		  <ul class="list-group">
-		  <li class="list-group-item">Cras justo odio</li>
-		
-		</ul>
-		@endforeach
       </div>
-    </div>
-  </div>
+
+    </div><br><br><br><br>
+   
+  <button type="submit" style="border-radius: 25px;" class="btn btn-success">Place Order</button>
+
+       
+ </form>
 </div>
   </div>
+ 
+
+
  
 
  
