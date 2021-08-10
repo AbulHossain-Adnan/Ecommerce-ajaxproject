@@ -1,6 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Division\DivisionController;
+use App\Http\Controllers\Admin\District\DistrictController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Order_detailsController;
+use App\Http\Controllers\ShippingController;
+
+
+
+use App\Http\Controllers\Admin\Area\AreaController;
+
 use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -177,5 +187,41 @@ Route::resource('brand', BrandController::class);
 
      Route::get('stripe',[App\Http\Controllers\StripePaymentController::class,'stripe']);
      Route::post('stripe',[App\Http\Controllers\StripePaymentController::class,'stripePost'])->name('stripe.post');
+
+
+
+
+
+     // Route for Division
+     Route::post('division/updated',[App\Http\Controllers\Admin\Division\DivisionController::class,'updated']);
+     Route::resource('division', DivisionController::class);
+
+     // Route for districtController
+     Route::post('district/updated',[App\Http\Controllers\Admin\District\DistrictController::class,'updated']);
+     Route::get('/get_district/{division_id}',[App\Http\Controllers\Admin\District\DistrictController::class,'getdistrict']);
+
+
+     Route::resource('district', DistrictController::class);
+
+     // route for area
+
+      Route::post('area/updated',[App\Http\Controllers\Admin\Area\AreaController::class,'updated']);
+      Route::get('/get_area/{district_id}',[App\Http\Controllers\Admin\Area\AreaController::class,'getarea']);
+
+
+     Route::resource('area', AreaController::class);
+
+// Route for OrderController
+     Route::resource('order', OrderController::class);
+
+     Route::resource('order_details', Order_detailsController::class);
+
+
+     Route::resource('shipping', ShippingController::class);
+
+
+
+
+
 
 

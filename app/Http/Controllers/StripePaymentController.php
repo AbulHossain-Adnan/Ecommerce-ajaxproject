@@ -4,14 +4,20 @@
 
 namespace App\Http\Controllers;
 
-   
-
 use Illuminate\Http\Request;
-
 use Session;
-
 use Stripe;
 use Cart;
+use App\Models\Order;
+use App\Models\Order_detail;
+use App\Models\Shipping;
+use App\Models\Admin\Division;
+use App\Models\Admin\District;
+use App\Models\Admin\Area;
+
+use Carbon\Carbon;
+use Auth;
+
 
    
 
@@ -37,7 +43,6 @@ class StripePaymentController extends Controller
 
     }
 
-  
 
     /**
 
@@ -52,6 +57,7 @@ class StripePaymentController extends Controller
     public function stripePost(Request $request)
 
     {
+       
 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -67,13 +73,56 @@ class StripePaymentController extends Controller
 
         ]);
 
-  			Cart::destroy();
+     
+            Order::insert([
+                'user_id'=>Auth::id(),
+                'payment_type'=>$request->payment,
+                'blnc_transection'=>$request->stripeToken,
+                'subtotal'=>Cart::subtotal(),  
+                'discount'=>$request->discount,          
+                'paying_amount'=>$request->subtotal,
 
-        // Session::flash('success', 'Payment successful!');
+                'shipping'=>0,
+                'vat'=>0,
+                'date'=>Carbon::now(),
+            ]);
+            foreach (Cart::content() as $value) {
+            
+            Order_detail::insert([
+                'user_id'=>Auth::id(),
+                'product_id'=>$value->id,
+                'color'=>$value->options->color,
+                'size'=>$value->options->size,
+                'quantity'=>$value->qty,
+                'price'=>$value->price,
+                'subtotal'=>$value->price*$value->qty,
+                'shipping'=>50,
+                'vat'=>50,
+                
+            ]);
+}
+      
+      $division_id=$request->division;
+$district_id=$request->district;
+$area_id=$request->area;
 
-          
+$division_name=Division::find($division_id);
+$district_name=District::find($district_id);
+$area_name=Area::find($area_id);
 
-        // return back();
+
+    Shipping::insert([
+
+        'user_id'=>Auth::id(),
+        'division'=>$division_name->division,
+        'district'=>$district_name->district,
+        'area'=>$area_name->area,
+        'zip'=>$request->zip,
+        'address'=>$request->adress,
+
+        ]);    
+Cart::destroy();
+       
         return redirect('/')->with('message',"Your Payment Successfully Done");
 
     }

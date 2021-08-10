@@ -506,7 +506,7 @@
                         <div class="row fill_height">
                             <div class="col-lg-4 col-md-6 fill_height">
                                 <div class="banner_2_content">
-                                    <div class="banner_2_category"><h4></h3>{{ $item->category->_name }}</h4></div>
+                                    <div class="banner_2_category"><h4></h3>{{ $item->category->name }}</h4></div>
 
                                     <div class="banner_2_title">{{ $item->product_name }}</div>
                                      <div class="banner_2_title"><h4>{{ $item->brand->brand_name }}</h4></div><br>
@@ -2298,7 +2298,7 @@ $(document).ready(function(){
                <input type="number" name="qty" id="quantity" class="form-control" value="1" pattern="[0-9]"  >
         </div>
          
-    <button class="bth btn-primary btn-sm" type="submit" onclick="addtocart()">Add to card</button>
+    <button class="bth btn-primary btn-sm" type="submit" onclick="addtocart()">Addv to card</button>
         
   </div>
   
@@ -2395,7 +2395,7 @@ $.ajaxSetup({
 });
 
        var id=$('#product_id').val();
-       var color=$('#pcolor').val();
+       var color=$('#color').val();
        var size=$('#size').val();
        var quantity=$('#quantity').val();
 

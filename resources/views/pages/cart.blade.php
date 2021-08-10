@@ -321,12 +321,8 @@ var coupon_name = $('#coupon_name').val();
 		url:"/applycouponn/",
 		success:function(data){
 		
-
+			 
 			cartcalculation();
-			
-
-			
-		
 			$('#coupon_name').val('');
 			
 
@@ -358,12 +354,13 @@ var coupon_name = $('#coupon_name').val();
                         })
                     }
 
-                    location.reload()
- 
+                  
+ window.location.reload()
 		}
 		
 		
 	});
+
 
 }
  

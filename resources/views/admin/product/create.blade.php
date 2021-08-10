@@ -49,22 +49,15 @@
              
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  <label class="form-control-label">Category: <span class="tx-danger">*</span></label>
                   @error('category_id')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   <select class="form-control select2" data-placeholder="Choose country" name="category_id">
                     <option label="Choose category"></option>
-
-                   
                         @foreach ($categories as $item)
-                            
-                      
-                    
                     <option value="{{$item->id}}">{{$item->category_name}}</option>
-
                     @endforeach
-                 
                   </select>
                 </div>
               </div><!-- col-4 -->
@@ -340,11 +333,10 @@
     </script>
     <script type="text/javascript">
       
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+// $.ajaxSetup({
+//     headers: {
+    //     }
+// });
 
 
       $(document).ready(function(){

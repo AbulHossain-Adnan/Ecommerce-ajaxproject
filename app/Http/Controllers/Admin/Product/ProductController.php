@@ -34,9 +34,7 @@ class ProductController extends Controller
         return view('admin.product.create', compact('categories','brands'));
 
     }
-    public function store(request $request){
-
-      
+    public function store(request $request){ 
 
         $validated = $request->validate([
             'category_id' => 'required',

@@ -137,14 +137,32 @@
                         </div>
 
                         <input type="hidden" value="{{$order_details['name']}}" name="name">
-                        <input type="hidden" value="{{$order_details['email']}}" name="email">
-                        <input type="hidden" value="{{$order_details['password']}}" name="password">
+                        <input type="hidden" value="{{$order_details['pnumber']}}" name="pnumber">
+                        <input type="hidden" value="{{$order_details['division_id']}}" name="division">
 
-                        <input type="hidden" value="{{$order_details['address']}}" name="address">
+                        <input type="hidden" value="{{$order_details['district_id']}}" name="district">
 
-                        <input type="hidden" value="{{$order_details['city']}}" name="city">
-                        <input type="hidden" value="{{$order_details['zip']}}" name="zip">
+                        <input type="hidden" value="{{$order_details['area_id']}}" name="area">
                         <input type="hidden" value="{{$order_details['subtotal']}}" name="subtotal">
+                        <input type="hidden" value="{{$order_details['adress']}}" name="adress">
+                        <input type="hidden" value="{{$order_details['zip']}}" name="zip">
+                        <input type="hidden" value="{{Cart::content()}}" name="cart">
+                        <input type="hidden" value="{{$order_details['payment']}}" name="payment">
+                     
+                   
+               
+
+                @if($order_details['discount'] == "NULL")
+                 <input type="hidden" value="0" name="discount">
+                 @else
+                  <input type="hidden" value="{{$order_details['discount']}}" name="discount">
+                  @endif
+                         
+                        
+
+
+
+                     
 
 
   

@@ -20,24 +20,24 @@
                 <table id="datatable1" class="table display responsive nowrap text-center">
                     <thead>
                         <tr>
-                            <th class="wd-15p">Serial</th>
-                            <th class="wd-15p">Category Name</th>
+                            <th class="wd-15p">Id</th>
+                            <th class="wd-15p">Division</th>
                             <th class="wd-20p">Action</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $key=>$category)
+                       
 
-
+                    	@foreach($districts as $item)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $category->category_name }}</td>
+                        	<td>{{$item->id}}</td>
+                            <td>{{$item->district}}</td>
                             <td>
-                                <form method="post" action="{{ route('admin.category.destroy',$category->id) }}">
+                                <form method="post" action="{{route('district.destroy',$item->id)}}">
                                     @csrf
                                     @method('DELETE')
-                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $category->id }}">edit</a>
+                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{$item->id}}">edit</a>
                           
                            <button type="submit" class="btn btn-danger btn-sm ">delete</button>
                         
@@ -45,7 +45,7 @@
                             </td>
 
                         </tr>
-                        @endforeach
+                   @endforeach
                     </tbody>
                 </table>
             </div><!-- table-wrapper -->
@@ -75,23 +75,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('admin.category.store') }}">
+            <form method="post" action="{{ route('district.store') }}">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Enter Category Name"
+                        <label for="exampleInputEmail1">District Name</label>
+                        <input name="district_name" type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter District Name"
                             class="@error('category_name') is-invalid @enderror">
-                        @error('category_name')
+                        @error('division_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
+                      <div class="form-group">
+                        <span class="text-danger" id="id_error"></span>
+                        <select class="form-control select2" data-placeholder="Choose country" id="category_id" name="division_id">
+                    <option label="Choose division"></option>
+
+                        @foreach ($divisions as $item)
+                        
+                    <option id="category_id" value="{{$item->id}}">{{$item->division}}</option>
+
+                    @endforeach
+                 
+                  </select>
+          </div>
+
 
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info pd-x-20">Add Category</button>
+                    <button type="submit" class="btn btn-info pd-x-20">Add District</button>
                     <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -110,20 +124,33 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ url('/admin/category/updated') }}">
+            <form method="post" action="{{ url('district/updated') }}">
                 @csrf
                
                 <input type="hidden" id="dataid" name="id" value="">
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="category_name"
-                            aria-describedby="emailHelp" placeholder="Enter Category Name"
-                            class="@error('category_name') is-invalid @enderror">
-                        @error('category_name')
+                        <label for="exampleInputEmail1">District Name</label>
+                        <input name="district_name" type="text" class="form-control" id="district_name"
+                            aria-describedby="emailHelp" placeholder="Enter District Name"
+                            class="@error('division_name') is-invalid @enderror">
+                        @error('district_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                     <div class="form-group">
+                        <span class="text-danger" id="id_error"></span>
+                        <select class="form-control select2" data-placeholder="Choose country" id="category_id" name="division_id">
+                    <option label="Choose division"></option>
+
+                        @foreach ($divisions as $item)
+                        
+                    <option id="division_id" value="{{$item->id}}">{{$item->division}}</option>
+
+                    @endforeach
+                 
+                  </select>
+          </div>
 
 
 
@@ -146,10 +173,11 @@
       $(document).ready(function(){
 
     $('body').on('click',"#edit",function(){
-        let id = $(this).data('id');
-        $.get(`/admin/category/${id}/edit`,function(data){
+        let id = $(this).data('id')
+        $.get(`/district/${id}/edit`,function(data){
             $("#dataid").val(id)
-            $("#category_name").val(data.category_name)
+            $("#district_name").val(data.district)
+          
             $("#modaldemo4").modal('show')
         })
     })
