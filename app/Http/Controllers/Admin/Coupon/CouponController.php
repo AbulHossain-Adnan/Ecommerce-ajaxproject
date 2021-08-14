@@ -58,7 +58,6 @@ class CouponController extends Controller
         $check=Coupon::where('coupon',$coupon)->first();
        
 
-     
       if($check){
      
         session::put('coupon',[

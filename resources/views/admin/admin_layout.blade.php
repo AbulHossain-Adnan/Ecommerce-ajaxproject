@@ -47,9 +47,9 @@
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
   <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <script src="{{ asset('backend') }}/js/jquery.min.js"></script>
-<script src="{{ asset('backend') }}/js/sweet.min.js"></script>
+<!-- <script src="{{ asset('backend') }}/js/sweet.min.js"></script> -->
 
  
 

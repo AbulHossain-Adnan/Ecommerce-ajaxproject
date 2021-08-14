@@ -14,6 +14,9 @@
             <h6 class="card-body-title">Category List
                 <a href="#" class="btn btn-warning btn-sm " style="float: right" data-toggle="modal"
                     data-target="#modaldemo3">Add New</a>
+
+
+                    
             </h6>
           
             <div class="table-wrapper">

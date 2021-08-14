@@ -13,6 +13,8 @@
       <th scope="col">paytype</th>
       <th scope="col">blnc transection</th>
       <th scope="col">paying amount</th>
+      <th scope="col">status code</th>
+
       <th scope="col">Action</th>
 
     </tr>
@@ -24,6 +26,8 @@
       <td>{{$item->payment_type}}</td>
       <td>{{$item->blnc_transection}}</td>
       <td>{{$item->paying_amount}}</td>
+      <td>{{$item->status_code}}</td>
+
       <td><a class="btn btn-info" href="{{url('/user/order/details/'.$item->id)}}">View</a></td>
     </tr>
     @endforeach

@@ -81,7 +81,7 @@ class StripePaymentController extends Controller
                 'subtotal'=>Cart::subtotal(),  
                 'discount'=>$request->discount,          
                 'paying_amount'=>$request->subtotal,
-
+                'status_code'=>mt_rand(100000,999999),
                 'shipping'=>0,
                 'vat'=>0,
                 'date'=>Carbon::now(),

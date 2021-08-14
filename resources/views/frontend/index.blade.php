@@ -4,6 +4,7 @@
 @section('frontendContent')
 
 @include('frontend.indexNav')
+
 <!-- Characteristics -->
 <link rel="stylesheet" href="sweetalert2.min.css">
 <div class="characteristics">
@@ -281,6 +282,10 @@
                                                 </div>
                                              
                                                 <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
+
+
+                                            
+
                                             </div>
                                         </div>
                                         <!-- <button  class="addwish" data-id={{ $item->id }}> -->
@@ -2242,6 +2247,7 @@ $(document).ready(function(){
 </script>
 
 
+
 <div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModallevel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -2308,7 +2314,16 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
 </div>
+
 
 
 <script type="text/javascript">

@@ -233,6 +233,11 @@ Route::resource('brand', BrandController::class);
 
 
 
+       Route::POST('/order/tracking/',[App\Http\Controllers\OrderController::class,'ordertracking']);
+
+
+
+
      Route::resource('order', OrderController::class);
      Route::resource('order_details', Order_detailsController::class);
      Route::resource('shipping', ShippingController::class);

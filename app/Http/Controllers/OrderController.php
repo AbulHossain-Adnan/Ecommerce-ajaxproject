@@ -11,6 +11,8 @@ use DB;
 
 
 
+
+
 class OrderController extends Controller
 {
     /**
@@ -150,6 +152,24 @@ class OrderController extends Controller
         public function orderdelivarysuccess($order_id){
        DB::table('orders')->where('id',$order_id)->update(['status'=>3]);
     return redirect()->route('delivary.success')->with('message','updated');
+       }
+
+       public function ordertracking(request $request){
+
+       $code=$request->status_code;
+       $check=Order::where('status_code',$code)->first();
+
+    if($check){
+        return view('pages/order_tracking',compact('check'));
+    }else{
+    $notification=array('message'=>'invlid status code','alert-type'=>'error');      
+        return back()->with($notification);
+       
+
+    }
+
+
+
        }
       
     }

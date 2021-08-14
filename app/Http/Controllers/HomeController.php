@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\Category;
 use App\Models\Order;
 use App\Models\Order_detail;
+use App\Models\Seo;
+
 
 
 
@@ -33,7 +35,8 @@ class HomeController extends Controller
 
         return view('home',[
             'categories'=>Category::all(),
-            'orders'=>Order::where('user_id',$id)->with('order_detail')->get()
+            'orders'=>Order::where('user_id',$id)->with('order_detail')->get(),
+            'seos'=>Seo::first(),
 
         ]);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Coupon;
+use App\Models\Seo;
 use Cart;
 use Session;
 use App\Models\Admin\Category;
@@ -55,12 +56,12 @@ class CartController extends Controller
 
 
     public function cart_show(){
-       
+       $seos=Seo::first();
         $cart=Cart::content();
         $categories=Category::all();
        
 
-        return view('pages/cart',compact('cart','categories'));
+        return view('pages/cart',compact('cart','categories','seos'));
      
     }
 
@@ -143,9 +144,6 @@ class CartController extends Controller
         $coupon_name=$request->coupon_name;
 
         $check=Coupon::where('coupon',$coupon_name)->first();
-
-
-
 
 
        

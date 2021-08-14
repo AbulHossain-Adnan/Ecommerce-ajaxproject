@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->integer('shipping')->nullable();
             $table->integer('vat')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('status_code');
             $table->date('date')->nullable();
             $table->timestamps();
         });

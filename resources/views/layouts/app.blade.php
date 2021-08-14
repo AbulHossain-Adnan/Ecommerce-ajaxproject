@@ -18,9 +18,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/contact_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/contact_responsive.css">
+       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-<link rel="stylesheet" href="sweetalert2.min.css">
-{{--   <script src="sweetalert2.min.js"></script> --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+ <script src="sweetalert2.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -51,6 +53,19 @@
                                 </div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
                             </div>
                             <div class="top_bar_content ml-auto">
+
+                                @guest
+                                @else
+                                <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                      
+                                        <li>
+                                           <a href="" data-toggle="modal" data-target="#exampleModalCenter">My Order tracking</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                               @endguest
+
                                 <div class="top_bar_menu">
                                     <ul class="standard_dropdown top_bar_dropdown">
                                       
@@ -65,7 +80,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                              
+                               
                             </div>
 
                         </div>
@@ -267,6 +282,31 @@
             </div>
     </div>
 
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">My Order Tracking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                   <form method="post" action="{{url('/order/tracking/')}}">
+                    @csrf
+              <div class="form-group">
+                <label for="exampleInputEmail1">Status Code</label>
+                <input type="Text" class="form-control" name="status_code" aria-describedby="emailHelp" placeholder="Enter Status Code">
+               
+              </div>
+              <button type="submit" class="btn btn-danger">Tracking</button>
+           </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
         <script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
     <script src="{{ asset('frontend') }}/styles/bootstrap4/popper.js"></script>
     <script src="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.js"></script>
@@ -281,7 +321,27 @@
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
     <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
     <script src="{{ asset('frontend') }}/js/cart_custom.js"></script>
-     <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+ 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+     <script>
+    @if(Session::has('message'))
+                var type="{{Session::get('alert-type','success')}}"
+                switch(type){
+                    case 'info':
+                         toastr.info("{{ Session::get('message') }}");
+                         break;
+                    case 'success':
+                        toastr.success("{{ Session::get('message') }}");
+                        break;
+                    case 'warning':
+                       toastr.warning("{{ Session::get('message') }}");
+                        break;
+                    case 'error':
+                        toastr.error("{{ Session::get('message') }}");
+                        break;
+                }
+              @endif
+  </script>
 </body>
 </html>

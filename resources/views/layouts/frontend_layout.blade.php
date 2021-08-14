@@ -91,14 +91,11 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">EUR Euro</a></li>
-                                                <li><a href="#">GBP British Pound</a></li>
-                                                <li><a href="#">JPY Japanese Yen</a></li>
-                                            </ul>
+                                    
+
                                         </li>
                                     </ul>
+
                                 </div>
                                 <div class="top_bar_user">
                                     <div class="user_icon"><img src="{{ asset('frontend') }}/images/user.svg" alt="">
@@ -297,6 +294,7 @@
                 </div>
             </footer>
 
+
             <!-- Copyright -->
 
             <div class="copyright">
@@ -336,7 +334,12 @@
                     </div>
                 </div>
             </div>
+            
     </div>
+
+
+
+
 
     <script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
   
@@ -354,6 +357,55 @@
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<div class="modal fade" id="testmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModallevel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModallevel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+ 
+  
+
+<div class="col-sm-4">
+                    
+    
+    <input type="hidden" id="product_id" name="product_id">
+                 <div class="form-group">
+                <label for="exampleInputColor">Color </label>
+                <select class="form-control input-lg" id="color" name="color">                          
+              
+             </select>
+        </div>
+         <div class="form-group">
+                <label for="exampleInputColor">Size </label>
+                <select class="form-control input-lg" id="size" name="size">
+
+             </select>
+        </div>
+          <div class="form-group">
+                <label for="exampleInputQuantity">Quantity </label>
+               <input type="number" name="qty" id="quantity" class="form-control" value="1" pattern="[0-9]"  >
+        </div>
+         
+    <button class="bth btn-primary btn-sm" type="submit" onclick="addtocart()">Addv to card</button>
+        
+  </div>
+  
+</div>
+      </div>
+     
+      </div>
+    </div>
+  </div>
+
+
     <script>
     @if(Session::has('message'))
                 var type="{{Session::get('alert-type','success')}}"
@@ -376,6 +428,7 @@
 
   
 <
+
 
      
 

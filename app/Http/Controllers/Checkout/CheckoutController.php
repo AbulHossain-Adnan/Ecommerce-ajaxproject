@@ -12,6 +12,8 @@ use App\Models\Admin\Area;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Shipping;
+use App\Models\Seo;
+
 
 use Auth;
 use Carbon\Carbon;
@@ -25,6 +27,7 @@ class CheckoutController extends Controller
 public function checkout(Request $Request){
 
 	  return view('pages/checkout',[
+        'seos'=>Seo::first(),
             'cart'=>Cart::content(),
             'categories'=>Category::all(),
             'carts'=>$Request->all(),
@@ -52,6 +55,7 @@ public function payment(Request $Request){
                 'subtotal'=>Cart::subtotal(),
                 'discount'=>$Request->discount,
                 'paying_amount'=>$Request->subtotal,
+                'status_code'=>mt_rand(100000,999999),
                 'shipping'=>0,
                 'vat'=>0,
                 'date'=>Carbon::now(),
@@ -109,6 +113,7 @@ Cart::destroy();
                 'blnc_transection'=>$Request->stripeToken,
                 'paying_amount'=>$Request->subtotal,
                 'subtotal'=>Cart::subtotal(),
+                'status_code'=>mt_rand(100000,999999),
                 'shipping'=>0,
                 'vat'=>0,
                 'date'=>Carbon::now(),
