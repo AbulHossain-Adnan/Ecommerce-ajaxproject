@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Division\DivisionController;
 use App\Http\Controllers\Admin\District\DistrictController;
+use App\Http\Controllers\Admin\Seo\SeoController;
+
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Order_detailsController;
 use App\Http\Controllers\ShippingController;
@@ -234,18 +236,15 @@ Route::resource('brand', BrandController::class);
 
 
 
-
-      
-
-
-
-
      Route::resource('order', OrderController::class);
-
      Route::resource('order_details', Order_detailsController::class);
-
-
      Route::resource('shipping', ShippingController::class);
+
+
+
+     // Route for db2_set_option(resource, options, type)
+
+      Route::resource('seo', SeoController::class);
 
 
 

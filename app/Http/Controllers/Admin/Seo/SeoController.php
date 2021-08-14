@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Seo;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Seo;
 
 class SeoController extends Controller
 {
@@ -14,7 +15,9 @@ class SeoController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin/seo/index',[
+                'seos'=>Seo::first(),
+        ]);
     }
 
     /**
@@ -35,7 +38,19 @@ class SeoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id=$request->id;
+
+        Seo::find($id)->update([
+                'meta_title'=>$request->meta_title,
+                'meta_author'=>$request->meta_author,
+                'meta_tag'=>$request->meta_tag,
+                'meta_description'=>$request->meta_description,
+                'google_analytics'=>$request->google_analytics,
+                'meta_author'=>$request->meta_author,
+                'bing_analyticst'=>$request->bing_analyticst,
+
+        ]);
+        return back()->with('message','seo updated');
     }
 
     /**
