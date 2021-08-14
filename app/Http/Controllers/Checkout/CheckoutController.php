@@ -59,6 +59,8 @@ public function payment(Request $Request){
                 'shipping'=>0,
                 'vat'=>0,
                 'date'=>Carbon::now(),
+                'month'=>Carbon::now()->format('F'),
+                'year'=>Carbon::now()->year,
             ]);
             foreach (Cart::content() as $value) {
             
@@ -117,6 +119,8 @@ Cart::destroy();
                 'shipping'=>0,
                 'vat'=>0,
                 'date'=>Carbon::now(),
+                'month'=>Carbon::now()->format('F'),
+                'year'=>Carbon::now()->year,
             ]);
             foreach (Cart::content() as $value) {
             

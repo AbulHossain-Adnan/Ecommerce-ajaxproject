@@ -249,6 +249,10 @@ Route::resource('brand', BrandController::class);
       Route::resource('seo', SeoController::class);
 
 
+      // Route for Report
+      Route::get('/today/order/report/',[App\Http\Controllers\Admin\Report\ReportController::class,'todayreport'])->name('today.orders');
+
+
 
 
 

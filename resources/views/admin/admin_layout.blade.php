@@ -168,6 +168,21 @@
         <li class="nav-item"><a href="{{route('seo.index')}}" class="nav-link">Add Seo</a></li>
        
       </ul>
+       <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Reports</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">Today Orders</a></li>
+          <li class="nav-item"><a href="{{url('/admin/accept/payment/')}}" class="nav-link">Todays delivary</a></li>
+           <li class="nav-item"><a href="{{ url('/admin/cancel/order/') }}" class="nav-link">This Month Orders</a></li>
+            <li class="nav-item"><a href="{{ url('/admin/order/progress/') }}" class="nav-link">This month delivary orders</a></li>
+         
+          <li class="nav-item"><a href="{{url('/admin/delivary/success/') }}" class="nav-link">delivarysuccess</a></li>
+        </ul>
 
 
 
