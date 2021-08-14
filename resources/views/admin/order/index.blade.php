@@ -58,25 +58,29 @@
                
               
                 <td>
-                  @if($item->status == 1)
-                  <span class="badge badge-success">Active</span>
-                  @else
-                  <span class="badge badge-danger">Deactive</span>
+                  @if($item->status == 0)
+                   <span class="badge badge-warning">Pending</span>
+                
+                  @elseif($item->status == 1)
+                    <span class="badge badge-success">Payment accept</span>
+                      @elseif($item->status == 2)
+                    <span class="badge badge-info">Progress</span>
+                      @elseif($item->status == 3)
+                    <span class="badge badge-success">Delevared</span>
+                      @else
+                    <span class="badge badge-danger">Cancel</span>
+                 
                   @endif
                 </td>
                 <td>
-                  <form method="post" action="{{ route('product.delete') }}">
+                  <form method="post" action="">
                     @csrf
                     <input type="hidden" value="{{$item->id}}" name="product_id">
-                  <a class="btn btn-success btn-sm" href="{{ route('product.edit',$item->id) }}"><i class="fa fa-edit"></i></a>
-                  <a class="btn btn-warning btn-sm" href="{{ route('product.show',$item->id) }}"><i class="fa fa-eye"></i></a>
-                  @if($item->status == 1)
-                  <a class="btn btn-primary btn-sm" href="{{ route('status.active',$item->id) }}"><i class="fa fa-thumbs-up"></i></a>
-                  @else
-                    <a class="btn btn-warning btn-sm" href="{{ route('status.deactive',$item->id) }}"><i class="fa fa-thumbs-down"></i></a>
-                    @endif
+                
+                  <a class="btn btn-primary btn-sm" href="{{ route('order.show',$item->id) }}"><i class="fa fa-eye"></i></a>
+                
                  
-                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                 
                 </form>
                 </td>
              

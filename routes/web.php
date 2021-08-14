@@ -37,8 +37,10 @@ Route::view('/', 'frontend.index',[
 
 
 
-Auth::routes(['varified=>true']);
+Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user/order/details/{order_id}', [App\Http\Controllers\HomeController::class, 'orderdetail']);
+
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
 Route::get('change/password', [App\Http\Controllers\HomeController::class, 'change_password'])->name('change.password');
 
@@ -212,6 +214,32 @@ Route::resource('brand', BrandController::class);
      Route::resource('area', AreaController::class);
 
 // Route for OrderController
+
+     Route::get('/admin/accept/payment/',[App\Http\Controllers\OrderController::class,'acceptpayment'])->name('accept.payment');
+     Route::get('/admin/cancel/order/',[App\Http\Controllers\OrderController::class,'cancel'])->name('order.cancel');
+     Route::get('/admin/order/progress/',[App\Http\Controllers\OrderController::class,'progress'])->name('order.progress');
+     Route::get('/admin/delivary/success/',[App\Http\Controllers\OrderController::class,'delivarysuccess'])->name('delivary.success');
+
+
+
+
+
+
+
+     Route::get('/admin/payment/accept/{order_id}',[App\Http\Controllers\OrderController::class,'paymentaccept']);
+      Route::get('/admin/order/cancel/{order_id}',[App\Http\Controllers\OrderController::class,'ordercancel']);
+      Route::get('/admin/order/progress/{order_id}',[App\Http\Controllers\OrderController::class,'orderprogress']);
+      Route::get('/admin/delevary/success/{order_id}',[App\Http\Controllers\OrderController::class,'orderdelivarysuccess']);
+
+
+
+
+
+      
+
+
+
+
      Route::resource('order', OrderController::class);
 
      Route::resource('order_details', Order_detailsController::class);

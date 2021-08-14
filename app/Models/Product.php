@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
+use App\Models\Product;
+
 
 class Product extends Model
 {
@@ -19,6 +21,7 @@ class Product extends Model
     {
         return $this->belongsTo(category::class);
     }
+    
      
 
 }

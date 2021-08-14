@@ -9,30 +9,24 @@
        <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">user Id</th>
+      <th scope="col">paytype</th>
+      <th scope="col">blnc transection</th>
+      <th scope="col">paying amount</th>
+      <th scope="col">Action</th>
+
     </tr>
   </thead>
   <tbody>
+   @foreach($orders as $item)
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>{{$item->user_id}}</td>
+      <td>{{$item->payment_type}}</td>
+      <td>{{$item->blnc_transection}}</td>
+      <td>{{$item->paying_amount}}</td>
+      <td><a class="btn btn-info" href="{{url('/user/order/details/'.$item->id)}}">View</a></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    @endforeach
   </tbody>
 </table>
       </div>

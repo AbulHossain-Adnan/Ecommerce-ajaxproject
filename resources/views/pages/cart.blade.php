@@ -19,7 +19,6 @@
 							    <tr>
 							      <th scope="col">id</th>
 							      <th scope="col">image</th>
-
 							      <th scope="col">name</th>
 							      <th scope="col">quantity</th>
 							      <th scope="col">price</th>
@@ -29,6 +28,7 @@
 							    </tr>
 							  </thead>
 							  <tbody>
+
 							   
 							  </tbody>
 							</table>
@@ -42,15 +42,26 @@
 						<div class="row">
 
 						  <div class="col-sm-6"> 
-						      	<div id="applycouponfield">
+						  	@if(session()->get('coupon'))
+								    @else
+						  	
+						  	<div id="applycouponfield">
 								  <div class="form-group">
 								    <label for="exampleInputEmail1"><h2>Coupon</h2></label>
+
 								    <input type="text" class="form-control" id="coupon_name" name="coupon_name" aria-describedby="emailHelp" placeholder="Enter Coupon">
+								    
 								  
 								  </div>
 								
 								  <button type="submit" class="btn btn-primary" onclick="applycoupon()">Apply coupon</button>
 							</div>
+							@endif
+
+						  	
+						      	
+
+
 						   </div>
 			
 						 
@@ -130,21 +141,6 @@
 	</div>
 
 
-
-
-
-
-
-								
-
-
-
-
-
-
-
-
-
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
@@ -163,36 +159,27 @@ $.ajaxSetup({
 		url:"/cartdata/",
 		success:function(response){
 
-			let data=""
+			$('tbody').html("");
 
 			$.each(response, function(key,value){
 
-				data= data + "<tr>"
-				data= data + "<td>"+value.id+"</td>"
-				data = data + "<td>"
-				data= data +  '<img src=" +value.options.image + " />'
-				data = data + "</td>"
-				data= data + "<td>"+value.name+"</td>"
-				data= data + "<td>"
+				$('tbody').append('<tr>\
+					<td>'+value.id+'</td>\
+					<td><img src="product_images/'+value.options.image+'" width="100"></td>\
+					<td>'+value.name+'</td>\
+					<td><button class="btn btn-success btn-sm" min="1" max="100" id='+value.rowId+'   onclick="decrement(this.id)">-</button>\
+					<input type="text" id="quantity_name" name="quantity_name" value='+value.qty+' style="width:25px;">\
+					<button class="btn btn-danger btn-sm" id='+value.rowId+' onclick="increment(this.id)">+</button></td>\
+					<td>'+value.price+'</td>\
+					<td><button class="btn btn-warning btn-sm" id='+value.rowId+' onclick="cart_remove(this.id)">x</button></td>\
+					</tr>');
+				
 
-				data= data + "<button class='btn btn-success btn-sm' min='1'  max='100' id="+value.rowId+"   onclick='decrement(this.id)'>-</button>"
 
 
-
-
-				data= data + "<input type='text' id='quantity_name' name='quantity_name' value="+value.qty+" style='width:25px;'>"
-
-			
-				data= data + "<button class='btn btn-danger btn-sm' id="+value.rowId+" onclick='increment(this.id)'>+</button>"
-				data= data + "</td>"
-				data= data + "<td>"+value.subtotal+"</td>"
-				data= data +"<td>"
-				data= data + "<button class='btn btn-warning btn-sm' id="+value.rowId+" onclick='cart_remove(this.id)'>x</button>"
-				data=data + "</td>"
-				data= data + "</tr>"
 
 			})
-			$('tbody').html(data);
+			
 
 
 		}
@@ -200,6 +187,7 @@ $.ajaxSetup({
 	});
 }
 alldata();
+
 
 
 
@@ -320,9 +308,12 @@ var coupon_name = $('#coupon_name').val();
 		data:{coupon_name:coupon_name},
 		url:"/applycouponn/",
 		success:function(data){
+
 		
 			 
 			cartcalculation();
+			 window.location.reload()
+
 			$('#coupon_name').val('');
 			
 
@@ -354,8 +345,9 @@ var coupon_name = $('#coupon_name').val();
                         })
                     }
 
-                  
- window.location.reload()
+               
+
+
 		}
 		
 		

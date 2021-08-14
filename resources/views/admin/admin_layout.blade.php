@@ -147,9 +147,12 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">All Orders</a></li>
-          <li class="nav-item"><a href="{{ route('order_details.index') }}" class="nav-link">Order_details</a></li>
-          <li class="nav-item"><a href="{{ route('shipping.index') }}" class="nav-link">Shipping</a></li>
+          <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link">New Orders</a></li>
+          <li class="nav-item"><a href="{{url('/admin/accept/payment/')}}" class="nav-link">Payment Accept</a></li>
+           <li class="nav-item"><a href="{{ url('/admin/cancel/order/') }}" class="nav-link">Cancel Order</a></li>
+            <li class="nav-item"><a href="{{ url('/admin/order/progress/') }}" class="nav-link">Progress Delevary</a></li>
+         
+          <li class="nav-item"><a href="{{url('/admin/delivary/success/') }}" class="nav-link">delivarysuccess</a></li>
         </ul>
 
 

@@ -74,7 +74,7 @@ class StripePaymentController extends Controller
         ]);
 
      
-            Order::insert([
+           $order_id= Order::insertGetId([
                 'user_id'=>Auth::id(),
                 'payment_type'=>$request->payment,
                 'blnc_transection'=>$request->stripeToken,
@@ -91,6 +91,8 @@ class StripePaymentController extends Controller
             Order_detail::insert([
                 'user_id'=>Auth::id(),
                 'product_id'=>$value->id,
+                'order_id'=>$order_id,
+
                 'color'=>$value->options->color,
                 'size'=>$value->options->size,
                 'quantity'=>$value->qty,
@@ -114,6 +116,7 @@ $area_name=Area::find($area_id);
     Shipping::insert([
 
         'user_id'=>Auth::id(),
+        'order_id'=>$order_id,
         'division'=>$division_name->division,
         'district'=>$district_name->district,
         'area'=>$area_name->area,

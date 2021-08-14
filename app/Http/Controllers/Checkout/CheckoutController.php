@@ -43,8 +43,10 @@ public function checkout(Request $Request){
 public function payment(Request $Request){
 
     if($Request->payment == "cash_on"){
-          Order::insert([
+         $order_id= Order::insertGetId([
                 'user_id'=>Auth::id(),
+           
+
                 'payment_type'=>$Request->payment,
                 // 'blnc_transection'=>$request->null,
                 'subtotal'=>Cart::subtotal(),
@@ -58,6 +60,8 @@ public function payment(Request $Request){
             
             Order_detail::insert([
                 'user_id'=>Auth::id(),
+                'order_id'=>$order_id,
+
                 'product_id'=>$value->id,
                 'color'=>$value->options->color,
                 'size'=>$value->options->size,
@@ -83,6 +87,8 @@ $area_name=Area::find($area_id);
     Shipping::insert([
 
         'user_id'=>Auth::id(),
+        'order_id'=>$order_id,
+
         'division'=>$division_name->division,
         'district'=>$district_name->district,
         'area'=>$area_name->area,
@@ -97,11 +103,12 @@ Cart::destroy();
 
     }
     elseif ($Request->payment == "bkash") {
-          Order::insert([
+          $order_id=Order::insertGetId([
                 'user_id'=>Auth::id(),
                 'payment_type'=>$Request->payment,
                 'blnc_transection'=>$Request->stripeToken,
                 'paying_amount'=>$Request->subtotal,
+                'subtotal'=>Cart::subtotal(),
                 'shipping'=>0,
                 'vat'=>0,
                 'date'=>Carbon::now(),
@@ -111,6 +118,7 @@ Cart::destroy();
             Order_detail::insert([
                 'user_id'=>Auth::id(),
                 'product_id'=>$value->id,
+                'order_id'=>$order_id,
                 'color'=>$value->options->color,
                 'size'=>$value->options->size,
                 'quantity'=>$value->qty,
@@ -133,6 +141,7 @@ $area_name=Area::find($area_id);
     Shipping::insert([
 
         'user_id'=>Auth::id(),
+        'order_id'=>$order_id,
         'division'=>$division_name->division,
         'district'=>$district_name->district,
         'area'=>$area_name->area,
