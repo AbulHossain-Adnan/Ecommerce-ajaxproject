@@ -2,10 +2,38 @@
 <html lang="en">
 
 <head>
+    
     <title>OneTech</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @if(!$seos->meta_title == null) 
+     <meta name="title" content="{{$seos->meta_title}}">
+    @else
+    @endif  @if(!$seos->meta_author == null) 
+     <meta name="author" content="{{$seos->meta_author}}">
+    @else
+    @endif  @if(!$seos->meta_description == null) 
+     <meta name="description" content="{{$seos->meta_description}}">
+    @else
+    @endif  @if(!$seos->meta_tag == null) 
+     <meta name="tag" content="{{$seos->meta_tag}}">
+    @else
+    @endif
+      @if(!$seos->google_analytics == null) 
+     <meta name="google" content="{{$seos->google_analytics}}">
+    @else
+    @endif
+     @if(!$seos->bing_analyticst == null) 
+     <meta name="bing" content="{{$seos->bing_analyticst}}">
+    @else
+    @endif
+
+
+
+
     <meta name="description" content="OneTech shop project">
+    <meta name="description" content="my name is adnan">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.css">

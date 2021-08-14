@@ -4,27 +4,24 @@ use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Division\DivisionController;
 use App\Http\Controllers\Admin\District\DistrictController;
 use App\Http\Controllers\Admin\Seo\SeoController;
-
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Order_detailsController;
 use App\Http\Controllers\ShippingController;
-
-
-
 use App\Http\Controllers\Admin\Area\AreaController;
-
 use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
 use App\Models\Product;
+use App\Models\Seo;
 
 
 
 
 // Route for forntend*********************************
 Route::view('/', 'frontend.index',[
+  'seos'=>Seo::first(),
     'categories'=>Category::all(),
     'products'=>Product::all(),
     'brands'=>Brand::all(),
