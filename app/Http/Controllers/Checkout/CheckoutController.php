@@ -118,7 +118,7 @@ Cart::destroy();
                 'status_code'=>mt_rand(100000,999999),
                 'shipping'=>0,
                 'vat'=>0,
-                'date'=>Carbon::now(),
+                'date'=>Carbon::now()->format('m-d-y'),
                 'month'=>Carbon::now()->format('F'),
                 'year'=>Carbon::now()->year,
             ]);

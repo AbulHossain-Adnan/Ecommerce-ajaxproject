@@ -255,8 +255,10 @@
 			@elseif($orders->status == 2)
 			<a class="btn btn-success btn-lg btn-block" href="{{url('/admin/delevary/success/'.$orders->id)}}">Delivary Success</a>
 
-			@else
-			<span class="text-danger text-center">This Order is not valid</span>
+			@elseif($orders->status == 3)
+			<span class="text-success" style="text-center">------------------------------------------------------------------------------------------------------------------This Order delivary completed---------------------------------------------------</span>
+      @else
+      <span class="text-danger text-center">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------This Order is not valid</span>
 			@endif
 			
 

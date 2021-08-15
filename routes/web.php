@@ -251,6 +251,15 @@ Route::resource('brand', BrandController::class);
 
       // Route for Report
       Route::get('/today/order/report/',[App\Http\Controllers\Admin\Report\ReportController::class,'todayreport'])->name('today.orders');
+      Route::get('/today/delivary/orders/',[App\Http\Controllers\Admin\Report\ReportController::class,'todaydelivary'])->name('today.delivarys');
+      Route::get('/this/month/delivarys/',[App\Http\Controllers\Admin\Report\ReportController::class,'thismonth'])->name('this.month');
+       Route::get('/this/year/delivarys/',[App\Http\Controllers\Admin\Report\ReportController::class,'thisyear'])->name('this.year');
+        Route::get('/report/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'reportsearch'])->name('report.search');
+
+
+          Route::POST('/admin/report/month/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'monthsearch'])->name('month.search');
+            Route::POST('/admin/report/year/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'yearsearch'])->name('year.search');
+             Route::POST('/admin/report/date/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'datesearch'])->name('date.search');
 
 
 

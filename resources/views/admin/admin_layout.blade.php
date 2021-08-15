@@ -177,11 +177,11 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">Today Orders</a></li>
-          <li class="nav-item"><a href="{{url('/admin/accept/payment/')}}" class="nav-link">Todays delivary</a></li>
-           <li class="nav-item"><a href="{{ url('/admin/cancel/order/') }}" class="nav-link">This Month Orders</a></li>
-            <li class="nav-item"><a href="{{ url('/admin/order/progress/') }}" class="nav-link">This month delivary orders</a></li>
+          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">Todays delivary</a></li>
+           <li class="nav-item"><a href="{{ route('this.month') }}" class="nav-link">This Month delivarys</a></li>
+            <li class="nav-item"><a href="{{ route('this.year') }}" class="nav-link">This year delivarys</a></li>
          
-          <li class="nav-item"><a href="{{url('/admin/delivary/success/') }}" class="nav-link">delivarysuccess</a></li>
+          <li class="nav-item"><a href="{{route('report.search')}}" class="nav-link">Report Search</a></li>
         </ul>
 
 
