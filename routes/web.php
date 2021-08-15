@@ -262,8 +262,10 @@ Route::resource('brand', BrandController::class);
              Route::POST('/admin/report/date/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'datesearch'])->name('date.search');
 
 
+// Route for userolecontroller
 
 
-
+ Route::get('/admin/create/user_roll/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'createrole'])->name('create.role');
+  Route::POST('/admin/user_roll/store/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userrolestore'])->name('user_role.store');
 
 

@@ -184,6 +184,62 @@
           <li class="nav-item"><a href="{{route('report.search')}}" class="nav-link">Report Search</a></li>
         </ul>
 
+         <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">User Role</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('create.role') }}" class="nav-link">Create User</a></li>
+          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All User</a></li>
+        </ul>
+        <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Return Order</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">Return Request</a></li>
+          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Request</a></li>
+        </ul>
+        <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Contact Message</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Message</a></li>
+          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Message</a></li>
+        </ul>
+         <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Product Comment</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Comment</a></li>
+          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Comment</a></li>
+        </ul>
+         <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Site Setting</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Message</a></li>
+         
+        </ul>
+
 
 
        
