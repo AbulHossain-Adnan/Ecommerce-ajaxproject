@@ -20,6 +20,19 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'product',
+        'category',
+        'coupon',
+        'division',
+        'orders',
+        'reports',
+        'return_order',
+        'site_setting',
+        'contact_message',
+        'product_comment',
+        'seo',
+     
+
     ];
 
     /**

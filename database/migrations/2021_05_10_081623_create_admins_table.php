@@ -20,6 +20,18 @@ class CreateAdminsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('product')->nullable();
+            $table->string('category')->nullable();
+            $table->string('coupon')->nullable();
+            $table->string('division')->nullable();
+            $table->string('orders')->nullable();
+            $table->string('seo')->nullable();
+            $table->string('reports')->nullable();
+            $table->string('site_setting')->nullable();
+            $table->string('return_order')->nullable();
+            $table->string('contact_message')->nullable();
+            $table->string('product_comment')->nullable();
+            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }

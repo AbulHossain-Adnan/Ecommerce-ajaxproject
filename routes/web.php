@@ -267,5 +267,11 @@ Route::resource('brand', BrandController::class);
 
  Route::get('/admin/create/user_roll/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'createrole'])->name('create.role');
   Route::POST('/admin/user_roll/store/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userrolestore'])->name('user_role.store');
+   Route::get('/admin/all/user_roll/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'alluserroll'])->name('alluser.role');
+
+   // action
+   Route::get('/user/role/edit/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'useredit']);
+   Route::DELETE('/user/role/delete/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userdelete']);
+    Route::POST('/admin/user/update/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userupdate']);
 
 
