@@ -10,6 +10,10 @@ use App\Models\Admin;
 
 class UserroleController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     public function createrole(){
     	return view('admin/user_role/create_role');
     }

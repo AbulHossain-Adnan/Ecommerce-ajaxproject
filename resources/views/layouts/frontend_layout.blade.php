@@ -73,11 +73,20 @@
                         <div class="col d-flex flex-row">
                             <div class="top_bar_contact_item">
                                 <div class="top_bar_icon"><img src="{{ asset('frontend') }}/images/phone.png" alt="">
-                                </div>+38 068 005 3570
+                                </div>
+                                @if($site_setting)
+                              
+                                {{$site_setting->phone}}
+                                @else
+                                Null
+                                @endif
                             </div>
                             <div class="top_bar_contact_item">
                                 <div class="top_bar_icon"><img src="{{ asset('frontend') }}/images/mail.png" alt="">
-                                </div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
+                                </div><a href="mailto:fastsales@gmail.com">  @if($site_setting)
+                                {{$site_setting->email}}
+                                @else
+                                @endif</a>
                             </div>
                             <div class="top_bar_content ml-auto">
                                 <div class="top_bar_menu">
@@ -229,17 +238,38 @@
                                     <div class="logo"><a href="{{ route('home') }}">OneTech</a></div>
                                 </div>
                                 <div class="footer_title">Got Question? Call Us 24/7</div>
-                                <div class="footer_phone">+38 068 005 3570</div>
+                                <div class="footer_phone">  @if($site_setting)
+                                {{$site_setting->phone}}
+                                @else
+                                @endif</div>
                                 <div class="footer_contact_text">
-                                    <p>17 Princess Road, London</p>
-                                    <p>Grester London NW18JR, UK</p>
+                                    <p>  @if($site_setting)
+                                {{$site_setting->address}}
+                                @else
+                                @endif</p>
+                                    <p>  @if($site_setting)
+                                {{$site_setting->company_name}}
+                                @else
+                                @endif</p>
                                 </div>
                                 <div class="footer_social">
                                     <ul>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                        <li><a href="  @if($site_setting)
+                                {{$site_setting->facebook}}
+                                @else
+                                @endif"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="  @if($site_setting)
+                                {{$site_setting->company_name}}
+                                @else
+                                @endif"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="  @if($site_setting)
+                                {{$site_setting->tweeter}}
+                                @else
+                                @endif"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="  @if($site_setting)
+                                {{$site_setting->google}}
+                                @else
+                                @endif"><i class="fab fa-google"></i></a></li>
                                         <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
                                     </ul>
                                 </div>

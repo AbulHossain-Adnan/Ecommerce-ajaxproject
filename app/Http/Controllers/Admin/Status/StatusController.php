@@ -8,6 +8,10 @@ use App\Models\Product;
 
 class StatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
     public function active($id){
        $product = Product::find($id);

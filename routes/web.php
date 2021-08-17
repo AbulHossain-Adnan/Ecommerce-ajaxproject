@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Division\DivisionController;
 use App\Http\Controllers\Admin\District\DistrictController;
+use App\Http\Controllers\Admin\Site\Site_settingController;
+
 use App\Http\Controllers\Admin\Seo\SeoController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Order_detailsController;
@@ -15,6 +17,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
 use App\Models\Product;
 use App\Models\Seo;
+use App\Models\Admin\Site;
 
 
 
@@ -31,6 +34,8 @@ Route::view('/', 'frontend.index',[
     'best_rateds'=>Product::orderBy('id','desc')->with('brand')->where('status',1 && 'best_rated',1)->get(),
     'middle_sliders'=>Product::orderBy('id','desc')->with('Category','brand')->where('status',1 && 'mid_slider',1)->limit(3)->get(),
     'byeonegetones'=>Product::orderBy('id','desc')->with('Category','brand')->where('status',1)->where('byeonegetone',1)->limit(6)->get(),
+
+    'site_setting'=>Site::first(),
 ])->name('front.home');
 
 
@@ -274,4 +279,7 @@ Route::resource('brand', BrandController::class);
    Route::DELETE('/user/role/delete/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userdelete']);
     Route::POST('/admin/user/update/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userupdate']);
 
+
+// Route for site setting
+     Route::resource('site', Site_settingController::class);
 

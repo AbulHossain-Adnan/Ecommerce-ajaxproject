@@ -9,6 +9,10 @@ use Carbon\Carbon;
 
 class ReportController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     public function todayreport(){
     	$date=date('y-m-d');
     	

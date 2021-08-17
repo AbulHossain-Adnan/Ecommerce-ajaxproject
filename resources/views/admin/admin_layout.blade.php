@@ -83,11 +83,9 @@
     
 
     
-@if(Auth::user()->product == 1)
+@if( Auth::check() && Auth()->user()->product == 1)
 
-
-
-      <a href="#" class="sl-menu-link">
+     <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
           <span class="menu-item-label">Product</span>
@@ -102,7 +100,7 @@
       @endif
        
   
-        @if(!Auth::user()->type == 2)
+        @if( Auth::check() && !Auth::user()->type == 2)
          <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
@@ -119,7 +117,7 @@
 
 
 
-@if(Auth::user()->category == 1)
+@if( Auth::check() && Auth()->user()->category == 1)
 
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -133,13 +131,14 @@
           <li class="nav-item"><a href="{{ url('/sub_category/index') }}" class="nav-link">Sub Category</a></li>
           <li class="nav-item"><a href="{{ route('brand.index') }}" class="nav-link">Brands</a></li>
         </ul>
-
         @else
         @endif
 
+     
 
 
-@if(!Auth::user()->type == 2)
+
+@if(Auth::check() && !Auth::user()->type == 2)
  <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -158,7 +157,7 @@
        
 
 
-          @if(Auth::user()->coupon == 1)
+          @if(Auth::check() && Auth::user()->coupon == 1)
          <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
@@ -175,7 +174,7 @@
       @endif
 
 
-          @if(!Auth::user()->type == 2)
+          @if(Auth::check() && !Auth::user()->type == 2)
            <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
@@ -192,7 +191,7 @@
 
 
 
-@if(Auth::user()->division == 1)
+@if(Auth::check() && Auth::user()->division == 1)
 
       <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -211,7 +210,7 @@
 
 
 
-@if(!Auth::user()->type == 2)
+@if(Auth::check() && !Auth::user()->type == 2)
  <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -229,7 +228,7 @@
 
 
 
-        @if(Auth::user()->orders == 1)
+        @if(Auth::check() && Auth::user()->orders == 1)
 
          <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -251,7 +250,7 @@
         @endif
 
 
-        @if(!Auth::user()->type == 2)
+        @if(Auth::check() && !Auth::user()->type == 2)
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -272,7 +271,7 @@
 
 
 
-@if(Auth::user()->seo == 1)
+@if(Auth::check() && Auth::user()->seo == 1)
  
        <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
@@ -290,7 +289,7 @@
 
 
 
-@if(!Auth::user()->type == 2)
+@if(Auth::check() && !Auth::user()->type == 2)
  <a href="#" class="sl-menu-link">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
@@ -308,7 +307,7 @@
 
 
 
-      @if(Auth::user()->reports == 1)
+      @if(Auth::check() && Auth::user()->reports == 1)
        <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -328,7 +327,7 @@
         @endif
 
 
-      @if(!Auth::user()->type == 2)
+      @if(Auth::check() && !Auth::user()->type == 2)
       <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -349,7 +348,7 @@
 
 
 
-        @if(Auth::user()->user_role == 1)
+        @if(Auth::check() && Auth::user()->user_role == 1)
 
          <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -366,7 +365,7 @@
         @endif
 
 
-        @if(!Auth::user()->type == 2)
+        @if(Auth::check() && !Auth::user()->type == 2)
            <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -382,7 +381,7 @@
         @endif
 
 
-        @if(Auth::user()->return_order == 1)
+        @if(Auth::check() && Auth::user()->return_order == 1)
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -397,7 +396,7 @@
         @else
         @endif
 
-        @if(!Auth::user()->type == 2)
+        @if(Auth::check() && !Auth::user()->type == 2)
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -412,7 +411,7 @@
         @else
         @endif
 
-        @if(Auth::user()->contact_message == 1)
+        @if(Auth::check() && Auth::user()->contact_message == 1)
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -428,7 +427,7 @@
         @endif
 
 
-        @if(!Auth::user()->type == 2)
+        @if(Auth::check() && Auth::user()->type == NULL)
           <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -444,7 +443,7 @@
           @endif
 
 
-        @if(Auth::user()->product_comment == 1)
+        @if(Auth::check() && Auth::user()->product_comment == 1)
          <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -459,7 +458,7 @@
         @else
         @endif
 
-        @if(!Auth::user()->type == 2)
+        @if(Auth::check() && Auth::user()->type == NULL)
          <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -474,7 +473,7 @@
         @else
         @endif
 
-        @if(Auth::user()->site_setting == 1)
+         @if(Auth::check() && Auth::user()->site_setting == 1)
          <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -483,14 +482,17 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Message</a></li>
+          <li class="nav-item"><a href="{{ route('site.create') }}" class="nav-link">  site setting</a></li>
+          <li class="nav-item"><a href="{{ route('site.index') }}" class="nav-link">All Site setting</a></li>
+         
          
         </ul>
         @else
         @endif
+     
 
 
-        @if(!Auth::user()->type == 2)
+        @if(Auth::check() && Auth::user()->type == NULL)
           <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -506,16 +508,12 @@
         @endif
 
 
-
-
-
-       
-
-
     </div><!-- sl-sideleft-menu -->
 
     <br>
   </div><!-- sl-sideleft -->
+
+
   <!-- ########## END: LEFT PANEL ########## -->
 
   <!-- ########## START: HEAD PANEL ########## -->

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\District;
+namespace App\Http\Controllers\Admin\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\District;
-use App\Models\Admin\Division;
+use App\Models\Admin\Site;
 
-
-class DistrictController extends Controller
-{    public function __construct()
+class Site_settingController extends Controller
+{
+      public function __construct()
     {
         $this->middleware('auth:admin');
     }
@@ -20,11 +19,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        return view('admin/district/index',[
-            'districts'=>District::all(),
-            'divisions'=>Division::all()
-
-        ]);
+        return view('admin/site/index',['sites'=>Site::all()]);
     }
 
     /**
@@ -34,7 +29,7 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/site/create');
     }
 
     /**
@@ -45,8 +40,18 @@ class DistrictController extends Controller
      */
     public function store(Request $request)
     {
-        District::insert(['district'=>$request->district_name,'division_id'=>$request->division_id]);
-        return back()->with('message','district added successfully');
+        $data=array();
+        $data['phone']=$request->phone;
+        $data['email']=$request->email;
+        $data['address']=$request->address;
+        $data['company_name']=$request->company_name;
+        $data['facebook']=$request->facebook;
+        $data['google']=$request->google;
+        $data['tweeter']=$request->tweeter;
+        $data['youtube']=$request->youtube;
+        $data=Site::insert($data);
+        return back()->with('message','site added succefully');
+
     }
 
     /**
@@ -57,7 +62,7 @@ class DistrictController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -68,8 +73,7 @@ class DistrictController extends Controller
      */
     public function edit($id)
     {
-         $data=District::find($id);
-        return Response()->json($data);
+        return view('admin/site/edit',['sites'=>Site::find($id)]);
     }
 
     /**
@@ -79,17 +83,19 @@ class DistrictController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updated(request $request){
-        $data_id=$request->id;
-        $data=District::find($data_id);
-        $data->update(['district'=>$request->district_name,'division_id'=>$request->division_id]);
-        return back()->with('message','data update successfully');
-    }
-
-
     public function update(Request $request, $id)
     {
-        //
+         $data=array();
+        $data['phone']=$request->phone;
+        $data['email']=$request->email;
+        $data['address']=$request->address;
+        $data['company_name']=$request->company_name;
+        $data['facebook']=$request->facebook;
+        $data['google']=$request->google;
+        $data['tweeter']=$request->tweeter;
+        $data['youtube']=$request->youtube;
+        $data=Site::find($id)->update($data);
+        return redirect()->route('site.index')->with('message','data updated succefully');
     }
 
     /**
@@ -100,14 +106,7 @@ class DistrictController extends Controller
      */
     public function destroy($id)
     {
-        District::find($id)->delete();
-        return back()->with('message','data delete successfully');
-    }
-    public function getdistrict($division_id){
-
-       $data= District::where('division_id',$division_id)->get();
-
-       return Response()->json($data);
-
+        Site::find($id)->delete();
+        return back()->with('message','site delted succefully');
     }
 }

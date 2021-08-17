@@ -12,6 +12,10 @@ use Session;
 
 class CouponController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     public function create(){
         return view('admin/coupon/index',[
             'coupons'=>Coupon::all()

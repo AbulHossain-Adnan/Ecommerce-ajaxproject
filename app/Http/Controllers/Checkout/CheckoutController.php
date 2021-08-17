@@ -8,6 +8,8 @@ use Cart;
 use App\Models\Admin\Category;
 use App\Models\Admin\Division;
 use App\Models\Admin\District;
+use App\Models\Admin\Site;
+
 use App\Models\Admin\Area;
 use App\Models\Order;
 use App\Models\Order_detail;
@@ -23,6 +25,7 @@ use Carbon\Carbon;
 class CheckoutController extends Controller
 {
    
+   
 
 public function checkout(Request $Request){
 
@@ -32,6 +35,7 @@ public function checkout(Request $Request){
             'categories'=>Category::all(),
             'carts'=>$Request->all(),
             'divisions'=>Division::all(),
+            'site_setting'=>Site::first(),
 
           
           

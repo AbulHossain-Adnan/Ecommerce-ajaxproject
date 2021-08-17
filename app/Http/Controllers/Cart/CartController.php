@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Coupon;
 use App\Models\Seo;
+use App\Models\Admin\Site;
+
 use Cart;
 use Session;
 use App\Models\Admin\Category;
@@ -59,9 +61,10 @@ class CartController extends Controller
        $seos=Seo::first();
         $cart=Cart::content();
         $categories=Category::all();
+        $site_setting=Site::first();
        
 
-        return view('pages/cart',compact('cart','categories','seos'));
+        return view('pages/cart',compact('cart','categories','seos','site_setting'));
      
     }
 
