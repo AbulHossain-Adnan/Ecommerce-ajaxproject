@@ -57,7 +57,8 @@
 </head>
 
 <body>
-
+@guest
+@else
 
   <!-- ########## START: LEFT PANEL ########## -->
   <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> starlight</a></div>
@@ -508,12 +509,14 @@
         @endif
 
 
+
     </div><!-- sl-sideleft-menu -->
 
     <br>
   </div><!-- sl-sideleft -->
 
-
+   
+        @endguest
   <!-- ########## END: LEFT PANEL ########## -->
 
   <!-- ########## START: HEAD PANEL ########## -->

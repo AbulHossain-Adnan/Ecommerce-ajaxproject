@@ -67,28 +67,60 @@
 
             <!-- Top Bar -->
 
-            <div class="top_bar">
+
+
+
+
+
+ 
+
+
+
+
+      
+
+
+
+ <div class="top_bar">
                 <div class="container">
                     <div class="row">
                         <div class="col d-flex flex-row">
                             <div class="top_bar_contact_item">
                                 <div class="top_bar_icon"><img src="{{ asset('frontend') }}/images/phone.png" alt="">
                                 </div>
-                                @if($site_setting)
+
+                                  @if($site_setting)
                               
                                 {{$site_setting->phone}}
                                 @else
-                                Null
+                           
                                 @endif
+
+
                             </div>
                             <div class="top_bar_contact_item">
                                 <div class="top_bar_icon"><img src="{{ asset('frontend') }}/images/mail.png" alt="">
-                                </div><a href="mailto:fastsales@gmail.com">  @if($site_setting)
+                                </div><a href="mailto:fastsales@gmail.com">
+
+
+                                  @if($site_setting)
                                 {{$site_setting->email}}
                                 @else
-                                @endif</a>
+                                sdfsdf
+                                @endif
+
+
+                            </a>
                             </div>
+
+                            
+                            
+                             
+                             
                             <div class="top_bar_content ml-auto">
+                               
+
+
                                 <div class="top_bar_menu">
                                     <ul class="standard_dropdown top_bar_dropdown">
                                         <li>
@@ -99,24 +131,61 @@
                                                 <li><a href="#">Japanese</a></li>
                                             </ul>
                                         </li>
-                                        <li>
-                                    
+                                       
+                                    </ul>
+                                </div>
+                                 <div class="top_bar_menu">
+                                     @if(Auth::Check())
 
+                                   <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                      
+                                        <li>
+                                           <a class="text-primary" href="" data-toggle="modal" data-target="#exampleModalCenter">My Order tracking</a>
                                         </li>
                                     </ul>
+                                </div>
+                                @else
+                                @endif
+
 
                                 </div>
                                 <div class="top_bar_user">
                                     <div class="user_icon"><img src="{{ asset('frontend') }}/images/user.svg" alt="">
                                     </div>
-                                    
-                                    <div><a href="{{ route('login') }}">Sign in/Sign up</a></div>
+                                    @if(Auth::check())
+                                   <div>  <ul class="standard_dropdown top_bar_dropdown">
+                                      
+                                        <li>
+                                            <a href="{{route('home')}}">Profile<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="{{ route('change.password') }}">edit profile</a></li>
+                                                <li><a href="{{ route('wish.list') }}">Wish List</a></li>
+                                                <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                                                <li><a href="#">JPY Japanese Yen</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul></div>
+                                   @else
+                                   <div><a href="{{ route('login') }}">Sign in/Sign up</a></div>
+                                   @endif
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
 
             <!-- Header Main -->
 

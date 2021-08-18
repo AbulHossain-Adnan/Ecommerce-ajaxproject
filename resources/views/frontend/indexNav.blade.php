@@ -22,6 +22,8 @@
                             <li class="hassubs">
                                 <a href="{{ route('category.show',$item->id) }}">{{ $item->category_name }}<i class="fas fa-chevron-right"></i></a>
                                 <ul>
+
+                                    
                                     @php
                                     $subcategories=DB::table('sub_categories')->where('category_id',$item->id)->get()
                                     @endphp
@@ -214,7 +216,7 @@
 </header>
 
 <!-- Banner -->
-{{ $main_sliders->selling_price }}
+
 <div class="banner">
     <div class="banner_background" style="background-image:url({{ asset('frontend') }}/images/banner_background.jpg)">
     </div>

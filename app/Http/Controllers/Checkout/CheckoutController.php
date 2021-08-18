@@ -11,6 +11,8 @@ use App\Models\Admin\District;
 use App\Models\Admin\Site;
 
 use App\Models\Admin\Area;
+
+
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Shipping;
@@ -170,6 +172,8 @@ Cart::destroy();
          return view('pages/stripe',[
             'categories'=>Category::all(),
             'order_details'=>$Request->all(),
+            'seos'=>Seo::first(),
+            'site_setting'=>Site::first(),
         ]);
     }else{
 

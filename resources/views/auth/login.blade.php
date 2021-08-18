@@ -146,7 +146,7 @@
     <div class="contact_form">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 offset-lg-1" style="border: 1px solid gray;border-radius: 25px; padding: 10px;">
+                <div class="col-lg-5 offset-lg-1 m-auto" style="border: 1px solid gray;border-radius: 25px; padding: 10px;">
                     <div class="contact_form_container">
                         <div class="contact_form_title">Sine in</div>
 
@@ -185,7 +185,7 @@
           <br>
 
           @if (Route::has('password.request'))
-          <a href="{{ route('password.request') }}" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
+          <a href="{{ route('password.request') }}" class="tx-info tx-12 d-block mg-t-10">Forgot password?<a href="{{route('user.register')}}">Sin UP</a></a>
           @endif
         </div><!-- form-group -->
           <br>
@@ -197,58 +197,7 @@
                   <button type="submit" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Login with google</button>
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-1" style="border: 1px solid gray;border-radius: 25px; padding: 10px;">
-                    <div class="contact_form_container">
-                        <div class="contact_form_title">Sine up</div>
-
-                        <form action="{{ route('register') }}" method="post">
-                            @csrf
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                         <input placeholder="Name" id="name" type="text"
-                            class="form-control @error('name') is-invalid @enderror" name="name"
-                            value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Email</label>
-                        <input placeholder="Email" id="email" type="email"
-                            class="form-control @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email">
-
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                      </div>
-                       <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input placeholder="Password" id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="new-password">
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                      </div>
-                       <div class="form-group">
-                        <label for="exampleInputPassword1">Confirm Password</label>
-                       <input placeholder="Confirm Password" id="password-confirm" type="password" class="form-control"
-                            name="password_confirmation" required autocomplete="new-password">
-                      </div>
-                    
-                      <button type="submit" class="btn btn-info">Register</button>
-                 </form>
-                    </div>
-                </div>
+            
 
             </div>
 

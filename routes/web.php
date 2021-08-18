@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Division\DivisionController;
 use App\Http\Controllers\Admin\District\DistrictController;
 use App\Http\Controllers\Admin\Site\Site_settingController;
-
 use App\Http\Controllers\Admin\Seo\SeoController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Order_detailsController;
@@ -43,6 +42,12 @@ Route::view('/', 'frontend.index',[
 
 Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user_custom/', [App\Http\Controllers\HomeController::class, 'userlogin'])->name('user_custom');
+Route::get('/user/registration/', [App\Http\Controllers\HomeController::class, 'userregister'])->name('user.register');
+Route::POST('/user/registration/post/', [App\Http\Controllers\HomeController::class, 'registerpost'])->name('register.post');
+
+
+
 Route::get('/user/order/details/{order_id}', [App\Http\Controllers\HomeController::class, 'orderdetail']);
 
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
@@ -117,7 +122,7 @@ Route::resource('brand', BrandController::class);
 
 
  // Route for user login registration
-   Route::get('user/login',[App\Http\Controllers\customloginController::class,'login'])->name('user.login');
+   // Route::get('user/login',[App\Http\Controllers\customloginController::class,'login'])->name('user.login');
 
 
 
@@ -283,3 +288,4 @@ Route::resource('brand', BrandController::class);
 // Route for site setting
      Route::resource('site', Site_settingController::class);
 
+ 

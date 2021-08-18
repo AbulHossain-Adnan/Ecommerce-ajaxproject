@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin\Category;
+use App\Models\Admin\Site;
+
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Seo;
+use App\Models\User;
+use Image;
+
 
 
 
@@ -19,10 +25,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+ 
 
     /**
      * Show the application dashboard.
@@ -37,6 +40,7 @@ class HomeController extends Controller
             'categories'=>Category::all(),
             'orders'=>Order::where('user_id',$id)->with('order_detail')->get(),
             'seos'=>Seo::first(),
+            'site_setting'=>Site::first(),
 
         ]);
     }
@@ -67,4 +71,42 @@ class HomeController extends Controller
 
         ]);
     }
+    public function userregister(){
+        return view('user/register');
+    }
+    public function registerpost(Request $Request){
+        $Request->validate([
+
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+
+            ]);
+      
+
+            $data = new user();
+            $data->name=$Request->name;
+            $data->email=$Request->email;
+            $data->password=bcrypt('password');
+
+
+        if ($Request->image) {
+
+            $uploaded_image=$Request->file('image');
+
+            $image_name = hexdec(uniqid()).'.'.$uploaded_image->extension();
+            Image::make($uploaded_image)->resize(100,100)->save(public_path('user_images/'.$image_name));
+            $data->image=$image_name;
+
+           
+        }
+
+        if($data->save())
+            return redirect()->route('login')->with('message','sdfsd');
+           
+
+
+    }
+
 }
