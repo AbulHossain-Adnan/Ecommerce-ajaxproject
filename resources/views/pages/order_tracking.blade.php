@@ -3,7 +3,7 @@
 @section('user_home')
 
 <div class="row" >
-  <div class="col-sm-4">
+  <div class="col-sm-4 m-0">
   	
   	<h3>Order status bar</h3><br>
 

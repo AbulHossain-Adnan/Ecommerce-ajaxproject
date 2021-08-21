@@ -175,6 +175,12 @@ class OrderController extends Controller
 
 
        }
+       public function orderreturn($order_id){
+        dd($order_id);
+        die();
+        Order::find($order_id)->where('status',3)->update(['return'=>1]);
+        echo "done";
+       }
       
     }
 

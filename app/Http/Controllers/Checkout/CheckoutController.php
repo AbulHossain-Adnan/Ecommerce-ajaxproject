@@ -27,7 +27,7 @@ use Carbon\Carbon;
 class CheckoutController extends Controller
 {
    
-   
+ 
 
 public function checkout(Request $Request){
 

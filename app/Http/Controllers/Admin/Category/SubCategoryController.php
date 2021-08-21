@@ -8,10 +8,11 @@ use App\Models\Admin\Category;
 use App\Models\Sub_category;
 class SubcategoryController extends Controller
 {
-       public function __construct()
+     public function __construct()
     {
         $this->middleware('auth:admin');
     }
+      
     public function index(){
         return view('admin/subcategory/index',[
             'categories'=>Category::all()

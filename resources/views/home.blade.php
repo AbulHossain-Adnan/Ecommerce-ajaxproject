@@ -60,7 +60,7 @@
         
         @if($item->status == 3)
          <a class="btn btn-info btn-sm" href="{{url('/user/order/details/'.$item->id)}}">view</a>
-          <a class="btn btn-danger btn-sm" href="{{url('/user/order/details/'.$item->id)}}">return</a>
+          <a class="btn btn-danger btn-sm" href="{{url('/user/order/return/'.$item->id)}}">return</a>
 
                 @else
                   <a class="btn btn-primary btn-sm" href="{{url('/user/order/details/'.$item->id)}}">view</a>
@@ -79,9 +79,10 @@
   <div class="col-sm-3 m-auto">
     <div class="card">
       <div class="card-body">
-       
+       @if(Auth::user()->image)
           <img src="{{asset('user_images/'.Auth::user()->image)}}" width="80">
-      
+      @else
+      @endif
      
 
 

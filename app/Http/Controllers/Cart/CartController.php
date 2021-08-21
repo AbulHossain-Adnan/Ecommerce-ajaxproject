@@ -16,6 +16,7 @@ use App\Models\Admin\Category;
 
 class CartController extends Controller
 {
+     
     public function addcart($id){
        if(session::has('coupon')){
         session::forget('coupon');
@@ -73,6 +74,7 @@ class CartController extends Controller
 
 
     public function addtocart(Request $request){
+        
    
 
          if(session::has('coupon')){

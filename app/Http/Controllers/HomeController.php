@@ -75,6 +75,7 @@ class HomeController extends Controller
         return view('user/register');
     }
     public function registerpost(Request $Request){
+    
         $Request->validate([
 
             'name' => ['required', 'string', 'max:255'],

@@ -240,6 +240,10 @@ Route::resource('brand', BrandController::class);
       Route::get('/admin/order/progress/{order_id}',[App\Http\Controllers\OrderController::class,'orderprogress']);
       Route::get('/admin/delevary/success/{order_id}',[App\Http\Controllers\OrderController::class,'orderdelivarysuccess']);
 
+ Route::get('/user/order/return/{order_id}',[App\Http\Controllers\OrderController::class,'orderreturn']);
+
+
+
 
 
 
