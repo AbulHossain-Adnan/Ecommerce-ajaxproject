@@ -240,7 +240,20 @@ Route::resource('brand', BrandController::class);
       Route::get('/admin/order/progress/{order_id}',[App\Http\Controllers\OrderController::class,'orderprogress']);
       Route::get('/admin/delevary/success/{order_id}',[App\Http\Controllers\OrderController::class,'orderdelivarysuccess']);
 
- Route::get('/user/order/return/{order_id}',[App\Http\Controllers\OrderController::class,'orderreturn']);
+ Route::get('/user/order/return/{order_id}',[App\Http\Controllers\User\UserReturnController::class,'orderreturn']);
+ Route::get('order/return/request/',[App\Http\Controllers\User\UserReturnController::class,'orderreturnrequest']);
+ 
+ Route::get('all/return/request',[App\Http\Controllers\User\UserReturnController::class,'allreturnrequest']);
+ Route::get('order/return/canel/',[App\Http\Controllers\User\UserReturnController::class,'allreturnrequest']);
+
+
+ Route::get('order/approve/cancel/{order_id}',[App\Http\Controllers\User\UserReturnController::class,'returncancel']);
+ Route::get('order/return/approve/{order_id}',[App\Http\Controllers\User\UserReturnController::class,'orderreturnapprove']);
+
+
+
+
+
 
 
 

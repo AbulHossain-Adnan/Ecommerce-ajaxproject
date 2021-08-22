@@ -14,6 +14,8 @@
       <th scope="col">blnc transection</th>
       <th scope="col">paying amount</th>
       <th scope="col">status code</th>
+      <th scope="col">return</th>
+
       <th scope="col">status</th>
 
 
@@ -23,6 +25,8 @@
   </thead>
   <tbody>
    @foreach($orders as $item)
+
+
     <tr>
       <td>{{$item->user_id}}</td>
       <td>{{$item->payment_type}}</td>
@@ -33,11 +37,25 @@
           {{$item->blnc_transection}}
         @endif
 
-      
-
+    
       </td>
       <td>{{$item->paying_amount}}</td>
       <td>{{$item->status_code}}</td>
+         <td>
+        @if($item->return == 1)
+          <span class="badge badge-primary">requested</span>
+          @elseif($item->return == 2)
+            <span class="badge badge-success">approved</span>
+            @elseif($item->return == 3)
+            <span class="badge badge-danger">canceled</span>
+
+            @else
+            <span class="badge badge-warning">no requested</span>
+            @endif
+
+
+
+      </td>
       <td>
             @if($item->status == 0)
                    <span class="badge badge-warning">Pending</span>
@@ -53,6 +71,7 @@
                  
                   @endif
       </td>
+
 
 
       <td>

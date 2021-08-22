@@ -391,8 +391,8 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">Return Request</a></li>
-          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Request</a></li>
+          <li class="nav-item"><a href="{{ url('order/return/request') }}" class="nav-link">Return Request</a></li>
+          <li class="nav-item"><a href="{{ url('all/return/request') }}" class="nav-link">All Request</a></li>
         </ul>
         @else
         @endif
@@ -406,8 +406,8 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">Return Request</a></li>
-          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Request</a></li>
+           <li class="nav-item"><a href="{{ url('order/return/request') }}" class="nav-link">Return Request</a></li>
+        <li class="nav-item"><a href="{{ url('all/return/request') }}" class="nav-link">All Request</a></li>
         </ul>
         @else
         @endif
