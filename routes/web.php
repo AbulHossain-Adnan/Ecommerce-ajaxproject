@@ -305,4 +305,10 @@ Route::resource('brand', BrandController::class);
 // Route for site setting
      Route::resource('site', Site_settingController::class);
 
+
+
+// route for socialite
+     Route::get('login/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
+
  

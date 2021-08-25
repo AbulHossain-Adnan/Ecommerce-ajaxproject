@@ -194,7 +194,9 @@
                    
                  </form><br>
                  <button type="submit" class="btn btn-primary btn-block"><i class="fab fa-facebook-square"></i> Login with facebook</button>
-                  <button type="submit" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Login with google</button>
+                  <a type="submit" class="btn btn-danger btn-block" href="{{url('login/google')}}"><i class="fab fa-google"></i> Login with google</a>
+
+                  
                     </div>
                 </div>
             
