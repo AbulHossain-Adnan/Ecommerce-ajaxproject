@@ -88,7 +88,13 @@ Route::get('admin/product/show/{id}', [App\Http\Controllers\Admin\Product\Produc
 Route::POST('admin/product/update', [App\Http\Controllers\Admin\Product\ProductController::class, 'update'])->name('product.update');
 Route::POST('admin/product/delete', [App\Http\Controllers\Admin\Product\ProductController::class, 'destroy'])->name('product.delete');
 Route::get('/singleproduct/{id}', [App\Http\Controllers\Admin\Product\ProductController::class, 'singleproduct'])->name('singleproduct.show');
-Route::get('/productview/{id}', [App\Http\Controllers\Admin\Product\ProductController::class, 'productview']);
+// Route::get('/productview/{id}', [App\Http\Controllers\Admin\Product\ProductController::class, 'productview']);
+Route::get('/productview/{id}', [App\Http\Controllers\Admin\Product\Productviewcontroller::class, 'productview']);
+
+
+Route::POST('search/product', [App\Http\Controllers\Searchcontroller::class, 'search']);
+
+
 
 
 
@@ -310,5 +316,11 @@ Route::resource('brand', BrandController::class);
 // route for socialite
      Route::get('login/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
+
+ 
+
+ // route for socialite facebook
+Route::get('login/facebook', [App\Http\Controllers\Facebookcontroller::class, 'redirectToFacebook']);
+Route::get('login/facebook/callback', [App\Http\Controllers\Facebookcontroller::class, 'handleFacebookCallback']);
 
  

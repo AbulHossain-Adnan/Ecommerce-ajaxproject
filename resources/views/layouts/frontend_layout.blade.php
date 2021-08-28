@@ -205,8 +205,10 @@
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div class="header_search_form_container">
-                                        <form action="#" class="header_search_form clearfix">
-                                            <input type="search" required="required" class="header_search_input"
+                                        <form action="{{url('search/product')}}" method="post">
+                                            @csrf
+                                          
+                                            <input type="search" name="search" required="required" id="search" value="{{request()->input('search')}}" class="header_search_input"
                                                 placeholder="Search for products...">
                                             <div class="custom_dropdown">
                                                 <div class="custom_dropdown_list">
