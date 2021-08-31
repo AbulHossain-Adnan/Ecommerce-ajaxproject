@@ -140,12 +140,21 @@ Route::resource('brand', BrandController::class);
 
 
 
+
+
    // Route for wishlist
    Route::get('/wishlist/added/{id}',[App\Http\Controllers\Wishlist\WishlistController::class,'addwishlist'])->name('wish.added');
    Route::get('/wishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'wishlist'])->name('wish.list');
    Route::get('/wishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'wishlist'])->name('wish.list');
    Route::get('/addwishlistt/{id}',[App\Http\Controllers\Wishlist\WishlistController::class,'wishlistt']);
    Route::get('/miniwishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'miniwishlist']);
+   Route::get('/user/wishlist/',[App\Http\Controllers\Wishlist\WishlistController::class,'userwishlist']);
+
+
+
+
+
+
 
    
 
@@ -162,6 +171,11 @@ Route::resource('brand', BrandController::class);
     Route::post('/cart/update/',[App\Http\Controllers\Cart\CartController::class,'cartupdate'])->name('cart.update');
     Route::post('/addtocart/',[App\Http\Controllers\Cart\CartController::class,'addtocart'])->name('addto.cart');
       Route::POST('/applycouponn/',[App\Http\Controllers\Cart\CartController::class,'appcoupon']);
+
+
+
+
+
 
 
 
@@ -197,6 +211,8 @@ Route::resource('brand', BrandController::class);
 
 
 
+
+
      // route for checkout Controller 
 
      Route::post('/checkout/',[App\Http\Controllers\Checkout\CheckoutController::class,'checkout'])->name('checkout');
@@ -204,6 +220,9 @@ Route::resource('brand', BrandController::class);
 
      
     
+
+
+
 
 
      // Route for stripe payment 
@@ -216,24 +235,38 @@ Route::resource('brand', BrandController::class);
 
 
 
+
+
+
      // Route for Division
      Route::post('division/updated',[App\Http\Controllers\Admin\Division\DivisionController::class,'updated']);
      Route::resource('division', DivisionController::class);
 
+
+
+
+
+
      // Route for districtController
      Route::post('district/updated',[App\Http\Controllers\Admin\District\DistrictController::class,'updated']);
      Route::get('/get_district/{division_id}',[App\Http\Controllers\Admin\District\DistrictController::class,'getdistrict']);
-
-
      Route::resource('district', DistrictController::class);
+
+
+
+
 
      // route for area
 
       Route::post('area/updated',[App\Http\Controllers\Admin\Area\AreaController::class,'updated']);
       Route::get('/get_area/{district_id}',[App\Http\Controllers\Admin\Area\AreaController::class,'getarea']);
-
-
      Route::resource('area', AreaController::class);
+
+
+
+
+
+
 
 // Route for OrderController
 
@@ -241,13 +274,6 @@ Route::resource('brand', BrandController::class);
      Route::get('/admin/cancel/order/',[App\Http\Controllers\OrderController::class,'cancel'])->name('order.cancel');
      Route::get('/admin/order/progress/',[App\Http\Controllers\OrderController::class,'progress'])->name('order.progress');
      Route::get('/admin/delivary/success/',[App\Http\Controllers\OrderController::class,'delivarysuccess'])->name('delivary.success');
-
-
-
-
-
-
-
      Route::get('/admin/payment/accept/{order_id}',[App\Http\Controllers\OrderController::class,'paymentaccept']);
       Route::get('/admin/order/cancel/{order_id}',[App\Http\Controllers\OrderController::class,'ordercancel']);
       Route::get('/admin/order/progress/{order_id}',[App\Http\Controllers\OrderController::class,'orderprogress']);
@@ -262,15 +288,6 @@ Route::resource('brand', BrandController::class);
 
  Route::get('order/approve/cancel/{order_id}',[App\Http\Controllers\User\UserReturnController::class,'returncancel']);
  Route::get('order/return/approve/{order_id}',[App\Http\Controllers\User\UserReturnController::class,'orderreturnapprove']);
-
-
-
-
-
-
-
-
-
 
 
        Route::POST('/order/tracking/',[App\Http\Controllers\OrderController::class,'ordertracking']);
@@ -289,6 +306,9 @@ Route::resource('brand', BrandController::class);
       Route::resource('seo', SeoController::class);
 
 
+
+
+
       // Route for Report
       Route::get('/today/order/report/',[App\Http\Controllers\Admin\Report\ReportController::class,'todayreport'])->name('today.orders');
       Route::get('/today/delivary/orders/',[App\Http\Controllers\Admin\Report\ReportController::class,'todaydelivary'])->name('today.delivarys');
@@ -300,6 +320,11 @@ Route::resource('brand', BrandController::class);
           Route::POST('/admin/report/month/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'monthsearch'])->name('month.search');
             Route::POST('/admin/report/year/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'yearsearch'])->name('year.search');
              Route::POST('/admin/report/date/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'datesearch'])->name('date.search');
+
+
+
+
+
 
 
 // Route for userolecontroller
@@ -315,8 +340,15 @@ Route::resource('brand', BrandController::class);
     Route::POST('/admin/user/update/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userupdate']);
 
 
+
+
+
+
 // Route for site setting
      Route::resource('site', Site_settingController::class);
+
+
+
 
 
 
@@ -325,6 +357,10 @@ Route::resource('brand', BrandController::class);
 Route::get('login/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
 
  
+
+
+
+
 
  // route for socialite facebook
 Route::get('login/facebook', [App\Http\Controllers\Facebookcontroller::class, 'redirectToFacebook']);
