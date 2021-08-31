@@ -35,7 +35,7 @@
     <meta name="description" content="my name is adnan">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+   <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.css">
     <link href="{{ asset('frontend') }}/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
         type="text/css">
@@ -52,7 +52,23 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="{{ asset('frontend') }}/js/jquery.min.js"></script>
     
-     
+       <style>
+        .header_search_form_container{
+            position: relative;
+        }
+        #product_suggession{
+            position: absolute;
+            top:70;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            z-index: 999;
+            border-radius: 4px;
+            margin-top: 2px;
+
+        }
+
+    </style>
       
 
 </head>
@@ -200,15 +216,21 @@
                             </div>
                         </div>
 
+
+
+
+
+
                         <!-- Search -->
                         <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div class="header_search_form_container">
-                                        <form action="{{url('search/product')}}" method="post">
+                                         <form action="{{url('search/product')}}" method="post" class="header_search_form clearfix">
+                                    
                                             @csrf
                                           
-                                            <input type="search" name="search" required="required" id="search" value="{{request()->input('search')}}" class="header_search_input"
+                                            <input type="search" name="search" onfocus="showsearch()" onblur="hidesearch()" required="required" id="search" value="{{request()->input('search')}}" class="header_search_input"
                                                 placeholder="Search for products...">
                                             <div class="custom_dropdown">
                                                 <div class="custom_dropdown_list">
@@ -225,10 +247,28 @@
                                                 value="Submit"><img src="{{ asset('frontend') }}/images/search.png"
                                                     alt=""></button>
                                         </form>
+                                       
                                     </div>
+
+
                                 </div>
+
                             </div>
+                            
+                                        <div id=product_suggession>
+                                          
+                                           
+                                        </div>
+                               
                         </div>
+
+
+                       
+
+
+
+
+
 
                         <!-- Wishlist -->
                         <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
@@ -610,13 +650,80 @@ miniwishlist();
 
 
 
+// $("body").on('keyup',"#search",function(){
+
+
+// let search= $("#search").val();
+
+// if(search.length > 0){
+ 
+//     $.ajax({
+//         type:"POST",
+//         datatype:json,
+//         data:{search:search},
+//         url:"/find/product/",
+//         success:function(response){
+        
+
+
+//         }
+
+//     });
+
+
+// }
+
+// });
+
+
 
 
 
 
 
 </script>
-        
+<script type="text/javascript">
+       $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+    $("body").on('keyup',"#search",function(){
+        let search= $('#search').val();
+        if(search.length > 0){
+            $.ajax({
+                type:"POST",
+                data:{search:search},
+                url:"/find/product/",
+                success:function(response){
+                   $('#product_suggession').html(response)
+
+                  
+                   
+                }
+            })
+
+        }
+         if(search.length <1){
+                   $('#product_suggession').html("")
+
+                   }
+    });
+</script>
+
+
+
+  
+
+<script type="text/javascript">
+    
+    function showsearch(){
+        $('#product_suggession').slideDown();
+    }
+     function hidesearch(){
+        $('#product_suggession').slideUp();
+    }
+</script>
 
 
 

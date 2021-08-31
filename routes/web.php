@@ -94,6 +94,13 @@ Route::get('/productview/{id}', [App\Http\Controllers\Admin\Product\Productviewc
 
 Route::POST('search/product', [App\Http\Controllers\Searchcontroller::class, 'search']);
 
+Route::POST('/find/product/', [App\Http\Controllers\Searchcontroller::class, 'findproduct']);
+
+
+
+
+
+
 
 
 

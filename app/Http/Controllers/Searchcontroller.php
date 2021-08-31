@@ -28,4 +28,17 @@ return view('pages/search_product',[
 
 		]);
   }
+
+  public function findproduct(request $request){
+
+
+  	$products=Product::where("product_name","LIKE","%".$request->search."%")
+					->orwhere("product_code","LIKE","%".$request->search."%")
+					->orwhere("product_details","LIKE","%".$request->search."%")
+					->orwhere("product_color","LIKE","%".$request->search."%")->get();
+
+					return view('pages/product_suggetion',compact('products'));
+
+
+  }
 }

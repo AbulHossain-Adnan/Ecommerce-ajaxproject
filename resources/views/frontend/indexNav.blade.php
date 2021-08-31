@@ -43,63 +43,31 @@
                     <div class="main_nav_menu ml-auto">
                         <ul class="standard_dropdown main_nav_dropdown">
                             <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+                              @foreach($categories as $item) 
                             <li class="hassubs">
-                                <a href="#">Super De
-                                    s<i class="fas fa-chevron-down"></i></a>
+
+                                <a href="#">{{$item->category_name}}<i class="fas fa-chevron-down"></i></a>
+
                                 <ul>
-                                    <li>
-                                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                        </ul>
+                                 
+                                    <li> 
+
+                                     @php
+                                    $subcategories=DB::table('sub_categories')->where('category_id',$item->id)->get()
+                                    @endphp
+
+                                    @foreach($subcategories as $item)
+                                        <a href="#">{{ $item->sub_category_name }}<i class="fas fa-chevron-right"></i></a>
+                                        @endforeach
+                                        
                                     </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                </ul>
-                            </li>
-                            <li class="hassubs">
-                                <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    @foreach($brands as $item)
-                                    <li>
-                                        <a href="#">{{ $item->brand_name }}<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            @php
-                                            $brand_products=DB::table('products')->where('brand_id',$item->id)->get();
-                                            @endphp
-                                            @foreach($brand_products as $item)
-                                            <li><a href="#">{{ $item->product_name }}<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            @endforeach
-                                           
-                                        </ul>
-                                    </li>
-                                    @endforeach
                                   
                                 </ul>
                             </li>
-                            <li class="hassubs">
-                                <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                            <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                             @endforeach
                         </ul>
                     </div>
+                     
 
                     <!-- Menu Trigger -->
 
