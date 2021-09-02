@@ -367,3 +367,26 @@ Route::get('login/facebook', [App\Http\Controllers\Facebookcontroller::class, 'r
 Route::get('login/facebook/callback', [App\Http\Controllers\Facebookcontroller::class, 'handleFacebookCallback']);
 
  
+
+ // route for post
+
+Route::get('/post/category/', [App\Http\Controllers\Admin\PostController::class, 'postcategory']);
+Route::POST('/post/category/store/',[App\Http\Controllers\Admin\PostController::class,'postcategorystore']);
+Route::get('/post/category/edit/{id}',[App\Http\Controllers\Admin\PostController::class,'postcategoryedit']);
+Route::POST('/post/category/updated/',[App\Http\Controllers\Admin\PostController::class,'postcategoryupdate']);
+Route::DELETE('/post/category/delete/{id}',[App\Http\Controllers\Admin\PostController::class,'postcategorydelete']);
+Route::get('/add/post/',[App\Http\Controllers\Admin\PostController::class,'addpost']);
+Route::POST('/post/store/',[App\Http\Controllers\Admin\PostController::class,'poststore']);
+Route::get('/post/edit/{id}',[App\Http\Controllers\Admin\PostController::class,'postedit']);
+Route::POST('/post/updated/',[App\Http\Controllers\Admin\PostController::class,'postupdated']);
+Route::DELETE('/post/delete/{id}',[App\Http\Controllers\Admin\PostController::class,'postdelete']);
+
+
+
+
+
+
+
+
+
+

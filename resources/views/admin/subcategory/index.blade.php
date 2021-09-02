@@ -167,6 +167,8 @@ function cleardata(){
         data:{sub_category_name:sub_category_name,category_id:category_id},
         url:"/subcategory/store/",
         success:function(data){
+           alldata();
+           cleardata();
             Swal.fire({
                 toast:true,
               position: 'top-end',
@@ -175,8 +177,8 @@ function cleardata(){
               showConfirmButton: false,
               timer: 1500
             })
-            alldata();
-            cleardata();
+         
+            
             
         },
         error:function(error){

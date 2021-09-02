@@ -24,7 +24,6 @@
   <tbody>
 @foreach($wishlists as $item)
     <tr>
-   
       <td><img src="{{ asset('product_images/'.$item->product->image_one) }}"width="100"></td>
       <td scope="col">{{ $item->product->product_name }}</td>
       <td scope="col">{{ $item->product->product_color }}</td>

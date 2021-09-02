@@ -110,7 +110,7 @@ if($wishlist){
 public  function userwishlist(){
   $id=Auth::user()->id;
 return view('pages/wishlist',[
-'wishlists'=>Wishlist::where('user_id',$id)->get(),
+'wishlists'=>Wishlist::where('user_id',$id)->with('product')->get(),
 
 ]);
 

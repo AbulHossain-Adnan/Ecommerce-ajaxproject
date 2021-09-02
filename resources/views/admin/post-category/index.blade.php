@@ -11,7 +11,7 @@
         <span class="breadcrumb-item active">Data Table</span>
         </nav>
         <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Category List
+            <h6 class="card-body-title">Post Category List
                 <a href="#" class="btn btn-warning btn-sm " style="float: right" data-toggle="modal"
                     data-target="#modaldemo3">Add New</a>
 
@@ -24,23 +24,27 @@
                     <thead>
                         <tr>
                             <th class="wd-15p">Serial</th>
-                            <th class="wd-15p">Category Name</th>
+                            <th class="wd-15p">Category Name english</th>
+                            <th class="wd-15p">Category Name Bangla</th>
+
                             <th class="wd-20p">Action</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $key=>$category)
+                        @foreach ($post_categories as $key=>$item)
 
 
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $category->category_name }}</td>
+                            <td>{{ $item->category_name_eng }}</td>
+                            <td>{{ $item->category_name_bng }}</td>
+
                             <td>
-                                <form method="post" action="{{ route('admin.category.destroy',$category->id) }}">
+                                <form method="post" action="{{url('/post/category/delete/'.$item->id)}}">
                                     @csrf
                                     @method('DELETE')
-                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $category->id }}">edit</a>
+                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $item->id }}">edit</a>
                           
                            <button type="submit" class="btn btn-danger btn-sm ">delete</button>
                         
@@ -78,15 +82,24 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('admin.category.store') }}">
+            <form method="post" action="{{ url('/post/category/store/') }}">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="exampleInputEmail1"
+                        <label for="exampleInputEmail1">Category Name English</label>
+                        <input name="category_name_eng" type="text" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
-                            class="@error('category_name') is-invalid @enderror">
-                        @error('category_name')
+                            class="@error('category_name_eng') is-invalid @enderror">
+                        @error('category_name_eng')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Category Name Bangla</label>
+                        <input name="category_name_bng" type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter Category Name"
+                            class="@error('category_name_eng') is-invalid @enderror">
+                        @error('category_name_bng')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -113,14 +126,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ url('/admin/category/updated') }}">
+            <form method="post" action="{{ url('/post/category/updated/') }}">
                 @csrf
                
                 <input type="hidden" id="dataid" name="id" value="">
                 <div class="modal-body pd-20">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="category_name"
+                        <label for="exampleInputEmail1">Category Name English</label>
+                        <input name="category_name_eng" type="text" class="form-control" id="category_name_eng"
+                            aria-describedby="emailHelp" placeholder="Enter Category Name"
+                            class="@error('category_name') is-invalid @enderror">
+                        @error('category_name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Category Name English</label>
+                        <input name="category_name_bng" type="text" class="form-control" id="category_name_bng"
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
                             class="@error('category_name') is-invalid @enderror">
                         @error('category_name')
@@ -146,16 +168,23 @@
 @section('script')
 
 <script>
-      $(document).ready(function(){
+   $('document').ready(function(){
+   	$('body').on('click','#edit',function(){
+   		let id = $(this).data('id');
+   		$.ajax({
+   			type:"GET",
+   			datatype:'json',
+   			url:"/post/category/edit/"+id,
+   			success:function(data){
 
-    $('body').on('click',"#edit",function(){
-        let id = $(this).data('id');
-        $.get(`/admin/category/${id}/edit`,function(data){
-            $("#dataid").val(id)
-            $("#category_name").val(data.category_name)
-            $("#modaldemo4").modal('show')
-        })
-    })
+   				$('#modaldemo4').modal('show')
+   				$('#category_name_eng').val(data.category_name_eng)
+   				$('#category_name_bng').val(data.category_name_bng)
+   				$('#dataid').val(data.id)
+
+   			}
+   		})
+   	})
    })
 </script>
 
