@@ -143,23 +143,34 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                 
+
+
+
                      <div class="form-group">
                         <label for="exampleInputEmail1">post detais english</label>
-                        <input name="post_details_eng" type="text" class="form-control" id="exampleInputEmail1"
+
+                        <textarea name="post_details_eng" type="text" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
-                            class="@error('category_name_eng') is-invalid @enderror">
-                        @error('post_title_eng')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            class="@error('category_name_eng') is-invalid @enderror">sdfsdfsd</textarea>
+                     
                     </div>
+
+
+
+
+
+
+                    
+
+
                      <div class="form-group">
-                        <label for="exampleInputEmail1">post details bangla</label>
-                        <input name="post_details_bng" type="text" class="form-control" id="exampleInputEmail1"
+                        <label for="exampleInputEmail1">post detais english</label>
+
+                        <textarea name="post_details_bng" type="text" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
-                            class="@error('category_name_eng') is-invalid @enderror">
-                        @error('post_title_eng')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            class="@error('category_name_eng') is-invalid @enderror">sdfsdfsd</textarea>
+                     
                     </div>
 
 

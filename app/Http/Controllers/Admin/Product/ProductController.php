@@ -82,19 +82,19 @@ class ProductController extends Controller
         if($image_one){
             // image_one
             $image_name1=hexdec(uniqid()).'.'.$image_one->extension();
-            Image::make($image_one)->resize(300, 300)->save(public_path('product_images/'.$image_name1));
+            Image::make($image_one)->resize(521, 459)->save(public_path('product_images/'.$image_name1));
             $product->image_one=$image_name1;
       }
       if($image_two){
             // image_two
             $image_name2=hexdec(uniqid()).'.'.$image_two->extension();
-            Image::make($image_two)->resize(300, 300)->save(public_path('product_images/'.$image_name2));
+            Image::make($image_two)->resize(521, 459)->save(public_path('product_images/'.$image_name2));
             $product->image_two=$image_name2;
       }
       if($image_three){
             // image_three
             $image_name3=hexdec(uniqid()).'.'.$image_three->extension();
-            Image::make($image_three)->resize(300, 300)->save(public_path('product_images/'.$image_name3));
+            Image::make($image_three)->resize(521, 459)->save(public_path('product_images/'.$image_name3));
             $product->image_three=$image_name3;
       }
        $product->save();
@@ -137,19 +137,19 @@ class ProductController extends Controller
         if($image_one){
               // image_one
               $image_name1=hexdec(uniqid()).'.'.$image_one->extension();
-              Image::make($image_one)->resize(300, 300)->save(public_path('product_images/'.$image_name1));
+              Image::make($image_one)->resize(521, 459)->save(public_path('product_images/'.$image_name1));
               $product->image_one=$image_name1;
         }
         if($image_two){
               // image_two
               $image_name2=hexdec(uniqid()).'.'.$image_two->extension();
-              Image::make($image_two)->resize(300, 300)->save(public_path('product_images/'.$image_name2));
+              Image::make($image_two)->resize(521, 459)->save(public_path('product_images/'.$image_name2));
               $product->image_two=$image_name2;
         }
         if($image_three){
               // image_three
               $image_name3=hexdec(uniqid()).'.'.$image_three->extension();
-              Image::make($image_three)->resize(300, 300)->save(public_path('product_images/'.$image_name3));
+              Image::make($image_three)->resize(521, 459)->save(public_path('product_images/'.$image_name3));
               $product->image_three=$image_name3;
         }
 

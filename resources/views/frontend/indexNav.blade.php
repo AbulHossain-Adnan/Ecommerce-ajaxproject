@@ -38,36 +38,75 @@
                         </ul>
                     </div>
 
+
+
+
+
+
+
+
+
+
                     <!-- Main Nav Menu -->
 
-                    <div class="main_nav_menu ml-auto">
-                        <ul class="standard_dropdown main_nav_dropdown">
-                            <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-                              @foreach($categories as $item) 
-                            <li class="hassubs">
-
-                                <a href="#">{{$item->category_name}}<i class="fas fa-chevron-down"></i></a>
-
-                                <ul>
-                                 
-                                    <li> 
-
-                                     @php
-                                    $subcategories=DB::table('sub_categories')->where('category_id',$item->id)->get()
-                                    @endphp
-
-                                    @foreach($subcategories as $item)
-                                        <a href="#">{{ $item->sub_category_name }}<i class="fas fa-chevron-right"></i></a>
-                                        @endforeach
-                                        
+                     <div class="main_nav_menu ml-auto">
+                                <ul class="standard_dropdown main_nav_dropdown">
+                                    <li><a href="#">{{__('msg.front_home')}}<i class="fas fa-chevron-down"></i></a></li>
+                                   
+                                    <li class="hassubs">
+                                        <a href="#">{{__('msg.front_brand')}}<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                <ul>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
                                     </li>
-                                  
+                                    <li class="hassubs">
+                                        <a href="#">{{__('msg.front_pages')}}<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{url('/blog/post/')}}">{{__('msg.front_blog')}}<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="contact.html">{{__('msg.front_contact')}}<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
-                            </li>
-                             @endforeach
-                        </ul>
-                    </div>
+                            </div>
                      
+
+
+
+
+                               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <!-- Menu Trigger -->
 
@@ -186,14 +225,14 @@
 <!-- Banner -->
 
 <div class="banner">
-    <div class="banner_background" style="background-image:url({{ asset('frontend') }}/images/banner_background.jpg)">
-    </div>
-    <div class="container fill_height">
+        <div class="banner_background" style="background-image:url({{ asset('frontend') }}/images/banner_background.jpg)"></div>
+   
+  <div class="container fill_height">
         <div class="row fill_height">
             <div class="banner_product_image"> <img src="{{asset('product_images/'.$main_sliders->image_one)}}" height="450"></div>
             <div class="col-lg-5 offset-lg-4 fill_height">
                 <div class="banner_content">
-                    <h1 class="banner_text">new era of smartphones</h1>
+                    <h2 class="banner_text">{{__('msg.front_title')}}</h2>
                     @if($main_sliders->discount_price==null)
                     <div class="banner_price">${{ $main_sliders->selling_price }}</div>
                     @else
@@ -201,7 +240,7 @@
                     @endif
                     
                     <div class="banner_product_name">{{ $main_sliders->brand->brand_name }}</div>
-                    <div class="button banner_button"><a href="#">Shop Now</a></div>
+                    <div class="button banner_button"><a href="#">{{__('msg.front_shopnow')}}</a></div>
                 </div>
             </div>
         </div>

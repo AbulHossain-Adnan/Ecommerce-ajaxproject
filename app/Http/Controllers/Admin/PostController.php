@@ -133,4 +133,8 @@ return back()->with('message','data updated successfully');
 
     	return back()->with('message','post deleted successfully');
     }
+
+    public function blogpost(){
+        return view('pages/blog.blade.php');
+    }
 }

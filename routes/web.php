@@ -35,6 +35,8 @@ Route::view('/', 'frontend.index',[
     'byeonegetones'=>Product::orderBy('id','desc')->with('Category','brand')->where('status',1)->where('byeonegetone',1)->limit(6)->get(),
 
     'site_setting'=>Site::first(),
+    'hot_deals'=>Product::where('status',1)->where('hot_deal',1)->with('category')->get(),
+    'best_sellers'=>Product::where('status',1)->where('hot_deal',1)->where('best_rated',1)->with('category')->get(),
 ])->name('front.home');
 
 
@@ -385,6 +387,21 @@ Route::DELETE('/post/delete/{id}',[App\Http\Controllers\Admin\PostController::cl
 
 
 
+
+
+
+// route for blog
+Route::get('/blog/post/',[App\Http\Controllers\BlogController::class,'blogpost']);
+
+
+// Route for localization
+Route::get('/local/{local}',[App\Http\Controllers\BlogController::class,'switch']);
+
+
+// Route for newsletter
+
+
+Route::POST('/add/newsletter/',[App\Http\Controllers\NewsLetterController::class,'addnewsletter']);
 
 
 
