@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
+use App\Models\Admin\Seo;
+use App\Models\Admin\Site;
+
 use App\Models\Sub_category;
 use App\Http\Controllers\Admin\Product\ProductController;
 use Image;
@@ -209,11 +212,15 @@ class ProductController extends Controller
         $product_color=explode(',', $color);
         $size=$single_products->product_size;
         $product_size=explode(',', $size);
+        $seos=Seo::first();
+        $categories=Category::all();
+        $site_setting=Site::first();
 
-        return view('pages/single_product',compact('single_products','product_color','product_size'));
+        return view('pages/single_product',compact('single_products','product_color','product_size','seos','categories','site_setting'));
     }
   
 
 
 
 }
+

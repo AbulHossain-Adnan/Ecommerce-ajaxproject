@@ -2208,12 +2208,12 @@ function addnewsletter(){
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-     let newsletter= $('#newsemail').val();
+     let newsletterr= $('#newsemail').val();
 
      $.ajax({
         type:'POST',
         datatype:'json',
-        data:{newsletter:newsletter},
+        data:{newsletter:newsletterr},
         url:'/add/newsletter/',
         success:function(data){
             $('#newsemail').val("")

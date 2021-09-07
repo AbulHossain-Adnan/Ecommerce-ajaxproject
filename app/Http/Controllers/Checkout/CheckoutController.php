@@ -16,7 +16,7 @@ use App\Models\Admin\Area;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Shipping;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
 
 
 use Auth;

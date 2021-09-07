@@ -10,7 +10,7 @@ use App\Models\Admin\Site;
 
 use App\Models\Order;
 use App\Models\Order_detail;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
 use App\Models\User;
 use Image;
 

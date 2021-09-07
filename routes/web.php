@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
 use App\Models\Product;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
 use App\Models\Admin\Site;
 
 
@@ -404,6 +404,20 @@ Route::get('/local/{local}',[App\Http\Controllers\BlogController::class,'switch'
 Route::POST('/add/newsletter/',[App\Http\Controllers\NewsLetterController::class,'addnewsletter']);
 
 
+
+// Route for contact
+Route::get('/user/contact/',[App\Http\Controllers\ContactController::class,'contact']);
+Route::POST('/send/message/',[App\Http\Controllers\ContactController::class,'sendmessage']);
+
+
+
+
+
+// rotue for shop controller 
+
+Route::get('/shop/page/',[App\Http\Controllers\ShopController::class,'shoppage']);
+Route::get('/category/shop/products/{id}',[App\Http\Controllers\ShopController::class,'categoryshopproducts']);
+Route::get('/brand/shop/products/{id}',[App\Http\Controllers\ShopController::class,'brandshopproducts']);
 
 
 

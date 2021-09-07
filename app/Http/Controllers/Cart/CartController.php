@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Coupon;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
 use App\Models\Admin\Site;
 
 use Cart;
@@ -145,6 +145,8 @@ class CartController extends Controller
 
   
     public function appcoupon(Request $request){
+
+
 
         $coupon_name=$request->coupon_name;
 

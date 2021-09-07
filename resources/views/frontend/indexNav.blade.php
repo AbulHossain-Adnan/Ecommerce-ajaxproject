@@ -56,33 +56,25 @@
                                     <li class="hassubs">
                                         <a href="#">{{__('msg.front_brand')}}<i class="fas fa-chevron-down"></i></a>
                                         <ul>
+                                            @foreach($brands as $item)
                                             <li>
-                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                                <ul>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                </ul>
+                                                <a href="">{{$item->brand_name}}<i class="fas fa-chevron-down"></i></a>
+                                              
                                             </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                           @endforeach
                                         </ul>
                                     </li>
                                     <li class="hassubs">
                                         <a href="#">{{__('msg.front_pages')}}<i class="fas fa-chevron-down"></i></a>
                                         <ul>
-                                            <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="{{url('/shop/page/')}}">Shop<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="{{url('/blog/post/')}}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="{{ route('cart.show') }}">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="{{url('/user/contact/')}}">Contact<i class="fas fa-chevron-down"></i></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="{{url('/blog/post/')}}">{{__('msg.front_blog')}}<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="contact.html">{{__('msg.front_contact')}}<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{url('/user/contact/')}}">{{__('msg.front_contact')}}<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </div>
                      

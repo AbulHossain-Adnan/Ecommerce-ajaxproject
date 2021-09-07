@@ -51,6 +51,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="{{ asset('frontend') }}/js/jquery.min.js"></script>
+  <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+  
     
        <style>
         .header_search_form_container{
@@ -724,8 +726,23 @@ miniwishlist();
         $('#product_suggession').slideUp();
     }
 </script>
+    <script src="{{ asset('backend') }}/lib/summernote/summernote-bs4.min.js"></script>
 
 
+    <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote2').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
 
 
 

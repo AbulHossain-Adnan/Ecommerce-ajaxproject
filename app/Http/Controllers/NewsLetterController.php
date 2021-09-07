@@ -13,6 +13,9 @@ class NewsLetterController extends Controller
 
     public function addnewsletter(Request $Request){
 
+
+
+
     	 $validator = Validator::make($Request->all(), [
             'newsletter' => 'required|email',
            

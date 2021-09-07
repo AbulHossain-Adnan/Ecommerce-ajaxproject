@@ -1,7 +1,10 @@
-@extends('layouts.app')
-@section('user_home')
+@extends('layouts.frontend_layout')
+@section('frontendContent')
+
+
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_styles.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
+
 
 	<!-- Single Product -->
 
@@ -12,9 +15,9 @@
 				<!-- Images -->
 				<div class="col-lg-2 order-lg-1 order-2">
 					<ul class="image_list">
-						<li data-image="images/single_4.jpg"><img src="" alt=""></li>
-						<li data-image="images/single_2.jpg"><img src="{{ asset('product_images/'.$single_products->image_one) }}" alt=""></li>
-						<li data-image="product_images/{{$single_products->image_one}}"><img src="{{ asset('product_images/'.$single_products->image_one) }}" alt=""></li>
+						<li data-image="{{ asset('product_images/'.$single_products->image_one) }}"><img src="{{ asset('product_images/'.$single_products->image_one) }}" alt=""></li>
+						<li data-image="{{ asset('product_images/'.$single_products->image_two) }}"><img src="{{ asset('product_images/'.$single_products->image_two) }}" alt=""></li>
+						<li data-image="{{ asset('product_images/'.$single_products->image_three) }}"><img src="{{ asset('product_images/'.$single_products->image_three) }}" alt=""></li>
 					</ul>
 				</div>
 
@@ -131,5 +134,5 @@
 	</div>
 
 	<!-- Brands -->
-
+<script src="{{ asset('frontend') }}/js/product_custom.js"></script>
 	@endsection
