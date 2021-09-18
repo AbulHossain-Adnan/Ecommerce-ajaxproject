@@ -50,7 +50,8 @@ class CouponController extends Controller
         ]);
        return back()->with('message',"coupon Update succesfully");
     }
-    public function destroy($id){
+    public function destroy(request $request){
+        $id=$request->coupon_id;
         coupon::find($id)->delete();
         return back()->with('message','coupon delete succesfully');
 
@@ -80,6 +81,14 @@ class CouponController extends Controller
         }
 
     }
+
+
+
+
+
+
+
+
     //   public function cartremove($rowId){
     //     Cart::remove($rowId);
        

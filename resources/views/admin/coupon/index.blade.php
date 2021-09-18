@@ -1,5 +1,4 @@
 @extends('admin.admin_layout')
-
 @section('adminMain')
 
 
@@ -38,12 +37,12 @@
                             <td>{{ $item->discount }}%</td>
 
                             <td>
-                                <form method="post" action="{{ route('coupon.destroy',$item->id) }}">
+                                <form method="post" action="">
                                     @csrf
                                     @method('DELETE')
                                     <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $item->id }}">edit</a>
                           
-                           <button type="submit" class="btn btn-danger btn-sm ">delete</button>
+                           <button type="button" value="{{$item->id}}" class="btn btn-danger btn-sm " id="coupondelete">delete</button>
                         
                              </form>
                             </td>
@@ -160,6 +159,33 @@
 {{-- end modal here  --}}
 
 
+<!-- modal for delete -->
+<div class="modal fade" id="deletemodal1" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle">Confirm?</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{{url('/coupon/delete/')}}">
+            @csrf
+            @method('DELETE')
+       <h5> Are You Sure You Want to Delete this ?</h5>
+       <input type="hidden" name="coupon_id" id="data_id">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Yes I want to delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <script>
@@ -175,5 +201,14 @@
         })
     })
    })
+</script>
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('body').on('click','#coupondelete', function(){
+            let coupon_id = $(this).val();
+                $('#deletemodal1').modal('show')
+                $('#data_id').val(coupon_id)
+        })
+    })
 </script>
 @endsection

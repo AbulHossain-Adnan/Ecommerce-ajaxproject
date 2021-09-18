@@ -178,7 +178,7 @@ Route::resource('brand', BrandController::class);
     // route for coupon\
     Route::get('/add/coupon/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'create'])->name('coupon.create');
      Route::post('/coupon/store/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'store'])->name('coupon.store');
-     Route::DELETE('/coupon/destroy/{id}',[App\Http\Controllers\Admin\Coupon\CouponController::class,'destroy'])->name('coupon.destroy');
+     Route::DELETE('/coupon/delete/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'destroy']);
      Route::get('/coupon/edit/{id}',[App\Http\Controllers\Admin\Coupon\CouponController::class,'edit']);
      Route::post('/coupon/updated',[App\Http\Controllers\Admin\Coupon\CouponController::class,'updated']);
 
