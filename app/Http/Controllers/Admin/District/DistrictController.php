@@ -100,8 +100,9 @@ class DistrictController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id=$request->district_id;
         District::find($id)->delete();
         return back()->with('message','data delete successfully');
     }
