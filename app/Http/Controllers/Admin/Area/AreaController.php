@@ -102,8 +102,9 @@ $request->validate(['area_name'=>'required','district_id'=>'required']);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id=$request->area_id;
         Area::find($id)->delete();
         return back()->with('message','area delete successfully');
     }

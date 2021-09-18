@@ -213,6 +213,7 @@ Route::resource('brand', BrandController::class);
 
      // route for Admin access area
 Route::post('area/updated',[App\Http\Controllers\Admin\Area\AreaController::class,'updated']);
+Route::DELETE('/area/delete/',[App\Http\Controllers\Admin\Area\AreaController::class,'destroy']);
 Route::resource('area', AreaController::class);
 
 // route for user Acess area
