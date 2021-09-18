@@ -199,9 +199,12 @@ Route::resource('brand', BrandController::class);
 
      // Route for Division
   Route::post('division/updated',[App\Http\Controllers\Admin\Division\DivisionController::class,'updated']);
+   Route::DELETE('/division/delete/',[App\Http\Controllers\Admin\Division\DivisionController::class,'destroy']);
+
   Route::resource('division', DivisionController::class);
      // Route for Admin Acess districtController
   Route::post('district/updated',[App\Http\Controllers\Admin\District\DistrictController::class,'updated']);
+
   Route::resource('district', DistrictController::class);
 
      // Route for user access districtController

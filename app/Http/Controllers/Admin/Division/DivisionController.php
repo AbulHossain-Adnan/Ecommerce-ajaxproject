@@ -104,9 +104,11 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(request $request)
     {
-        $data=Division::find($id);
+
+        $id=$request->division_id;
+        $data=Division::findOrFail($id);
         $data->delete();
         return back()->with('message','division deleted successfully');
     }
