@@ -154,15 +154,32 @@
               <input type="checkbox" name="contact_msg" value="1">
               <span>Contact message</span>
             </label>
-            </div><!-- col-4 -->  <div class="col-lg-4">
+            </div><!-- col-4 --> 
+
+             <div class="col-lg-4">
             <label class="ckbox">
               <input type="checkbox" name="product_comment" value="1">
               <span>Product Comment</span>
             </label>
-            </div><!-- col-4 -->  <div class="col-lg-4">
+            </div><!-- col-4 --> 
+
+             <div class="col-lg-4">
             <label class="ckbox">
               <input type="checkbox" name="site_setting" value="1">
               <span>Site Seting</span>
+            </label>
+            </div><!-- col-4 -->
+
+             <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="post" value="1">
+              <span>Post</span>
+            </label>
+            </div><!-- col-4 -->
+              <div class="col-lg-4">
+            <label class="ckbox">
+              <input type="checkbox" name="stock" value="1">
+              <span>Stock</span>
             </label>
             </div><!-- col-4 -->
             </div><!-- row -->

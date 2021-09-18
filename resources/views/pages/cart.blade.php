@@ -168,7 +168,7 @@ $.ajaxSetup({
 					<td><img src="product_images/'+value.options.image+'" width="100"></td>\
 					<td>'+value.name+'</td>\
 					<td><button class="btn btn-success btn-sm" min="1" max="100" id='+value.rowId+'   onclick="decrement(this.id)">-</button>\
-					<input type="text" id="quantity_name" name="quantity_name" value='+value.qty+' style="width:25px;">\
+					<input type="text"  id="quantity_name" name="quantity_name" value='+value.qty+' style="width:25px;">\
 					<button class="btn btn-danger btn-sm" id='+value.rowId+' onclick="increment(this.id)">+</button></td>\
 					<td>'+value.subtotal+'</td>\
 					<td><button class="btn btn-warning btn-sm" id='+value.rowId+' onclick="cart_remove(this.id)">x</button></td>\

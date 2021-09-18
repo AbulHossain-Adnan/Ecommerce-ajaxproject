@@ -9,6 +9,7 @@ use App\Models\Admin\Area;
 
 class AreaController extends Controller
 {
+    
      public function __construct()
     {
         $this->middleware('auth:admin');
@@ -106,8 +107,5 @@ $request->validate(['area_name'=>'required','district_id'=>'required']);
         Area::find($id)->delete();
         return back()->with('message','area delete successfully');
     }
-    public function getarea($district_id){
-$data=Area::where('district_id',$district_id)->get();
-return Response()->json($data);
-    }
+   
 }

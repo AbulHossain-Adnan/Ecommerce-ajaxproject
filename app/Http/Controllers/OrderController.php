@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Shipping;
+use App\Models\Product;
+
 use Cart;
 use DB;
 
@@ -73,7 +75,6 @@ class OrderController extends Controller
 
 
 
-  
         return view('admin/order/show',[
 
             'orders'=>Order::find($id)->where('id',$id)->with('Shipping')->first(),
@@ -155,6 +156,18 @@ class OrderController extends Controller
        }
         public function orderdelivarysuccess($order_id){
        DB::table('orders')->where('id',$order_id)->update(['status'=>3]);
+
+       $order_details=Order_detail::where('order_id',$order_id)->get();
+
+
+foreach ($order_details as  $item) {
+   $products=Product::where('id',$item->product_id)->first();
+   $mainqty=$products->product_quantity;
+   $order_qty=$item->quantity;
+   $newqty=$mainqty-$order_qty;
+   Product::where('id',$item->product_id)->update(['product_quantity'=>$newqty]);
+}
+
     return redirect()->route('delivary.success')->with('message','updated');
        }
 

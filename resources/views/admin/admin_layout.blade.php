@@ -49,7 +49,8 @@
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <script src="{{ asset('backend') }}/js/jquery.min.js"></script>
-<!-- <script src="{{ asset('backend') }}/js/sweet.min.js"></script> -->
+
+
 
  
 
@@ -72,7 +73,7 @@
 
     <label class="sidebar-label">Navigation</label>
     <div class="sl-sideleft-menu">
-      <a href="index.html" class="sl-menu-link active">
+      <a href="{{route('admin.home')}}" class="sl-menu-link {{'admin/home' == request()->path()?'active':''}}">
         <div class="sl-menu-item">
           <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
           <span class="menu-item-label">Dashboard</span>
@@ -86,15 +87,15 @@
     
 @if( Auth::check() && Auth()->user()->product == 1)
 
-     <a href="#" class="sl-menu-link">
-        <div class="sl-menu-item">
+     <a href="#" class="sl-menu-link {{'admin/product/add' == request()->path()?'active':''}}">
+        <div class="sl-menu-item {{'admin/product/add' == request()->path()?'active':''}}">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
           <span class="menu-item-label">Product</span>
           <i class="menu-item-arrow fa fa-angle-down"></i>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{ route('add.product') }}" class="nav-link">Add product</a></li>
+      <ul class="sl-menu-sub nav flex-column {{'admin/product/add' == request()->path()?'active':''}}">
+        <li class="nav-item {{'admin/product/add' == request()->path()?'active':''}}" ><a href="{{ route('add.product') }}" class="nav-link {{'admin/product/add' == request()->path()?'active':''}}">Add product</a></li>
         <li class="nav-item"><a href="{{ route('all.product') }}" class="nav-link">All product</a></li>
       </ul>
       @else
@@ -512,7 +513,7 @@
 
 
 
-  @if(Auth::check() && Auth::user()->reports == 1)
+  @if(Auth::check() && Auth::user()->post == 1)
        <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -543,7 +544,35 @@
       @else
       @endif
 
-        
+ 
+
+
+@if(Auth()->check() && Auth()->user()->stock == 1)
+
+           <a href="#" class="sl-menu-link {{'admin/stock/management' == request()->path()?'active':''}}">
+          <div class="sl-menu-item {{'admin/stock/management' == request()->path()?'active':''}}">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20 {{'admin/stock/management' == request()->path()?'active':''}}" ></i>
+            <a href="{{url('/admin/stock/management/')}}"><span class="menu-item-label {{'admin/stock/management' == request()->path()?'active':''}}">Stock</span></a>
+           
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+    
+@else
+@endif
+
+@if(Auth()->check() && Auth()->user()->type == NULL)
+
+           <a href="#" class="sl-menu-link {{'admin/stock/management' == request()->path()?'active':''}}">
+          <div class="sl-menu-item {{'admin/stock/management' == request()->path()?'active':''}}">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20 {{'admin/stock/management' == request()->path()?'active':''}}" ></i>
+            <a href="{{url('/admin/stock/management/')}}"><span class="menu-item-label {{'admin/stock/management' == request()->path()?'active':''}}">Stock</span></a>
+           
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+    
+@else
+@endif
+
 
 
     </div><!-- sl-sideleft-menu -->
@@ -846,7 +875,7 @@
   <script src="{{ asset('backend') }}/js/starlight.js"></script>
   <script src="{{ asset('backend') }}/js/ResizeSensor.js"></script>
   <script src="{{ asset('backend') }}/js/dashboard.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
 
  

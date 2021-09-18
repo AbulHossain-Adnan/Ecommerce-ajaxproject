@@ -24,10 +24,7 @@ use Auth;
 class StripePaymentController extends Controller
 
 {
-      public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+     
 
     /**
 
@@ -129,7 +126,9 @@ $area_name=Area::find($area_id);
         'zip'=>$request->zip,
         'address'=>$request->adress,
 
-        ]);    
+        ]); 
+
+           
 Cart::destroy();
        
         return redirect('/')->with('message',"Your Payment Successfully Done");

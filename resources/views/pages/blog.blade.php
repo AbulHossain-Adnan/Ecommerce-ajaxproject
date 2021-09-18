@@ -1,7 +1,7 @@
 @extends('layouts.frontend_layout')
+@section('frontendContent')
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/blog_styles.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/blog_responsive.css">
-@section('frontendContent')
 
 <div class="home">
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="{{ asset('frontend') }}/images/shop_background.jpg"></div>

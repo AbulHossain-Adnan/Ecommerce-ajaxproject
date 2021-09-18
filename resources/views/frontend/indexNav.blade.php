@@ -52,6 +52,7 @@
                      <div class="main_nav_menu ml-auto">
                                 <ul class="standard_dropdown main_nav_dropdown">
                                     <li><a href="#">{{__('msg.front_home')}}<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{url('/shop/page/')}}">Shop<i class="fas fa-chevron-down"></i></a></li>
                                    
                                     <li class="hassubs">
                                         <a href="#">{{__('msg.front_brand')}}<i class="fas fa-chevron-down"></i></a>

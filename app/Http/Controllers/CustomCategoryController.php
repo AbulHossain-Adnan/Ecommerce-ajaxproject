@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
 use App\Models\Admin\Site;
 
 

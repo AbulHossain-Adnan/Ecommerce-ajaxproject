@@ -86,7 +86,7 @@
       <div class="card-body">
 
 
-        <table class="table">
+      	<table class="table">
   <thead>
     <tr>
      <th scope="col">id</th>
@@ -98,7 +98,7 @@
   </thead>
   <tbody>
 
-    @foreach($cart as $item)
+  	@foreach($cart as $item)
 
     <tr>
       <td>{{$item->id}}</td>
@@ -115,7 +115,7 @@
 </table>
 
        <ul class="list-group" style="border: 2px solid red;border-radius: 10px">
-      <li class="list-group-item"><h4>Subtotal:: {{$carts['subtotal']}}$</h4></li>
+		  <li class="list-group-item"><h4>Subtotal:: {{$carts['subtotal']}}$</h4></li>
       <li class="list-group-item"><h4>Discount=>   {{$carts['discount']}}%({{$carts['discount_amount']}}$)</h4></li>
 
       <li class="list-group-item"><h4>Coupon Name: {{$carts['name']}}</h4></li>
@@ -131,7 +131,7 @@
 
       @endif
 
-    </ul>
+		</ul>
       </div>
 
     </div><br>
@@ -178,15 +178,11 @@
 
 
  <script type="text/javascript">
+
 $(document).ready(function(){
         $('select[name="division_id"]').on('change',function(){
           var division_id = $(this).val();
           if(division_id){
-            $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
             $.ajax({
               type:"GET",
               dataType:"json",
@@ -202,17 +198,17 @@ $(document).ready(function(){
           }else{
             alert('danger');
           }
+
         });
       });
+
+
+
+
 $(document).ready(function(){
         $('select[name="district_id"]').on('change',function(){
           var district_id = $(this).val();
           if(district_id){
-            $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
             $.ajax({
               type:"GET",
               dataType:"json",
@@ -228,6 +224,7 @@ $(document).ready(function(){
           }else{
             alert('danger');
           }
+
         });
       });
     </script>

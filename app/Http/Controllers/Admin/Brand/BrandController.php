@@ -131,9 +131,11 @@ return back()->with('message','brand updated successfully');
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $data=Brand::findOrFail($id);
+
+$brand_id=$request->brand_id;
+ $data=Brand::findOrFail($brand_id);
     unlink('images/'.$data->brand_photo);
 
     $data->delete();

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin\Seo;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
+use Illuminate\Support\Facades\Validator;
 
 class SeoController extends Controller
 { public function __construct()
@@ -20,7 +21,7 @@ class SeoController extends Controller
     public function index()
     {
         return view('admin/seo/index',[
-                'seos'=>Seo::first(),
+                'seos'=>Seo::orderBy('id', 'DESC')->get(),
         ]);
     }
 
@@ -40,21 +41,12 @@ class SeoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $Request)
     {
-        $id=$request->id;
 
-        Seo::find($id)->update([
-                'meta_title'=>$request->meta_title,
-                'meta_author'=>$request->meta_author,
-                'meta_tag'=>$request->meta_tag,
-                'meta_description'=>$request->meta_description,
-                'google_analytics'=>$request->google_analytics,
-                'meta_author'=>$request->meta_author,
-                'bing_analyticst'=>$request->bing_analyticst,
-
-        ]);
-        return back()->with('message','seo updated');
+        Seo::create($Request->all());
+        return back()->with('message','data created successfully');
+  
     }
 
     /**
@@ -76,8 +68,11 @@ class SeoController extends Controller
      */
     public function edit($id)
     {
-        //
+       $data=Seo::find($id);
+        return Response()->json($data);
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -86,10 +81,15 @@ class SeoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $seo_id=$request->id;
+        $seo=Seo::findOrFail($seo_id);
+        $seo->update($request->all());
+        return back()->with('message','seo update successfully');
+
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -97,8 +97,12 @@ class SeoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(request $request)
     {
-        //
+        $id=$request->seo_id;
+
+        Seo::findOrFail($id)->delete();
+
+        return back()->with('message','data delete successfully');
     }
 }

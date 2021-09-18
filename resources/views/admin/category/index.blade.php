@@ -1,8 +1,5 @@
 @extends('admin.admin_layout')
-
 @section('adminMain')
-
-
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
@@ -40,9 +37,9 @@
                                 <form method="post" action="{{ route('admin.category.destroy',$category->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <a src="" class="btn btn-warning btn-sm "  id="edit" data-id="{{ $category->id }}">edit</a>
+                                    <a src="" class="btn btn-warning btn-sm"  id="edit" data-id="{{ $category->id }}">edit</a>
                           
-                           <button type="submit" class="btn btn-danger btn-sm ">delete</button>
+                           <button type="button" value="{{$category->id}}" class="btn btn-danger btn-sm" id="check">delete</button>
                         
                              </form>
                             </td>
@@ -141,6 +138,33 @@
 </div><!-- modal -->
 {{-- end modal here  --}}
 
+<!-- modal for delete -->
+<div class="modal fade" id="deletemodal1" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle">Confirm?</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{{url('/admin/category/delete/')}}">
+            @csrf
+            @method('DELETE')
+       <h5> Are You Sure You Want to Delete this ?</h5>
+       <input type="hidden" name="cat_id" id="cat_id">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Yes I want to delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 @endsection
 @section('script')
@@ -158,6 +182,13 @@
     })
    })
 </script>
-
-
-@endsection
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('body').on('click','#check', function(){
+            let category_id = $(this).val();
+            $('#deletemodal1').modal('show')
+            $('#cat_id').val(category_id)
+        })
+    })
+</script>
+@endsection()

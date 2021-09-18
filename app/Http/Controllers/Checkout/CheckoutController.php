@@ -27,9 +27,14 @@ use Carbon\Carbon;
 class CheckoutController extends Controller
 {
    
- 
+ public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 public function checkout(Request $Request){
+
+    
 
 	  return view('pages/checkout',[
         'seos'=>Seo::first(),
@@ -44,10 +49,7 @@ public function checkout(Request $Request){
 			
         ]);
 }
- public function __construct()
-    {
-        $this->middleware('auth');
-    }
+ 
 
 public function payment(Request $Request){
 

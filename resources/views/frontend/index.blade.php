@@ -606,7 +606,7 @@
                                                 
 
                                                 <div class="product_name">
-                                                    <div><a href="product.html">{{ $item->product_name }}</a></div>
+                                                    <div><a href="{{ route('singleproduct.show',$item->id) }}">{{ $item->product_name }}</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     <div class="product_color">

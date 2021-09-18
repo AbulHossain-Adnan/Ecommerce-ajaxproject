@@ -35,6 +35,9 @@ class UserroleController extends Controller
     	$data['contact_message']= $Request->contact_msg;
     	$data['product_comment']= $Request->product_comment;
     	$data['site_setting']= $Request->site_setting;
+        $data['post']= $Request->post;
+        $data['stock']= $Request->stock;
+
     	$data['type']=2;
     	DB::table('admins')->insert($data);
 
@@ -72,6 +75,9 @@ public function userupdate(Request $Request ,$id){
     	$data['contact_message']= $Request->contact_msg;
     	$data['product_comment']= $Request->product_comment;
     	$data['site_setting']= $Request->site_setting;
+        $data['post']= $Request->post;
+        $data['stock']= $Request->stock;
+
     	$data['type']=2;
     	$data->update();
 

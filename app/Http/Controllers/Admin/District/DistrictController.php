@@ -9,7 +9,9 @@ use App\Models\Admin\Division;
 
 
 class DistrictController extends Controller
-{    public function __construct()
+{   
+
+ public function __construct()
     {
         $this->middleware('auth:admin');
     }
@@ -103,11 +105,5 @@ class DistrictController extends Controller
         District::find($id)->delete();
         return back()->with('message','data delete successfully');
     }
-    public function getdistrict($division_id){
-
-       $data= District::where('division_id',$division_id)->get();
-
-       return Response()->json($data);
-
-    }
+   
 }

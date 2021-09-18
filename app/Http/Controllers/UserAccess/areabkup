@@ -1,0 +1,4 @@
+ public function getarea($district_id){
+$data=Area::where('district_id',$district_id)->get();
+return Response()->json($data);
+    }

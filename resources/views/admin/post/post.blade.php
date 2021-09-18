@@ -292,11 +292,11 @@
    			success:function(data){
 
    				$('#modaldemo4').modal('show')
-                   $('#category_id').val(data.category_id)
+                $('#category_id').val(data.category_id)
    				$('#post_title_eng').val(data.post_title_eng)
    				$('#post_title_bng').val(data.post_title_bng)
-                  $('#post_details_bng').val(data.post_details_bng)
-                   $('#post_details_eng').val(data.post_details_eng)
+                $('#post_details_bng').val(data.post_details_bng)
+                $('#post_details_eng').val(data.post_details_eng)
    				$('#dataid').val(data.id)
 
    			}
@@ -306,6 +306,4 @@
    	})
    })
 </script>
-
-
 @endsection

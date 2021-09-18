@@ -53,7 +53,8 @@ class CategoryController extends Controller
             return back()->with('message',"Category Update succesfully");
         }
     } 
-    public function destroy($id){
+    public function destroy(request $request){
+        $id=$request->cat_id;
        Category::find($id)->delete();
        return back()->with('message','category deleted success');
     }

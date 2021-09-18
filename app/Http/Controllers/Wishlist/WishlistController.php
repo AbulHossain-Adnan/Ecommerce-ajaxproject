@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Wishlist;
+use App\Models\Admin\Seo;
+use App\Models\Admin\Site;
 use App\Models\Admin\Category;
+use App\Models\Admin\Post;
 
 class WishlistController extends Controller
 {
@@ -111,9 +114,11 @@ public  function userwishlist(){
   $id=Auth::user()->id;
 return view('pages/wishlist',[
 'wishlists'=>Wishlist::where('user_id',$id)->with('product')->get(),
+'seos'=>Seo::first(),'site_setting'=>Site::first(),'categories'=>category::all(),'blog_posts'=>Post::all()
 
 ]);
 
+ 
 }
 
 }
