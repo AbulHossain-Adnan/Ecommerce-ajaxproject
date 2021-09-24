@@ -29,7 +29,7 @@
                                     @endphp
 
                                     @foreach($subcategories as $item)
-                                        <a href="#">{{ $item->sub_category_name }}<i class="fas fa-chevron-right"></i></a>
+                                        <a href="{{url('/subcategory/product/show/'.$item->id)}}">{{ $item->sub_category_name }}<i class="fas fa-chevron-right"></i></a>
                                         @endforeach
                                      
                                 </ul>

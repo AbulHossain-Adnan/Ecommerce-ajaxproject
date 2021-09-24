@@ -31,6 +31,7 @@ class Admin extends Authenticatable
         'contact_message',
         'product_comment',
         'seo',
+        'setting',
      
 
     ];

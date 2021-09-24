@@ -45,6 +45,9 @@
   <link href="{{ asset('backend') }}/lib/select2/css/select2.min.css" rel="stylesheet">
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/css/all.min.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/css/fontawesome.min.css">
+
   <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
@@ -86,10 +89,9 @@
 
     
 @if( Auth::check() && Auth()->user()->product == 1)
-
-     <a href="#" class="sl-menu-link {{'admin/product/add' == request()->path()?'active':''}}">
+     <a href="#" class="sl-menu-link {{'admin/product/add' == request()->path()?'active':''}} {{'admin/product/all' == request()->path()?'active':''}}">
         <div class="sl-menu-item {{'admin/product/add' == request()->path()?'active':''}}">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+       <i class="fas fa-cubes"></i>
           <span class="menu-item-label">Product</span>
           <i class="menu-item-arrow fa fa-angle-down"></i>
         </div><!-- menu-item -->
@@ -103,14 +105,14 @@
        
   
         @if( Auth::check() && !Auth::user()->type == 2)
-         <a href="#" class="sl-menu-link">
-        <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+         <a href="#" class="sl-menu-link  {{'admin/product/add' == request()->path()?'active':''}} {{'admin/product/all' == request()->path()?'active':''}}">
+        <div class="sl-menu-item ">
+        <i class="fas fa-cubes"></i>
           <span class="menu-item-label">Product</span>
           <i class="menu-item-arrow fa fa-angle-down"></i>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
+      <ul class="sl-menu-sub nav flex-column ">
         <li class="nav-item"><a href="{{ route('add.product') }}" class="nav-link">Add product</a></li>
         <li class="nav-item"><a href="{{ route('all.product') }}" class="nav-link">All product</a></li>
       </ul>
@@ -121,9 +123,9 @@
 
 @if( Auth::check() && Auth()->user()->category == 1)
 
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link  {{'admin/category' == request()->path()?'active':''}} {{'sub_category/index' == request()->path()?'active':''}} {{'brand' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+         <i class="fas fa-layer-group"></i>
             <span class="menu-item-label">Category</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -141,9 +143,9 @@
 
 
 @if(Auth::check() && !Auth::user()->type == 2)
- <a href="#" class="sl-menu-link">
+ <a href="#" class="sl-menu-link {{'admin/category' == request()->path()?'active':''}} {{'sub_category/index' == request()->path()?'active':''}} {{'brand' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+        <i class="fas fa-layer-group"></i>
             <span class="menu-item-label">Category</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -160,34 +162,28 @@
 
 
           @if(Auth::check() && Auth::user()->coupon == 1)
-         <a href="#" class="sl-menu-link">
+         <a href="{{ route('coupon.create') }}" class="sl-menu-link  {{'add/coupon' == request()->path()?'active':''}}">
         <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
+         <i class="fas fa-dollar-sign"></i>
           <span class="menu-item-label">Coupon</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
+        
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{ route('coupon.create') }}" class="nav-link">Add Coupon</a></li>
-        <li class="nav-item"><a href="map-vector.html" class="nav-link">All Coupon</a></li>
-      </ul>
+   
 
       @else
       @endif
 
 
           @if(Auth::check() && !Auth::user()->type == 2)
-           <a href="#" class="sl-menu-link">
+           <a href="{{ route('coupon.create') }}" class="sl-menu-link {{'add/coupon' == request()->path()?'active':''}}">
         <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
+        <i class="fas fa-dollar-sign"></i>
           <span class="menu-item-label">Coupon</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
+        
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{ route('coupon.create') }}" class="nav-link">Add Coupon</a></li>
-        <li class="nav-item"><a href="map-vector.html" class="nav-link">All Coupon</a></li>
-      </ul>
+   
           @else
           @endif
 
@@ -195,9 +191,9 @@
 
 @if(Auth::check() && Auth::user()->division == 1)
 
-      <a href="#" class="sl-menu-link">
+      <a href="#" class="sl-menu-link {{'division' == request()->path()?'active':''}} {{'district' == request()->path()?'active':''}} {{'area' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+        <i class="fas fa-cart-arrow-down"></i>
             <span class="menu-item-label">Division</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -213,9 +209,9 @@
 
 
 @if(Auth::check() && !Auth::user()->type == 2)
- <a href="#" class="sl-menu-link">
+ <a href="#" class="sl-menu-link {{'division' == request()->path()?'active':''}} {{'district' == request()->path()?'active':''}} {{'area' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+   <i class="fas fa-cart-arrow-down"></i>
             <span class="menu-item-label">Division</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -232,9 +228,9 @@
 
         @if(Auth::check() && Auth::user()->orders == 1)
 
-         <a href="#" class="sl-menu-link">
+         <a href="#" class="sl-menu-link {{'order' == request()->path()?'active':''}} {{'admin/accept/payment' == request()->path()?'active':''}} {{'admin/cancel/order' == request()->path()?'active':''}} {{'admin/order/progress' == request()->path()?'active':''}} {{'admin/delivary/success' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+        <i class="fab fa-sellcast"></i>
             <span class="menu-item-label">Orders</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -253,9 +249,9 @@
 
 
         @if(Auth::check() && !Auth::user()->type == 2)
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link {{'order' == request()->path()?'active':''}} {{'admin/accept/payment' == request()->path()?'active':''}} {{'admin/cancel/order' == request()->path()?'active':''}} {{'admin/order/progress' == request()->path()?'active':''}} {{'admin/delivary/success' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+        <i class="fab fa-sellcast"></i>
             <span class="menu-item-label">Orders</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -275,34 +271,28 @@
 
 @if(Auth::check() && Auth::user()->seo == 1)
  
-       <a href="#" class="sl-menu-link">
+       <a href="{{route('seo.index')}}" class="sl-menu-link {{'seo' == request()->path()?'active':''}}">
         <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
+        <i class="fas fa-hashtag"></i>
           <span class="menu-item-label">Seo</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
+       
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{route('seo.index')}}" class="nav-link">Add Seo</a></li>
-       
-      </ul>
+    
       @else
       @endif
 
 
 
 @if(Auth::check() && !Auth::user()->type == 2)
- <a href="#" class="sl-menu-link">
+ <a href="{{route('seo.index')}}" class="sl-menu-link {{'seo' == request()->path()?'active':''}}">
         <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
+        <i class="fas fa-hashtag"></i>
           <span class="menu-item-label">Seo</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
+       
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{route('seo.index')}}" class="nav-link">Add Seo</a></li>
-       
-      </ul>
+    
 @else
 @endif
 
@@ -310,9 +300,9 @@
 
 
       @if(Auth::check() && Auth::user()->reports == 1)
-       <a href="#" class="sl-menu-link">
+       <a href="#" class="sl-menu-link {{'today/order/report' == request()->path()?'active':''}} {{'today/delivary/orders' == request()->path()?'active':''}} {{'this/month/delivarys' == request()->path()?'active':''}} {{'this/year/delivarys' == request()->path()?'active':''}} {{'report/search' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+      <i class="fas fa-calculator"></i>
             <span class="menu-item-label">Reports</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -330,9 +320,9 @@
 
 
       @if(Auth::check() && !Auth::user()->type == 2)
-      <a href="#" class="sl-menu-link">
+      <a href="#" class="sl-menu-link {{'today/order/report' == request()->path()?'active':''}} {{'today/delivary/orders' == request()->path()?'active':''}} {{'this/month/delivarys' == request()->path()?'active':''}} {{'this/year/delivarys' == request()->path()?'active':''}} {{'report/search' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+       <i class="fas fa-calculator"></i>
             <span class="menu-item-label">Reports</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -352,9 +342,9 @@
 
         @if(Auth::check() && Auth::user()->user_role == 1)
 
-         <a href="#" class="sl-menu-link">
+         <a href="#" class="sl-menu-link {{'admin/create/user_roll' == request()->path()?'active':''}} {{'admin/all/user_roll' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+           <i class="fas fa-user-tag"></i>
             <span class="menu-item-label">User Role</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -368,9 +358,9 @@
 
 
         @if(Auth::check() && !Auth::user()->type == 2)
-           <a href="#" class="sl-menu-link">
+           <a href="#" class="sl-menu-link {{'admin/create/user_roll' == request()->path()?'active':''}} {{'admin/all/user_roll' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <i class="fas fa-user-tag"></i>
             <span class="menu-item-label">User Role</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -384,9 +374,9 @@
 
 
         @if(Auth::check() && Auth::user()->return_order == 1)
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link {{'order/return/request' == request()->path()?'active':''}} {{'all/return/request' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <i class="fas fa-undo-alt"></i>
             <span class="menu-item-label">Return Order</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -399,9 +389,9 @@
         @endif
 
         @if(Auth::check() && !Auth::user()->type == 2)
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link {{'order/return/request' == request()->path()?'active':''}} {{'all/return/request' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+         <i class="fas fa-undo-alt"></i>
             <span class="menu-item-label">Return Order</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -414,72 +404,38 @@
         @endif
 
         @if(Auth::check() && Auth::user()->contact_message == 1)
-        <a href="#" class="sl-menu-link">
+        <a href="" class="sl-menu-link {{'comtact/messages' == request()->path()?'active':''}} ">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <i class="fas fa-search-location"></i>
             <span class="menu-item-label">Contact Message</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
+         
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Message</a></li>
-          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Message</a></li>
-        </ul>
+     
         @else
         @endif
 
 
         @if(Auth::check() && Auth::user()->type == NULL)
-          <a href="#" class="sl-menu-link">
+          <a href="{{url('comtact/messages')}}" class="sl-menu-link {{'comtact/messages' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+         <i class="fas fa-search-location"></i>
             <span class="menu-item-label">Contact Message</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
+          
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Message</a></li>
-          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Message</a></li>
-        </ul>
+     
           @else
           @endif
 
 
-        @if(Auth::check() && Auth::user()->product_comment == 1)
-         <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Product Comment</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Comment</a></li>
-          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Comment</a></li>
-        </ul>
-        @else
-        @endif
-
-        @if(Auth::check() && Auth::user()->type == NULL)
-         <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Product Comment</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Comment</a></li>
-          <li class="nav-item"><a href="{{ route('today.delivarys') }}" class="nav-link">All Comment</a></li>
-        </ul>
-        @else
-        @endif
+      
 
          @if(Auth::check() && Auth::user()->site_setting == 1)
          <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Site Setting</span>
+        <i class="fas fa-wrench"></i>
+            <span class="menu-item-label">Site</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -497,13 +453,15 @@
         @if(Auth::check() && Auth::user()->type == NULL)
           <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Site Setting</span>
+          <i class="fas fa-wrench"></i>
+            <span class="menu-item-label">Site</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('today.orders') }}" class="nav-link">New Message</a></li>
+          <li class="nav-item"><a href="{{ route('site.create') }}" class="nav-link">  site setting</a></li>
+          <li class="nav-item"><a href="{{ route('site.index') }}" class="nav-link">All Site setting</a></li>
+         
          
         </ul>
         @else
@@ -512,11 +470,16 @@
 
 
 
+      
+
+
+
+
 
   @if(Auth::check() && Auth::user()->post == 1)
-       <a href="#" class="sl-menu-link">
+       <a href="#" class="sl-menu-link {{'add/post' == request()->path()?'active':''}} {{'post/category' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+           <i class="fas fa-user-plus"></i>
             <span class="menu-item-label">Post</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -530,9 +493,9 @@
 
 
       @if(Auth::check() && !Auth::user()->type == 2)
-      <a href="#" class="sl-menu-link">
+      <a href="#" class="sl-menu-link {{'add/post' == request()->path()?'active':''}} {{'post/category' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <i class="fas fa-user-plus"></i>
             <span class="menu-item-label">Post</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -544,35 +507,64 @@
       @else
       @endif
 
- 
 
 
-@if(Auth()->check() && Auth()->user()->stock == 1)
 
-           <a href="#" class="sl-menu-link {{'admin/stock/management' == request()->path()?'active':''}}">
-          <div class="sl-menu-item {{'admin/stock/management' == request()->path()?'active':''}}">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20 {{'admin/stock/management' == request()->path()?'active':''}}" ></i>
-            <a href="{{url('/admin/stock/management/')}}"><span class="menu-item-label {{'admin/stock/management' == request()->path()?'active':''}}">Stock</span></a>
+
+@if(Auth()->check() && !Auth()->user()->type == NULL)
+       <a href="#" class="sl-menu-link {{'admin/stock/management' == request()->path()?'active':''}} ">
+          <div class="sl-menu-item">
+        <i class="fas fa-store"></i>
+            <span class="menu-item-label"><a href="{{url('/admin/stock/management/')}}">Stock</a></span>
+         
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+   
+        @else
+        @endif
+
+
+@if(Auth()->check() && !Auth()->user()->type == 2)
+      <a href="#" class="sl-menu-link {{'admin/stock/management' == request()->path()?'active':''}} ">
+          <div class="sl-menu-item">
+         <i class="fas fa-store"></i>
+            <span class="menu-item-label"><a href="{{url('/admin/stock/management/')}}">Stock</a></span>
            
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-    
-@else
-@endif
 
-@if(Auth()->check() && Auth()->user()->type == NULL)
+      @else
+      @endif
 
-           <a href="#" class="sl-menu-link {{'admin/stock/management' == request()->path()?'active':''}}">
-          <div class="sl-menu-item {{'admin/stock/management' == request()->path()?'active':''}}">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20 {{'admin/stock/management' == request()->path()?'active':''}}" ></i>
-            <a href="{{url('/admin/stock/management/')}}"><span class="menu-item-label {{'admin/stock/management' == request()->path()?'active':''}}">Stock</span></a>
-           
+
+
+
+
+         @if(Auth()->check() && Auth()->user()->setting == NULL)
+         <a href="{{url('/admin/setting/')}}" class="sl-menu-link {{'admin/setting' == request()->path()?'active':''}} ">
+          <div class="sl-menu-item">
+         <i class="fas fa-cogs"></i>
+            <span class="menu-item-label">Setting</span>
+          
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-    
-@else
-@endif
+       
+        @else
+        @endif
+     
 
+
+        @if(Auth::check() && Auth::user()->type == 2)
+          <a href="{{url('/admin/setting/')}}" class="sl-menu-link {{'admin/setting' == request()->path()?'active':''}} ">
+          <div class="sl-menu-item">
+           <i class="fas fa-cogs"></i>
+            <span class="menu-item-label">Setting</span>
+      
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+       
+        @else
+        @endif
 
 
     </div><!-- sl-sideleft-menu -->

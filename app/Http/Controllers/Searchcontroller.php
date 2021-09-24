@@ -7,7 +7,7 @@ use App\Http\Controllers\Searchcontroller;
 use App\Models\Product;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
-use App\Models\Seo;
+use App\Models\Admin\Seo;
 use App\Models\Admin\Site;
 
 class Searchcontroller extends Controller

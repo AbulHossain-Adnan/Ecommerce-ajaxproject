@@ -28,6 +28,9 @@ class CreateAdminsTable extends Migration
             $table->string('seo')->nullable();
             $table->string('reports')->nullable();
             $table->string('site_setting')->nullable();
+            $table->string('setting')->nullable();
+            $table->string('post')->nullable();
+            $table->string('stock')->nullable();
             $table->string('return_order')->nullable();
             $table->string('contact_message')->nullable();
             $table->string('product_comment')->nullable();

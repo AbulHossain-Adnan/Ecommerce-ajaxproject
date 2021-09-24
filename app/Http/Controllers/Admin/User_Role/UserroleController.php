@@ -23,7 +23,7 @@ class UserroleController extends Controller
     	$data=array();
     	$data['name']= $Request->name;
     	$data['email']= $Request->email;
-    	$data['password']=bcrypt($Request->password);
+    	$data['password']=Hash::make($Request->password);
     	$data['product']= $Request->product;
     	$data['category']= $Request->category;
     	$data['coupon']= $Request->coupon;
@@ -60,10 +60,11 @@ public function useredit($id){
 	]);
 }
 public function userupdate(Request $Request ,$id){
+
 	$data=Admin::find($id);
     	$data['name']= $Request->name;
     	$data['email']= $Request->email;
-    	$data['password']=Hash::make($Request->name);
+    	$data['password']=Hash::make($Request->password);
     	$data['product']= $Request->product;
     	$data['category']= $Request->category;
     	$data['coupon']= $Request->coupon;

@@ -74,12 +74,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('division.store') }}">
+            <form method="post" action="{{ route('division.store') }}" id="modalvalidate">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Division Name</label>
-                        <input name="division_name" type="text" class="form-control" id="exampleInputEmail1"
+                        <input name="division_name" type="text" class="form-control" id="division1"
                             aria-describedby="emailHelp" placeholder="Enter Division Name"
                             class="@error('category_name') is-invalid @enderror">
                         @error('division_name')
@@ -187,6 +187,27 @@
             $('#division_id').val(data_id)
         })
     })
+</script>
+
+<script>
+
+  $('document').ready(function(){
+     $("#modalvalidate").validate({
+        rules: {
+            division_name: {
+                required: true,
+              
+               
+            },    
+        },
+        messages: {
+            division_name:"division name field is required",
+           
+           
+            
+        }
+    });
+  })
 </script>
 
 @endsection

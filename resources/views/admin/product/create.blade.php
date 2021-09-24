@@ -7,13 +7,13 @@
       <nav class="breadcrumb sl-breadcrumb">
         <a class="breadcrumb-item" href="index.html">Starlight</a>
         <a class="breadcrumb-item" href="index.html">Forms</a>
-        <span class="breadcrumb-item active">Form Layouts</span>
+      
       </nav>
-<a class="btn btn-primary" href="{{ route('all.product') }}">All product</a>
-<a class="btn btn-primary" href="{{ route('admin.home') }}" class="nav-link">Home</a>
+
         <div class="card pd-20 pd-sm-40">
           <h6 class="card-body-title">New product Add</h6>
-          <p class="mg-b-20 mg-sm-b-30">New Product Add Form</p>
+          <p class="mg-b-20 mg-sm-b-30"><a class="btn btn-warning" href="{{ route('all.product') }}">All product</a>
+<a class="btn btn-primary" href="{{ route('admin.home') }}" class="nav-link">Home</a></p>
         <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
         @csrf
           <div class="form-layout">
@@ -267,7 +267,7 @@
             <br>
 
             <div class="form-layout-footer">
-              <button class="btn btn-info mg-r-5">Submit Form</button>
+              <button class="btn btn-primary mg-r-5">Submit Form</button>
               <button class="btn btn-secondary">Cancel</button>
             </div><!-- form-layout-footer -->
           </div><!-- form-layout -->

@@ -97,9 +97,9 @@
   </div>
   <div class="col-sm-3 m-auto">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body m-auto">
        @if(Auth::user()->image)
-          <img src="{{asset('user_images/'.Auth::user()->image)}}" width="80">
+          <img src="{{asset('user_images/'.Auth::user()->image)}}" style="width:100px;">
       @else
       @endif
      
@@ -111,7 +111,8 @@
 
 
 
-<form>
+<form method="post" action="{{url('/user/profile_image/update/'.Auth()->id())}}" enctype="multipart/form-data">
+  @csrf
   <div class="form-group">
     <label for="exampleInputEmail1">Profile Image</label>
     <input type="file" class="form-control" id="exampleInputEmail1" name="image" aria-describedby="emailHelp" placeholder="Enter email">

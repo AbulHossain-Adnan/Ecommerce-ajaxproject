@@ -60,6 +60,8 @@ class ProductController extends Controller
         ]);
         $product = new product();
         $product->category_id=$request->category_id;
+        $product->subcategory_id=$request->subcategory_id;
+
         $product->brand_id=$request->brand_id;
         $product->product_name=$request->Product_name;
         $product->product_code=$request->Product_code;

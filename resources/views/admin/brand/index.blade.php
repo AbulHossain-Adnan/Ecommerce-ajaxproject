@@ -80,12 +80,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('brand.store') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('brand.store') }}" enctype="multipart/form-data" id="modalvalidate">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="exampleInputEmail1">brand Name</label>
-                        <input name="brand_name" type="text" class="form-control" id="exampleInputEmail1"
+                        <input name="brand_name" type="text" class="form-control" id="brand_name"
                             aria-describedby="emailHelp" placeholder="Enter brand Name"
                             class="@error('brand_name') is-invalid @enderror">
                         @error('category_name')
@@ -96,7 +96,7 @@
                  
                     <div class="form-group">
                         <label for="exampleInputEmail1">brand photo</label>
-                        <input name="brand_photo" type="file" class="form-control" id="exampleInputEmail1"
+                        <input name="brand_photo" type="file" class="form-control" id="brand_photo"
                             aria-describedby="emailHelp" placeholder="Enter brand Name"
                             class="@error('brand_photo') is-invalid @enderror">
                         @error('brand_photo')
@@ -211,6 +211,35 @@
            $('#data_id').val(id)
         })
     })
+</script>
+
+
+
+
+<script>
+
+  $('document').ready(function(){
+     $("#modalvalidate").validate({
+        rules: {
+            brand_name: {
+                required: true,
+            },
+
+            brand_photo: {
+                required: true,
+            },
+          
+             
+             
+        },
+        messages: {
+            brand_name:"brand name field is required",
+             brand_photo:"brand photo field is required",
+           
+            
+        }
+    });
+  })
 </script>
 
 @endsection

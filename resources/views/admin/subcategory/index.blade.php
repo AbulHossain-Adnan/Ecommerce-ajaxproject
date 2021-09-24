@@ -34,7 +34,7 @@
                 </table>
             </div><!-- table-wrapper -->
         </div><!-- card -->
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+      
       </div>
     </div>
   </div>
@@ -168,14 +168,15 @@ function cleardata(){
         success:function(data){
            alldata();
            cleardata();
-            Swal.fire({
+              Swal.fire({
                 toast:true,
               position: 'top-end',
               icon: 'success',
-              title: 'data added successfully',
+              title: 'data updated successfully',
               showConfirmButton: false,
               timer: 1500
-            })
+            });
+           
          
             
             
@@ -226,7 +227,7 @@ function updata(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
- let sub_category_name=$("#sub_category_name").val();
+ let sub_category_name= $("#sub_category_name").val();
     let category_id=$("#category_id").val();
     let id =$("#id").val()
 
@@ -236,6 +237,13 @@ function updata(){
          data:{sub_category_name:sub_category_name,category_id:category_id},
          url:"/subcategory/update/"+id,
          success:function(data){
+          alldata();
+          cleardata();
+            
+            $("#subbtn").show();
+            $("#updatetitle").hide();
+            $('#upbtn').hide();
+          
              Swal.fire({
                 toast:true,
               position: 'top-end',
@@ -244,12 +252,12 @@ function updata(){
               showConfirmButton: false,
               timer: 1500
             });
-            alldata();
-            cleardata();
+           
              $("#addtitle").show();
-             $("#subbtn").show();
-             $("#updatetitle").hide();
-            $("#upbtn").hide();
+             
+           
+             alldata();
+            
 
          }
      })

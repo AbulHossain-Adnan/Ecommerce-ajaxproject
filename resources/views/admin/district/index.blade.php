@@ -74,7 +74,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('district.store') }}">
+            <form method="post" action="{{ route('district.store') }}" id="modalvalidate">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
@@ -220,6 +220,35 @@
                 $('#district_id').val(data_id)
         })
      })
+</script>
+
+
+<script>
+
+  $('document').ready(function(){
+     $("#modalvalidate").validate({
+        rules: {
+            district_name: {
+                required: true,
+              
+               
+            },
+                  division_id: {
+                required: true,
+              
+               
+            },     
+        },
+        messages: {
+            district_name:"district name field is required",
+            division_id:"Choose division name field is required",
+
+           
+           
+            
+        }
+    });
+  })
 </script>
 
 @endsection

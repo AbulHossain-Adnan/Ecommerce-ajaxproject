@@ -31,6 +31,9 @@ class CouponController extends Controller
         $data = new coupon();
         $data->coupon=$request->coupon_name;
         $data->discount=$request->coupon_discount;
+        $data->coupon_started=$request->coupon_start;
+        $data->coupon_end=$request->coupon_end;
+
         $data->save();
         return back()->with('message','data adden succesfully');
     }

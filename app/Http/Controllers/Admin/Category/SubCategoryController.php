@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Sub_category;
+use App\Models\Product;
+use App\Models\Admin\Brand;
+
+
 class SubcategoryController extends Controller
 {
      public function __construct()
@@ -33,7 +37,8 @@ class SubcategoryController extends Controller
         $data->sub_category_name=$request->sub_category_name;
         $data->category_id =$request->category_id;
         $data->save();
-        return response()->json($data);
+      return \Response()->json(['success'=>'data added succefully']);
+       
     }
     public function edit($id){
         $data=Sub_category::findOrFail($id);
@@ -54,6 +59,16 @@ class SubcategoryController extends Controller
         return response()->json($data);
         
     }
+    public function subcategoryshow($id){
+            return view('pages/subcategoryshow',[
+                    'products'=>Product::where('status',1)->where('subcategory_id',$id)->get(),
+                    'categories'=>Category::all(),
+                    'brands'=>Brand::all(),
+
+
+            ]);
+    }
+
 
 
     }

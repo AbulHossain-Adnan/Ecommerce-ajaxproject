@@ -89,7 +89,7 @@ class HomeController extends Controller
             $data = new user();
             $data->name=$Request->name;
             $data->email=$Request->email;
-            $data->password=bcrypt('password');
+            $data->password=Hash::make('password');
 
 
         if ($Request->image) {
@@ -106,6 +106,50 @@ class HomeController extends Controller
         if($data->save())
             return redirect()->route('login')->with('message','sdfsd');
            
+
+
+    }
+    public function update_password(Request $Request){
+        $password=Auth::user()->password;
+        $old_password=$Request->old_password;
+        $newpass=$Request->password;
+        $confirm=$Request->password_confirmation;
+    
+
+       
+
+
+        if(Hash::check($old_password,$password)){
+           if($newpass === $confirm){
+           $user_id=User::find(Auth::id());
+           $user_id->password=Hash::make($newpass);
+           $user_id->save();
+           Auth::logout();
+           return redirect()->route('login')->with('message','password updated Successfully yuo can login now');
+           }
+           else{
+           return back()->with('message','new password and confirm passsword not same');
+
+           }
+
+
+        }
+        else{
+            return back()->with('message','old password not matched');
+        }
+       
+    }
+    public function userprofileimageupdate(Request $Request,$id){
+        if($Request->hasfile('image')){
+            $uploaded_image=$Request->file('image');
+            $image_newname=time().'.'.$uploaded_image->extension();
+            $uploaded_image->move(public_path('user_images'),$image_newname);
+        }
+
+        $user=User::find($id);
+
+        $user->update(['image'=>$image_newname]);
+        return back()->with('message','user profile added Successfully');
 
 
     }

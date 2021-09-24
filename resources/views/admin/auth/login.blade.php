@@ -1,5 +1,4 @@
 @extends('admin.admin_layout')
-
 @section('adminMain')
 <form method="POST" action="{{ route('admin.login') }}">
   @csrf

@@ -75,12 +75,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('admin.category.store') }}">
+            <form method="post" action="{{ route('admin.category.store') }}" id="newModalForm">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="exampleInputEmail1"
+                        <input name="category_name" type="text" class="form-control" id="category_name"
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
                             class="@error('category_name') is-invalid @enderror">
                         @error('category_name')
@@ -117,7 +117,7 @@
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category Name</label>
-                        <input name="category_name" type="text" class="form-control" id="category_name"
+                        <input name="category_name" type="text" class="form-control" id="category_name1"
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
                             class="@error('category_name') is-invalid @enderror">
                         @error('category_name')
@@ -166,6 +166,42 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+<!-- modal form validation -->
+<script>
+
+  $('document').ready(function(){
+     $("#newModalForm").validate({
+        rules: {
+            category_name: {
+                required: true,
+            },
+
+           
+             
+        },
+        messages: {
+            category_name:"category_name field is required",
+            
+            
+        }
+    });
+  })
+</script>
+
+
+
+
+
 @endsection
 @section('script')
 
@@ -176,7 +212,7 @@
         let id = $(this).data('id');
         $.get(`/admin/category/${id}/edit`,function(data){
             $("#dataid").val(id)
-            $("#category_name").val(data.category_name)
+            $("#category_name1").val(data.category_name)
             $("#modaldemo4").modal('show')
         })
     })
@@ -191,4 +227,24 @@
         })
     })
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @endsection()

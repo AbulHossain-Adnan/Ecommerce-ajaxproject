@@ -22,7 +22,9 @@
                             <th class="wd-15p">Serial</th>
                             <th class="wd-15p">Coupon</th>
                             <th class="wd-15p">Discount</th>
-
+                            <th class="wd-15p">coupon start</th>
+                            <th class="wd-15p">coupon end</th>
+                            <th class="wd-15p">status</th>
                             <th class="wd-20p">Action</th>
 
                         </tr>
@@ -35,6 +37,17 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->coupon }}</td>
                             <td>{{ $item->discount }}%</td>
+                            <td>{{ $item->coupon_started }}</td>
+                            <td>{{ $item->coupon_end }}</td>
+                            <td>
+                                @if(\Carbon\Carbon::now() < $item->coupon_end)
+                          <span class="badge badge-pill badge-success">Valid</span>
+                               @else
+<span class="badge badge-pill badge-danger">Invalid</span>
+                               @endif
+
+                            </td>
+
 
                             <td>
                                 <form method="post" action="">
@@ -78,12 +91,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('coupon.store') }}">
+            <form method="post" action="{{ route('coupon.store') }}" id="modalvalidate">
                 @csrf
                 <div class="modal-body pd-20">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Coupon Name</label>
-                        <input name="coupon_name" type="text" class="form-control" id="exampleInputEmail1"
+                        <input name="coupon_name" type="text" class="form-control" id=""
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
                             class="@error('coupon_name') is-invalid @enderror">
                         @error('coupon_name')
@@ -92,13 +105,32 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Coupon Discount</label>
-                        <input name="coupon_discount" type="text" class="form-control" id="exampleInputEmail1"
+                        <input name="coupon_discount" type="text" class="form-control" id=""
                             aria-describedby="emailHelp" placeholder="Enter Category Name"
                             class="@error('coupon_discount') is-invalid @enderror">
                         @error('coupon_discount')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Coupon start</label>
+                        <input name="coupon_start" type="date"  class="form-control" id="coupon_start"
+                            aria-describedby="emailHelp" placeholder="Enter Category Name"
+                            class="@error('coupon_discount') is-invalid @enderror">
+                        @error('coupon_discount')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Coupon end</label>
+                        <input name="coupon_end" type="date" class="form-control" id="coupon_end"
+                            aria-describedby="emailHelp" placeholder="Enter Category Name"
+                            class="@error('coupon_discount') is-invalid @enderror">
+                        @error('coupon_discount')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                   
 
 
                 </div><!-- modal-body -->
@@ -210,5 +242,44 @@
                 $('#data_id').val(coupon_id)
         })
     })
+</script>
+
+
+
+
+<script>
+
+  $('document').ready(function(){
+     $("#modalvalidate").validate({
+        rules: {
+            coupon_name: {
+                required: true,
+               
+            },
+
+            coupon_discount: {
+                required: true,
+            },
+              coupon_start: {
+                required: true,
+            },
+              coupon_end: {
+                required: true, 
+            },
+          
+             
+             
+        },
+        messages: {
+            coupon_name:"coupon name field is required",
+             coupon_discount:"coupon discount field is required",
+             coupon_start:"coupon start field is required",
+             coupon_end:"coupon end field is required",
+
+           
+            
+        }
+    });
+  })
 </script>
 @endsection

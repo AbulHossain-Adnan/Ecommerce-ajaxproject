@@ -211,7 +211,7 @@
                                              @php
                                         $amout=$item->selling_price-$item->discount_price;
                                         @endphp
-                                            <li class="product_mark product_discount">{{ $amout/$item->selling_price*100 }}%</li>
+                                            <li class="product_mark product_discount">{{ round($amout/$item->selling_price*100) }}%</li>
                                             @endif
                                            
                                            
@@ -274,7 +274,7 @@
                                              @php
                                         $amout=$item->selling_price-$item->discount_price;
                                         @endphp
-                                            <li class="product_mark product_discount">{{ $amout/$item->selling_price*100 }}%</li>
+                                            <li class="product_mark product_discount">{{ round($amout/$item->selling_price*100) }}%</li>
                                             @endif
                                             
                                             
@@ -336,7 +336,7 @@
                                              @php
                                         $amout=$item->selling_price-$item->discount_price;
                                         @endphp
-                                            <li class="product_mark product_discount">{{ $amout/$item->selling_price*100 }}%</li>
+                                            <li class="product_mark product_discount">{{ round($amout/$item->selling_price*100) }}%</li>
                                             @endif
                                             
                                            
@@ -455,7 +455,7 @@
             <div class="col">
                 <div class="tabbed_container">
                     <div class="tabs clearfix tabs-right">
-                        <div class="new_arrivals_title">Women Fassion</div>
+                        <div class="new_arrivals_title">MOBILES</div>
                         <ul class="clearfix">
                             <li class="active"></li>
                          
@@ -471,13 +471,14 @@
 
 
                         @php
-                        $cat=DB::table('categories')->first();
+                        $cat=DB::table('categories')->skip(2)->first();
                         // ->skip(1)->limit(12)->get()
                         $catid=$cat->id;
-                        $women_products=\App\Models\Product::with('brand','category')->where('status',1)->where('category_id',$catid)->limit(10)->get();
+
+                        $mobiles=\App\Models\Product::with('brand','category')->where('status',1)->where('category_id',$catid)->limit(10)->get();
                         @endphp
 
-                            @foreach($women_products as $item)
+                            @foreach($mobiles as $item)
 
                                     <!-- Slider Item -->
                                     <div class="arrivals_slider_item">
@@ -526,7 +527,7 @@
                                                   <li class="product_mark product_new" style="background:blue;">new</li>
 
                                                 @else
-                                                 <li class="product_mark product_new">{{ $amount/$item->selling_price*100 }}%</li>
+                                                 <li class="product_mark product_new">{{ round($amount/$item->selling_price*100 )}}%</li>
                                                 @endif
                                              
                                                
@@ -579,7 +580,7 @@
 
 
                         @php
-                        $watch=DB::table('categories')->first();
+                        $watch=DB::table('categories')->skip(10)->first();
                         // ->skip(1)->limit(12)->get()
                         $watchid=$watch->id;
                         $watch_products=\App\Models\Product::with('brand','category')->where('status',1)->where('category_id',$watchid)->limit(10)->get();
@@ -630,7 +631,7 @@
                                                 $amount= $item->selling_price - $item->discount_price;
                                                 @endphp
                                              
-                                                <li class="product_mark product_new">{{ $amount/$item->selling_price*100 }}%</li>
+                                                <li class="product_mark product_new">{{ round($amount/$item->selling_price*100) }}%</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -660,6 +661,308 @@
 
 
 
+
+
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="tabbed_container">
+                    <div class="tabs clearfix tabs-right">
+                        <div class="new_arrivals_title">Laptops</div>
+                        <ul class="clearfix">
+                            <li class="active"></li>
+                         
+                        </ul>
+                        <div class="tabs_line"><span></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9" style="z-index:1;">
+
+                            <!-- Product Panel -->
+                            <div class="product_panel panel active">
+                                <div class="arrivals_slider slider">
+
+
+                        @php
+                        $laptop=DB::table('categories')->skip(1)->first();
+                        // ->skip(1)->limit(12)->get()
+                        $laptopid=$laptop->id;
+                        $laptops=\App\Models\Product::with('brand','category')->where('status',1)->where('category_id',$laptopid)->limit(10)->get();
+                        @endphp
+
+                            @foreach($laptops as $item)
+
+                                    <!-- Slider Item -->
+                                    <div class="arrivals_slider_item">
+                                        <div class="border_active"></div>
+                                        <div
+                                            class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                            <div
+                                                class="product_image d-flex flex-column align-items-center justify-content-center">
+                                              <img src="{{ asset('product_images/'.$item->image_one) }}" width="125">
+                                            </div>
+                                            <div class="product_content">
+                                                @if($item->discount_price == null)
+                                              <div class="product_price discount">{{ $item->selling_price }}</div>
+                                            @else
+                                              <div class="product_price discount">${{ $item->discount_price }}<span>${{ $item->selling_price }}</span></div>
+                                            @endif
+
+                                                
+
+                                                <div class="product_name">
+                                                    <div><a href="{{ route('singleproduct.show',$item->id) }}">{{ $item->product_name }}</a></div>
+                                                </div>
+                                                <div class="product_extras">
+                                                    <div class="product_color">
+                                                        <input type="radio" checked name="product_color"
+                                                            style="background:#b19c83">
+                                                        <input type="radio" name="product_color"
+                                                            style="background:#000000">
+                                                        <input type="radio" name="product_color"
+                                                            style="background:#999999">
+                                                    </div>
+                                                    <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
+                                                </div>
+                                            </div>
+                                            
+                                             <button  class="addwish" data-id={{ $item->id }}>
+                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+
+                                            <ul class="product_marks">
+
+                                                @php
+                                                $amount= $item->selling_price - $item->discount_price;
+                                                @endphp
+                                             
+                                                <li class="product_mark product_new">{{ round($amount/$item->selling_price*100) }}%</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                  
+                                    @endforeach
+
+                                    
+
+                                  
+                                    </div>
+                                </div>
+                                <div class="arrivals_slider_dots_cover"></div>
+                            </div>
+
+                        </div>
+
+                  
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="tabbed_container">
+                    <div class="tabs clearfix tabs-right">
+                        <div class="new_arrivals_title">Headphones</div>
+                        <ul class="clearfix">
+                            <li class="active"></li>
+                         
+                        </ul>
+                        <div class="tabs_line"><span></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9" style="z-index:1;">
+
+                            <!-- Product Panel -->
+                            <div class="product_panel panel active">
+                                <div class="arrivals_slider slider">
+
+
+                        @php
+                        $headphone=DB::table('categories')->skip(3)->first();
+                        // ->skip(1)->limit(12)->get()
+                        $headphoneid=$headphone->id;
+                        $headphones=\App\Models\Product::with('brand','category')->where('status',1)->where('category_id',$headphoneid)->limit(10)->get();
+                        @endphp
+
+                            @foreach($headphones as $item)
+
+                                    <!-- Slider Item -->
+                                    <div class="arrivals_slider_item">
+                                        <div class="border_active"></div>
+                                        <div
+                                            class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                            <div
+                                                class="product_image d-flex flex-column align-items-center justify-content-center">
+                                              <img src="{{ asset('product_images/'.$item->image_one) }}" width="125">
+                                            </div>
+                                            <div class="product_content">
+                                                @if($item->discount_price == null)
+                                              <div class="product_price discount">{{ $item->selling_price }}</div>
+                                            @else
+                                              <div class="product_price discount">${{ $item->discount_price }}<span>${{ $item->selling_price }}</span></div>
+                                            @endif
+
+                                                
+
+                                                <div class="product_name">
+                                                    <div><a href="{{ route('singleproduct.show',$item->id) }}">{{ $item->product_name }}</a></div>
+                                                </div>
+                                                <div class="product_extras">
+                                                    <div class="product_color">
+                                                        <input type="radio" checked name="product_color"
+                                                            style="background:#b19c83">
+                                                        <input type="radio" name="product_color"
+                                                            style="background:#000000">
+                                                        <input type="radio" name="product_color"
+                                                            style="background:#999999">
+                                                    </div>
+                                                    <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
+                                                </div>
+                                            </div>
+                                            
+                                             <button  class="addwish" data-id={{ $item->id }}>
+                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+
+                                            <ul class="product_marks">
+
+                                                @php
+                                                $amount= $item->selling_price - $item->discount_price;
+                                                @endphp
+                                             
+                                                <li class="product_mark product_new">{{ round($amount/$item->selling_price*100) }}%</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                  
+                                    @endforeach
+
+                                    
+
+                                  
+                                    </div>
+                                </div>
+                                <div class="arrivals_slider_dots_cover"></div>
+                            </div>
+
+                        </div>
+
+                  
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="tabbed_container">
+                    <div class="tabs clearfix tabs-right">
+                        <div class="new_arrivals_title">Fans</div>
+                        <ul class="clearfix">
+                            <li class="active"></li>
+                         
+                        </ul>
+                        <div class="tabs_line"><span></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9" style="z-index:1;">
+
+                            <!-- Product Panel -->
+                            <div class="product_panel panel active">
+                                <div class="arrivals_slider slider">
+
+
+                        @php
+                        $fan=DB::table('categories')->skip(6)->first();
+                        // ->skip(1)->limit(12)->get()
+                        $fanid=$fan->id;
+                        $fans=\App\Models\Product::with('brand','category')->where('status',1)->where('category_id',$fanid)->limit(10)->get();
+                        @endphp
+
+                            @foreach($fans as $item)
+
+                                    <!-- Slider Item -->
+                                    <div class="arrivals_slider_item">
+                                        <div class="border_active"></div>
+                                        <div
+                                            class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                            <div
+                                                class="product_image d-flex flex-column align-items-center justify-content-center">
+                                              <img src="{{ asset('product_images/'.$item->image_one) }}" width="125">
+                                            </div>
+                                            <div class="product_content">
+                                                @if($item->discount_price == null)
+                                              <div class="product_price discount">{{ $item->selling_price }}</div>
+                                            @else
+                                              <div class="product_price discount">${{ $item->discount_price }}<span>${{ $item->selling_price }}</span></div>
+                                            @endif
+
+                                                
+
+                                                <div class="product_name">
+                                                    <div><a href="{{ route('singleproduct.show',$item->id) }}">{{ $item->product_name }}</a></div>
+                                                </div>
+                                                <div class="product_extras">
+                                                    <div class="product_color">
+                                                        <input type="radio" checked name="product_color"
+                                                            style="background:#b19c83">
+                                                        <input type="radio" name="product_color"
+                                                            style="background:#000000">
+                                                        <input type="radio" name="product_color"
+                                                            style="background:#999999">
+                                                    </div>
+                                                    <button type="submit" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" id="{{ $item->id }} " onclick="productview(this.id)" >Add to Cart</button>
+                                                </div>
+                                            </div>
+                                            
+                                             <button  class="addwish" data-id={{ $item->id }}>
+                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+
+                                            <ul class="product_marks">
+
+                                                @php
+                                                $amount= $item->selling_price - $item->discount_price;
+                                                @endphp
+                                             
+                                                <li class="product_mark product_new">{{ round($amount/$item->selling_price*100) }}%</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                  
+                                    @endforeach
+
+                                    
+
+                                  
+                                    </div>
+                                </div>
+                                <div class="arrivals_slider_dots_cover"></div>
+                            </div>
+
+                        </div>
+
+                  
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -1432,7 +1735,7 @@
                                         $amout=$item->selling_price-$item->discount_price;
                                         @endphp
                                            
-                                              <li class="trends_mark trends_new">{{ $amout/$item->selling_price*100 }}%</li>
+                                              <li class="trends_mark trends_new">{{ round($amout/$item->selling_price*100) }}%</li>
                                             @endif
                                  
                                 </ul>
@@ -1984,7 +2287,7 @@ $(document).ready(function(){
   <li class="list-group-item">Product Name::<span id="pname"></span></li>
   <li class="list-group-item" >Category Name::<span id="cname"></span></li>
   <li class="list-group-item">Brand name::<span id="bname"></span></li>
-  <li class="list-group-item">Stock::<span class="badge badge-success">Available</span></li>
+  <li class="list-group-item">Stock::<span class="badge badge-success" id="stock"></span></li>
 
 </ul>
   </div>
@@ -2059,6 +2362,7 @@ $.ajaxSetup({
             datatype:"json",
             url:"/productview/"+id,
             success:function(data){
+
                  $("#pcname").text(data.product.product_code);
                  $("#ptname").text(data.product.product_name);
                 $("#pname").text(data.product.product_name);
@@ -2066,17 +2370,21 @@ $.ajaxSetup({
                 $("#cname").text(data.product.category.category_name);
                 $("#bname").text(data.product.brand.brand_name);
                 $("#product_id").val(data.product.id);
+               
+               $("#stock").text(data.product.product_quantity);
 
 
-            var d=$('select[name="color"]').empty();
 
-            $.each(data.color,function(key,value){
-                $('select[name="color"]').append('<option value="'+value+'">'+value+'</option>');
-            });
 
-            var e=$('select[name="size"]').empty();
 
-            $.each(data.size ,function(key,value){
+
+
+                var d=$('select[name="color"]').empty();
+                $.each(data.color,function(key,value){
+                    $('select[name="color"]').append('<option value="'+value+'">'+value+'</option>');
+                });
+                var e=$('select[name="size"]').empty();
+                $.each(data.size ,function(key,value){
                 $('select[name="size"]').append('<option value ="'+value+'">'+value+'</option>');
 
             });

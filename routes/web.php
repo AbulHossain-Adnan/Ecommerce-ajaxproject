@@ -3,6 +3,7 @@ use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Division\DivisionController;
 use App\Http\Controllers\Admin\District\DistrictController;
 use App\Http\Controllers\Admin\Site\Site_settingController;
+use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\Seo\SeoController;
 use App\Http\Controllers\Order_detailsController;
 use App\Http\Controllers\OrderController;
@@ -31,11 +32,12 @@ Route::view('/', 'frontend.index',[
     'best_rateds'=>Product::orderBy('id','desc')->with('brand')->where('status',1 && 'best_rated',1)->get(),
     'middle_sliders'=>Product::orderBy('id','desc')->with('Category','brand')->where('status',1 && 'mid_slider',1)->limit(3)->get(),
     'byeonegetones'=>Product::orderBy('id','desc')->with('Category','brand')->where('status',1)->where('byeonegetone',1)->limit(6)->get(),
-
     'site_setting'=>Site::first(),
     'hot_deals'=>Product::where('status',1)->where('hot_deal',1)->with('category')->get(),
     'best_sellers'=>Product::where('status',1)->where('hot_deal',1)->where('best_rated',1)->with('category')->get(),
 ])->name('front.home');
+
+
 
 
 
@@ -46,9 +48,14 @@ Route::get('/user_custom/', [App\Http\Controllers\HomeController::class, 'userlo
 Route::get('/user/registration/', [App\Http\Controllers\HomeController::class, 'userregister'])->name('user.register');
 Route::POST('/user/registration/post/', [App\Http\Controllers\HomeController::class, 'registerpost'])->name('register.post');
 Route::get('/user/order/details/{order_id}', [App\Http\Controllers\HomeController::class, 'orderdetail']);
-
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
 Route::get('change/password', [App\Http\Controllers\HomeController::class, 'change_password'])->name('change.password');
+Route::POST('update/password', [App\Http\Controllers\HomeController::class, 'update_password'])->name('update.password');
+Route::POST('/user/profile_image/update/{id}', [App\Http\Controllers\HomeController::class, 'userprofileimageupdate']);
+
+
+
+
 
 
 
@@ -58,20 +65,12 @@ Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'in
 Route::get('/admin', [App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [App\Http\Controllers\Admin\LoginController::class, 'login']);
 Route::get('/admin/logout', [App\Http\Controllers\Admin\HomeController::class, 'logout'])->name('admin.logout');
-
 // Route for  Category
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
-    Route::post('category/updated',[CategoryController::class,'udpated']);
-    Route::DELETE('/category/delete/',[CategoryController::class,'destroy']);
-
-  
-    Route::resource('category', CategoryController::class);
+Route::post('category/updated',[CategoryController::class,'udpated']);
+Route::DELETE('/category/delete/',[CategoryController::class,'destroy']);
+Route::resource('category', CategoryController::class);
 });
-
-
-
-
-
 
 
 
@@ -79,10 +78,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
 
 // route for custom category
   Route::get('category/page/{id}',[App\Http\Controllers\CustomCategoryController::class,'categoryshow'])->name('category.show');
-
-
-
-
 // Route for product controller
 Route::get('/admin/product/add', [App\Http\Controllers\Admin\Product\ProductController::class, 'create'])->name('add.product');
 Route::get('/admin/product/all', [App\Http\Controllers\Admin\Product\ProductController::class, 'index'])->name('all.product');
@@ -104,11 +99,6 @@ Route::POST('/find/product/', [App\Http\Controllers\Searchcontroller::class, 'fi
 // Route for Status controller
 Route::get('status/active/{id}',[App\Http\Controllers\Admin\Status\StatusController::class,'active'])->name('status.active');
 Route::get('status/deactive/{id}',[App\Http\Controllers\Admin\Status\StatusController::class,'deactive'])->name('status.deactive');
-
-
-
-
-
  //  Route for subcategory 
 Route::get('/sub_category/index',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'index']);
 Route::get('/sub_category/alldata',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'alldata']);
@@ -117,12 +107,15 @@ Route::get('/subcategory/edit/{id}',[App\Http\Controllers\Admin\Category\Subcate
 Route::get('/subcategory/update/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'update']);
 Route::get('/subcategory/delete/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'delete']);
 Route::get('/get_subcategory/{id}',[App\Http\Controllers\Admin\Product\ProductController::class,'getsubcat']);
+Route::get('/subcategory/product/show/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'subcategoryshow']);
 
 // Route for Brand 
 Route::post('/brand/updated',[App\Http\Controllers\Admin\Brand\BrandController::class,'updated']);
 Route::DELETE('/brand/delete/',[App\Http\Controllers\Admin\Brand\BrandController::class,'destroy']);
 Route::resource('brand', BrandController::class);
  
+
+
 
 
 
@@ -141,7 +134,6 @@ Route::resource('brand', BrandController::class);
 
 
 
-   
    // Route for cart
     Route::get('/add/cart/{id}',[App\Http\Controllers\Cart\CartController::class,'addcart'])->name('cart.added');
     Route::get('/check',[App\Http\Controllers\Cart\CartController::class,'check']);
@@ -151,7 +143,6 @@ Route::resource('brand', BrandController::class);
     Route::post('/cart/update/',[App\Http\Controllers\Cart\CartController::class,'cartupdate'])->name('cart.update');
     Route::post('/addtocart/',[App\Http\Controllers\Cart\CartController::class,'addtocart'])->name('addto.cart');
     Route::POST('/applycouponn/',[App\Http\Controllers\Cart\CartController::class,'appcoupon']);
-
 
 
 
@@ -173,20 +164,15 @@ Route::resource('brand', BrandController::class);
         
 
 
-
-
     // route for coupon\
-    Route::get('/add/coupon/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'create'])->name('coupon.create');
+     Route::get('/add/coupon/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'create'])->name('coupon.create');
      Route::post('/coupon/store/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'store'])->name('coupon.store');
      Route::DELETE('/coupon/delete/',[App\Http\Controllers\Admin\Coupon\CouponController::class,'destroy']);
      Route::get('/coupon/edit/{id}',[App\Http\Controllers\Admin\Coupon\CouponController::class,'edit']);
      Route::post('/coupon/updated',[App\Http\Controllers\Admin\Coupon\CouponController::class,'updated']);
-
      // route for checkout Controller 
-
      Route::post('/checkout/',[App\Http\Controllers\Checkout\CheckoutController::class,'checkout'])->name('checkout');
      Route::post('/final_step/',[App\Http\Controllers\Checkout\CheckoutController::class,'payment'])->name('final_step');
-
      // Route for stripe payment 
      Route::get('stripe',[App\Http\Controllers\StripePaymentController::class,'stripe']);
      Route::post('stripe',[App\Http\Controllers\StripePaymentController::class,'stripePost'])->name('stripe.post');
@@ -199,25 +185,20 @@ Route::resource('brand', BrandController::class);
 
      // Route for Division
   Route::post('division/updated',[App\Http\Controllers\Admin\Division\DivisionController::class,'updated']);
-   Route::DELETE('/division/delete/',[App\Http\Controllers\Admin\Division\DivisionController::class,'destroy']);
-
+  Route::DELETE('/division/delete/',[App\Http\Controllers\Admin\Division\DivisionController::class,'destroy']);
   Route::resource('division', DivisionController::class);
      // Route for Admin Acess districtController
   Route::post('district/updated',[App\Http\Controllers\Admin\District\DistrictController::class,'updated']);
   Route::DELETE('/district/delete/',[App\Http\Controllers\Admin\District\DistrictController::class,'destroy']);
-
   Route::resource('district', DistrictController::class);
-
      // Route for user access districtController
   Route::get('/get_district/{division_id}',[App\Http\Controllers\UserAccess\District\UserDistrictController::class,'getdistrict']);
-
      // route for Admin access area
-Route::post('area/updated',[App\Http\Controllers\Admin\Area\AreaController::class,'updated']);
-Route::DELETE('/area/delete/',[App\Http\Controllers\Admin\Area\AreaController::class,'destroy']);
-Route::resource('area', AreaController::class);
-
-// route for user Acess area
-Route::get('/get_area/{district_id}',[App\Http\Controllers\UserAccess\UserAreaController::class,'getarea']);
+  Route::post('area/updated',[App\Http\Controllers\Admin\Area\AreaController::class,'updated']);
+  Route::DELETE('/area/delete/',[App\Http\Controllers\Admin\Area\AreaController::class,'destroy']);
+  Route::resource('area', AreaController::class);
+  // route for user Acess area
+  Route::get('/get_area/{district_id}',[App\Http\Controllers\UserAccess\UserAreaController::class,'getarea']);
 
 
 
@@ -251,27 +232,25 @@ Route::POST('/order/tracking/',[App\Http\Controllers\OrderController::class,'ord
   Route::resource('order', OrderController::class);
   Route::resource('order_details', Order_detailsController::class);
   Route::resource('shipping', ShippingController::class);
-
      // Route for db2_set_option(resource, options, type)
   Route::get('/seo/edit/{id}',[App\Http\Controllers\Admin\Seo\SeoController::class,'edit']);
-    Route::POST('/seo/updated/',[App\Http\Controllers\Admin\Seo\SeoController::class,'update']);
-     Route::DELETE('/seo/delete/',[App\Http\Controllers\Admin\Seo\SeoController::class,'destroy']);
-
-   Route::resource('seo', SeoController::class);
+  Route::POST('/seo/updated/',[App\Http\Controllers\Admin\Seo\SeoController::class,'update']);
+  Route::DELETE('/seo/delete/',[App\Http\Controllers\Admin\Seo\SeoController::class,'destroy']);
+  Route::resource('seo', SeoController::class);
 
 
 
 
 
       // Route for Report
-      Route::get('/today/order/report/',[App\Http\Controllers\Admin\Report\ReportController::class,'todayreport'])->name('today.orders');
-      Route::get('/today/delivary/orders/',[App\Http\Controllers\Admin\Report\ReportController::class,'todaydelivary'])->name('today.delivarys');
-     Route::get('/this/month/delivarys/',[App\Http\Controllers\Admin\Report\ReportController::class,'thismonth'])->name('this.month');
+    Route::get('/today/order/report/',[App\Http\Controllers\Admin\Report\ReportController::class,'todayreport'])->name('today.orders');
+    Route::get('/today/delivary/orders/',[App\Http\Controllers\Admin\Report\ReportController::class,'todaydelivary'])->name('today.delivarys');
+    Route::get('/this/month/delivarys/',[App\Http\Controllers\Admin\Report\ReportController::class,'thismonth'])->name('this.month');
     Route::get('/this/year/delivarys/',[App\Http\Controllers\Admin\Report\ReportController::class,'thisyear'])->name('this.year');
     Route::get('/report/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'reportsearch'])->name('report.search');
-     Route::POST('/admin/report/month/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'monthsearch'])->name('month.search');
-     Route::POST('/admin/report/year/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'yearsearch'])->name('year.search');
-     Route::POST('/admin/report/date/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'datesearch'])->name('date.search');
+    Route::POST('/admin/report/month/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'monthsearch'])->name('month.search');
+    Route::POST('/admin/report/year/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'yearsearch'])->name('year.search');
+    Route::POST('/admin/report/date/search/',[App\Http\Controllers\Admin\Report\ReportController::class,'datesearch'])->name('date.search');
 
 
 
@@ -283,13 +262,21 @@ Route::POST('/order/tracking/',[App\Http\Controllers\OrderController::class,'ord
 
 
  Route::get('/admin/create/user_roll/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'createrole'])->name('create.role');
-  Route::POST('/admin/user_roll/store/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userrolestore'])->name('user_role.store');
-   Route::get('/admin/all/user_roll/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'alluserroll'])->name('alluser.role');
+ Route::POST('/admin/user_roll/store/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userrolestore'])->name('user_role.store');
+ Route::get('/admin/all/user_roll/',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'alluserroll'])->name('alluser.role');
    // action
-   Route::get('/user/role/edit/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'useredit']);
-   Route::DELETE('/user/role/delete/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userdelete']);
-  Route::POST('/admin/user/update/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userupdate']);
+ Route::get('/user/role/edit/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'useredit']);
+ Route::DELETE('/user/role/delete/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userdelete']);
+ Route::POST('/admin/user/update/{id}',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userupdate']);
 
+
+
+
+
+
+// route for setting
+ Route::get('/admin/setting/',[App\Http\Controllers\Admin\Setting\SettingController::class,'index']);
+ Route::POST('/admin/setting/store',[App\Http\Controllers\Admin\Setting\SettingController::class,'store']);
 
 
 
@@ -297,18 +284,12 @@ Route::POST('/order/tracking/',[App\Http\Controllers\OrderController::class,'ord
 
 
 // Route for site setting
- Route::resource('site', Site_settingController::class);
+
+Route::resource('site', Site_settingController::class);
 
 // route for socialite
-     Route::get('login/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
+Route::get('login/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
-
- // route for socialite facebook
-Route::get('login/facebook', [App\Http\Controllers\Facebookcontroller::class, 'redirectToFacebook']);
-Route::get('login/facebook/callback', [App\Http\Controllers\Facebookcontroller::class, 'handleFacebookCallback']);
-
- 
-
 
 
 
@@ -328,27 +309,25 @@ Route::DELETE('/post/delete/{id}',[App\Http\Controllers\Admin\PostController::cl
 
 
 
-
 // route for blog
 Route::get('/blog/post/',[App\Http\Controllers\BlogController::class,'blogpost']);
-
 // Route for localization
 Route::get('/local/{local}',[App\Http\Controllers\BlogController::class,'switch']);
-
 // Route for newsletter
 Route::POST('/add/newsletter/',[App\Http\Controllers\NewsLetterController::class,'addnewsletter']);
+// rotue for contact message
+Route::get('comtact/messages',[App\Http\Controllers\Admin\Contact\AdminContactController::class,'contactmessage']);
+
+
+
 
 // Route for contact
 Route::get('/user/contact/',[App\Http\Controllers\ContactController::class,'contact']);
 Route::POST('/send/message/',[App\Http\Controllers\ContactController::class,'sendmessage']);
-
 // rotue for shop controller 
 Route::get('/shop/page/',[App\Http\Controllers\ShopController::class,'shoppage']);
 Route::get('/category/shop/products/{id}',[App\Http\Controllers\ShopController::class,'categoryshopproducts']);
 Route::get('/brand/shop/products/{id}',[App\Http\Controllers\ShopController::class,'brandshopproducts']);
-
-
-
 // Route for stockcontroller 
 Route::get('/admin/stock/management/',[App\Http\Controllers\Admin\Stock\stockController::class,'stock']);
 
