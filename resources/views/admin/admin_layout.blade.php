@@ -54,10 +54,8 @@
 <script src="{{ asset('backend') }}/js/jquery.min.js"></script>
 
 
+<link rel="stylesheet" href="sweetalert2.min.css">
 
- 
-
- 
 </head>
 
 <body>
@@ -89,33 +87,26 @@
 
     
 @if( Auth::check() && Auth()->user()->product == 1)
-     <a href="#" class="sl-menu-link {{'admin/product/add' == request()->path()?'active':''}} {{'admin/product/all' == request()->path()?'active':''}}">
+     <a href="{{ route('product.index') }}" class="sl-menu-link {{'admin/product/add' == request()->path()?'active':''}} {{'admin/product/all' == request()->path()?'active':''}}">
         <div class="sl-menu-item {{'admin/product/add' == request()->path()?'active':''}}">
        <i class="fas fa-cubes"></i>
           <span class="menu-item-label">Product</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
+          
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column {{'admin/product/add' == request()->path()?'active':''}}">
-        <li class="nav-item {{'admin/product/add' == request()->path()?'active':''}}" ><a href="{{ route('add.product') }}" class="nav-link {{'admin/product/add' == request()->path()?'active':''}}">Add product</a></li>
-        <li class="nav-item"><a href="{{ route('all.product') }}" class="nav-link">All product</a></li>
-      </ul>
+     
       @else
       @endif
        
   
         @if( Auth::check() && !Auth::user()->type == 2)
-         <a href="#" class="sl-menu-link  {{'admin/product/add' == request()->path()?'active':''}} {{'admin/product/all' == request()->path()?'active':''}}">
+         <a href="{{ route('product.index') }}" class="sl-menu-link  {{'admin/product/add' == request()->path()?'active':''}} {{'admin/product/all' == request()->path()?'active':''}}">
         <div class="sl-menu-item ">
         <i class="fas fa-cubes"></i>
           <span class="menu-item-label">Product</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-      <ul class="sl-menu-sub nav flex-column ">
-        <li class="nav-item"><a href="{{ route('add.product') }}" class="nav-link">Add product</a></li>
-        <li class="nav-item"><a href="{{ route('all.product') }}" class="nav-link">All product</a></li>
-      </ul>
+     
       @else
       @endif
 
@@ -123,7 +114,7 @@
 
 @if( Auth::check() && Auth()->user()->category == 1)
 
-        <a href="#" class="sl-menu-link  {{'admin/category' == request()->path()?'active':''}} {{'sub_category/index' == request()->path()?'active':''}} {{'brand' == request()->path()?'active':''}}">
+        <a href="#" class="sl-menu-link  {{'admin/category' == request()->path()?'active':''}} {{'subcategory/index' == request()->path()?'active':''}} {{'brand' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
          <i class="fas fa-layer-group"></i>
             <span class="menu-item-label">Category</span>
@@ -131,9 +122,9 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('admin.category.index') }}" class="nav-link">Category</a></li>
-          <li class="nav-item"><a href="{{ url('/sub_category/index') }}" class="nav-link">Sub Category</a></li>
-          <li class="nav-item"><a href="{{ route('brand.index') }}" class="nav-link">Brands</a></li>
+          <li class="nav-item"><a href="{{ route('admin.category.create') }}" class="nav-link">Category</a></li>
+          <li class="nav-item"><a href="{{route('subCategory.create') }}" class="nav-link">Sub Category</a></li>
+          <li class="nav-item"><a href="{{ route('brand.create') }}" class="nav-link">Brands</a></li>
         </ul>
         @else
         @endif
@@ -143,7 +134,7 @@
 
 
 @if(Auth::check() && !Auth::user()->type == 2)
- <a href="#" class="sl-menu-link {{'admin/category' == request()->path()?'active':''}} {{'sub_category/index' == request()->path()?'active':''}} {{'brand' == request()->path()?'active':''}}">
+ <a href="#" class="sl-menu-link {{'admin/category' == request()->path()?'active':''}} {{'subcategory/index' == request()->path()?'active':''}} {{'brand' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
         <i class="fas fa-layer-group"></i>
             <span class="menu-item-label">Category</span>
@@ -151,9 +142,9 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('admin.category.index') }}" class="nav-link">Category</a></li>
-          <li class="nav-item"><a href="{{ url('/sub_category/index') }}" class="nav-link">Sub Category</a></li>
-          <li class="nav-item"><a href="{{ route('brand.index') }}" class="nav-link">Brands</a></li>
+          <li class="nav-item"><a href="{{ route('admin.category.create') }}" class="nav-link">Category</a></li>
+          <li class="nav-item"><a href="{{route('subCategory.create') }}" class="nav-link">Sub Category</a></li>
+          <li class="nav-item"><a href="{{ route('brand.create') }}" class="nav-link">Brands</a></li>
         </ul>
 @else
 @endif
@@ -342,33 +333,27 @@
 
         @if(Auth::check() && Auth::user()->user_role == 1)
 
-         <a href="#" class="sl-menu-link {{'admin/create/user_roll' == request()->path()?'active':''}} {{'admin/all/user_roll' == request()->path()?'active':''}}">
+         <a href="{{route('user_role.index')}}" class="sl-menu-link {{'admin/create/user_roll' == request()->path()?'active':''}} {{'admin/all/user_roll' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
            <i class="fas fa-user-tag"></i>
             <span class="menu-item-label">User Role</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
+            
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('create.role') }}" class="nav-link">Create User</a></li>
-          <li class="nav-item"><a href="{{ route('alluser.role') }}" class="nav-link">All User</a></li>
-        </ul>
+       
         @else
         @endif
 
 
         @if(Auth::check() && !Auth::user()->type == 2)
-           <a href="#" class="sl-menu-link {{'admin/create/user_roll' == request()->path()?'active':''}} {{'admin/all/user_roll' == request()->path()?'active':''}}">
+           <a href="{{route('user_role.index')}}" class="sl-menu-link {{'admin/create/user_roll' == request()->path()?'active':''}} {{'admin/all/user_roll' == request()->path()?'active':''}}">
           <div class="sl-menu-item">
           <i class="fas fa-user-tag"></i>
             <span class="menu-item-label">User Role</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
+            
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('create.role') }}" class="nav-link">Create User</a></li>
-          <li class="nav-item"><a href="{{ route('alluser.role') }}" class="nav-link">All User</a></li>
-        </ul>
+      
         @else
         @endif
 
@@ -540,7 +525,7 @@
 
 
 
-         @if(Auth()->check() && Auth()->user()->setting == NULL)
+         @if(Auth()->check() && Auth()->user()->type == NULL)
          <a href="{{url('/admin/setting/')}}" class="sl-menu-link {{'admin/setting' == request()->path()?'active':''}} ">
           <div class="sl-menu-item">
          <i class="fas fa-cogs"></i>
@@ -573,7 +558,7 @@
   </div><!-- sl-sideleft -->
 
    
-        @endguest
+      
   <!-- ########## END: LEFT PANEL ########## -->
 
   <!-- ########## START: HEAD PANEL ########## -->
@@ -621,7 +606,7 @@
     </div><!-- sl-header-right -->
   </div><!-- sl-header -->
   <!-- ########## END: HEAD PANEL ########## -->
-
+  @endguest
   <!-- ########## START: RIGHT PANEL ########## -->
   <div class="sl-sideright">
     <ul class="nav nav-tabs nav-fill sidebar-tabs" role="tablist">
@@ -848,6 +833,7 @@
     <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
+
     <script>
       $(function(){
         'use strict';
@@ -862,17 +848,34 @@
         })
       });
     </script>
-  @yield('script')
- 
+     <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote2').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
+<!--   @yield('script') -->
+
   <script src="{{ asset('backend') }}/js/starlight.js"></script>
   <script src="{{ asset('backend') }}/js/ResizeSensor.js"></script>
   <script src="{{ asset('backend') }}/js/dashboard.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
 
+  <script src="sweetalert2.all.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
 
-        
+  
 
 
 

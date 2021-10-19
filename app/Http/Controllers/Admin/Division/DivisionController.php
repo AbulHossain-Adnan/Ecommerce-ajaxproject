@@ -33,7 +33,8 @@ class DivisionController extends Controller
      */
     public function create()
     {
-        //
+        $data=Division::OrderBy('id','DESC')->get();
+        return Response()->json($data);
     }
 
     /**
@@ -44,11 +45,9 @@ class DivisionController extends Controller
      */
     public function store(Request $request)
     {
-        Division::insert([
-'division'=>$request->division_name,
-        ]);
-
-        return back();
+     
+        Division::create($request->input());
+        return Response()->json(['success'=>'data added']);
     }
 
     /**
@@ -70,7 +69,8 @@ class DivisionController extends Controller
      */
     public function edit($id)
     {
-        $data=Division::find($id);
+
+        $data=Division::findOrFail($id);
         return Response()->json($data);
     }
 
@@ -95,7 +95,10 @@ class DivisionController extends Controller
     }
     public function update(Request $request, $id)
     {
-        //
+        $data=Division::findOrFail($id);
+        $data->division=$request->division;
+        $data->save();
+        return Response()->json(['success'=>'sdfs']);
     }
 
     /**
@@ -104,12 +107,12 @@ class DivisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(request $request)
+    public function destroy($id)
     {
 
-        $id=$request->division_id;
+        
         $data=Division::findOrFail($id);
         $data->delete();
-        return back()->with('message','division deleted successfully');
+        return Response()->json(['success'=>'sdfs']);
     }
 }

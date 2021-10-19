@@ -8,34 +8,32 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-     public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
-    
+   
     public function index()
     {
-        $categories = Category::all();
+       $data=Category::OrderBy('id', 'DESC')->get();
+       return response()->json($data);
+    }
+
+
+    public function create()
+    {
+         $categories = Category::all();
      
         return view('admin.category.index', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'category_name' => 'required | unique:categories'
-        ]);
+       
 
-        Category::create($request->only('category_name'));
-        $data = [
-            'message' => 'Category Created Successfully',
-            'alert-type' => 'success'
-        ];
-
-        return back()->with($data);
+        $data= new Category();
+        $data->category_name=$request->input('category_name');
+      $data->save();
+        return response()->json(['success'=>'data added succesfully']);
     }
 
-    public function edit ($id) 
+    public function edit($id) 
     {
         
         $category = Category::findOrFail($id);
@@ -43,20 +41,24 @@ class CategoryController extends Controller
         return response()->json($category);
     } 
 
-    public function udpated (Request $request) 
+    public function update(Request $request, $id) 
     {
+        $data=Category::findOrFail($id);
+        $data->category_name=$request->category_name;
+        $data->update();
+        return response()->json(['success'=>'success']);
+      
        
-    
-        $category = Category::findOrFail($request->id);
-        $category->category_name = $request->category_name;
-        if($category->save()) {
-            return back()->with('message',"Category Update succesfully");
-        }
+        
     } 
-    public function destroy(request $request){
-        $id=$request->cat_id;
-       Category::find($id)->delete();
-       return back()->with('message','category deleted success');
+    public function destroy($id){
+       
+      Category::find($id)->delete();
+return response()->json(['success'=>'success']);
+    }
+    public function confirmdelete($id){
+Category::find($id)->delete();
+return response()->json(['success'=>'success']);
     }
   
 }

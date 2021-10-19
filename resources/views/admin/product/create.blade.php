@@ -25,7 +25,7 @@
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     
-                  <input class="form-control" type="text" name="Product_name"  placeholder="Enter Product name">
+                  <input class="form-control" type="text" name="Product_name"  placeholder="Enter Product name" value="{{old('Product_name')}}">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
@@ -34,7 +34,7 @@
                   @error('Product_code')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control" type="text" name="Product_code"  placeholder="Enter product code">
+                  <input class="form-control" type="text" name="Product_code"  placeholder="Enter product code" value="{{old('Product_code')}}">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
@@ -43,7 +43,7 @@
                   @error('Product_quantity')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control" type="text" name="Product_quantity" placeholder="Enter product quantity">
+                  <input class="form-control" type="text" name="Product_quantity" placeholder="Enter product quantity" value="{{old('Product_quantity')}}">
                 </div>
               </div><!-- col-4 -->
              
@@ -94,7 +94,7 @@
                   @error('product_size')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control" type="text" name="product_size" id="size" data-role="tagsinput" placeholder="Enter product size">
+                  <input class="form-control" type="text" name="product_size" id="size" data-role="tagsinput" placeholder="Enter product size" value="{{old('product_size')}}">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
@@ -103,7 +103,7 @@
                   @error('Product_color')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control" type="text" name="Product_color" id="color" data-role="tagsinput" placeholder="Enter product color">
+                  <input class="form-control" type="text" name="Product_color" id="color" data-role="tagsinput" placeholder="Enter product color" value="{{old('Product_color')}}">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
@@ -112,7 +112,7 @@
                   @error('selling_price')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control" type="text" name="selling_price" placeholder="Enter product selling price">
+                  <input class="form-control" type="text" name="selling_price" placeholder="Enter product selling price" value="{{old('selling_price')}}">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
@@ -121,7 +121,7 @@
                   @error('video_link')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control"  name="video_link" placeholder="video link">
+                  <input class="form-control"  name="video_link" placeholder="video link" value="{{old('video_link')}}">
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-4">
@@ -130,7 +130,7 @@
                   @error('discount_price')
                   <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                  <input class="form-control" type="text" name="discount_price" placeholder="Enter product discount price">
+                  <input class="form-control" type="text" name="discount_price" placeholder="Enter product discount price" value="{{old('discount_price')}}">
                 </div>
               </div><!-- col-4 -->
             
@@ -333,11 +333,6 @@
     </script>
     <script type="text/javascript">
       
-// $.ajaxSetup({
-//     headers: {
-    //     }
-// });
-
 
       $(document).ready(function(){
         $('select[name="category_id"]').on('change',function(){

@@ -10,7 +10,7 @@
         <span class="breadcrumb-item active">Form Layouts</span>
       </nav>
 
-<a class="btn btn-primary" href="{{ route('admin.home') }}" class="nav-link">Home</a>
+    <a class="btn btn-primary" href="{{ route('admin.home') }}" class="nav-link">Home</a>
         <div class="card pd-20 pd-sm-40">
           <h6 class="card-body-title">User Create</h6>
          
@@ -48,8 +48,6 @@
               </div><!-- col-4 -->
              
              
-             
-         
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Password<span class="tx-danger">*</span></label>
@@ -114,12 +112,6 @@
             </label>
             </div><!-- col-4 -->
 
-
-
-          
-
-
-
             <div class="col-lg-4">
             <label class="ckbox">
               <input type="checkbox" name="orders" value="1">
@@ -134,8 +126,6 @@
               <span>Seo</span>
             </label>
             </div><!-- col-4 -->
-
-
 
             <div class="col-lg-4">
             <label class="ckbox">

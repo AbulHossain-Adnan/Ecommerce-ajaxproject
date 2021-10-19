@@ -8,10 +8,7 @@ use App\Models\Order;
 
 class UserReturnController extends Controller
 {
-	public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+
      public function orderreturn($order_id){
       
         Order::find($order_id)->where('status',3)->update(['return'=>1]);
@@ -32,16 +29,15 @@ class UserReturnController extends Controller
 
         ]);
       }
-      public function returncancel($order_id){
-      
-      Order::find($order_id)->update(['return'=>3]);
-      return back()->with('message','return request canceled successfully');
-  
-      }
+     
        public function orderreturnapprove($order_id){
       
       Order::find($order_id)->update(['return'=>2]);
       return back()->with('message','return request approve successfully');
   
+      }
+      public function returncancel($id){
+        Order::find($id)->update(['return'=>3]);
+      return response()->json(['success'=>'sdfs']);
       }
 }

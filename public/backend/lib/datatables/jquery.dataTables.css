@@ -425,6 +425,10 @@ table.dataTable td {
   clear: both;
   height: 0;
 }
+.error{
+  color:red;
+
+}
 
 @media screen and (max-width: 767px) {
   .dataTables_wrapper .dataTables_info,

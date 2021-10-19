@@ -31,33 +31,26 @@
       <div class="container">
         <div class="row">
           <div class="col d-flex flex-row">
-            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
-            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>01998100733</div>
+            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">alhossain.a92@gmail.com</a></div>
             <div class="top_bar_content ml-auto">
               <div class="top_bar_menu">
                 <ul class="standard_dropdown top_bar_dropdown">
                   <li>
-                    <a href="#">English<i class="fas fa-chevron-down"></i></a>
+                    <a href="#">language<i class="fas fa-chevron-down"></i></a>
                     <ul>
-                      <li><a href="#">Italian</a></li>
-                      <li><a href="#">Spanish</a></li>
-                      <li><a href="#">Japanese</a></li>
+                      <li><a href="#">english</a></li>
+                      <li><a href="#">bangla</a></li>
+                   
                     </ul>
                   </li>
-                  <li>
-                    <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                    <ul>
-                      <li><a href="#">EUR Euro</a></li>
-                      <li><a href="#">GBP British Pound</a></li>
-                      <li><a href="#">JPY Japanese Yen</a></li>
-                    </ul>
-                  </li>
+                 
                 </ul>
               </div>
               <div class="top_bar_user">
                 <div class="user_icon"><img src="{{ asset('frontend') }}/images/user.svg" alt=""></div>
-                <div><a href="#">Register</a></div>
-                <div><a href="#">Sign in</a></div>
+                <div><a href="{{route('login')}}">Sign in/Sign Up</a></div>
+               
               </div>
             </div>
           </div>
@@ -107,31 +100,7 @@
           </div>
 
           <!-- Wishlist -->
-          <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
-            <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-              <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                <div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
-                <div class="wishlist_content">
-                  <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                  <div class="wishlist_count">115</div>
-                </div>
-              </div>
-
-              <!-- Cart -->
-              <div class="cart">
-                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                  <div class="cart_icon">
-                    <img src="images/cart.png" alt="">
-                    <div class="cart_count"><span>10</span></div>
-                  </div>
-                  <div class="cart_content">
-                    <div class="cart_text"><a href="#">Cart</a></div>
-                    <div class="cart_price">$85</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        
         </div>
       </div>
     </div>
@@ -284,7 +253,7 @@
               <div class="sidebar_title">Categories</div>
               <ul class="sidebar_categories">
                 @foreach($categories as $item)
-                <li><a href="{{url('/category/shop/products/'.$item->id)}}">{{$item->category_name}}{{$item->id}}</a></li>
+                <li><a href="{{url('/category/shop/products/'.$item->id)}}">{{$item->category_name}}</a></li>
                 @endforeach
               </ul>
             </div>

@@ -36,7 +36,8 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        //
+        $data=District::OrderBy('id','DESC')->get();
+        return Response()->json($data);
     }
 
     /**
@@ -47,8 +48,9 @@ class DistrictController extends Controller
      */
     public function store(Request $request)
     {
-        District::insert(['district'=>$request->district_name,'division_id'=>$request->division_id]);
-        return back()->with('message','district added successfully');
+        District::create($request->input());
+    
+        return Response()->json(['success'=>'sdfs']);
     }
 
     /**
@@ -91,7 +93,11 @@ class DistrictController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data=District::find($id);
+        $data->district=$request->district;
+        $data->division_id=$request->division_id;
+        $data->update();
+        return Response()->json(['success'=>'sdfsd']);
     }
 
     /**
@@ -100,11 +106,11 @@ class DistrictController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id=$request->district_id;
+        
         District::find($id)->delete();
-        return back()->with('message','data delete successfully');
+        return Response()->json(['success'=>'sdfsd']);
     }
    
 }

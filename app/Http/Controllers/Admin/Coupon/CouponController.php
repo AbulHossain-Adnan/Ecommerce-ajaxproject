@@ -12,10 +12,11 @@ use Session;
 
 class CouponController extends Controller
 {
-      public function __construct()
-    {
-        $this->middleware('auth:admin');
+    public function index(){
+        $data=Coupon::OrderBy('id','DESC')->get();
+        return response()->json($data);
     }
+    
     public function create(){
         return view('admin/coupon/index',[
             'coupons'=>Coupon::all()
@@ -23,40 +24,39 @@ class CouponController extends Controller
     }
     public function store(request $request){
 
-        $request->validate([
-            'coupon_name'=>'required',
-            'coupon_discount'=>'required',
-        ]);
-
         $data = new coupon();
-        $data->coupon=$request->coupon_name;
-        $data->discount=$request->coupon_discount;
-        $data->coupon_started=$request->coupon_start;
-        $data->coupon_end=$request->coupon_end;
+        $data->coupon=$request->input('coupon_name');
+        $data->discount=$request->input('coupon_discount');
+        $data->coupon_started=$request->input('coupon_start');
+        $data->coupon_end=$request->input('coupon_end');
 
         $data->save();
-        return back()->with('message','data adden succesfully');
+        return response()->json(['success'=>'sdfsd']);
     }
     public function edit($id){
+
 
         $data=Coupon::findOrFail($id);
         return response()->json($data);
 
 
     }
-    public function updated(request $request){
-        $id=$request->id;
-        $coupon=Coupon::find($id);
-        $coupon->update([
-            'coupon'=>$request->coupon_name,
-            'discount'=>$request->coupon_discount
+    public function update(request $request,$id){
+      
+        $coupon_id=Coupon::findOrFail($id);
+        $coupon_id->update([
+            'coupon'=>$request->coupon,
+            'discount'=>$request->discount,
+            'coupon_started'=>$request->coupon_start,
+            'coupon_end'=>$request->coupon_end,
         ]);
-       return back()->with('message',"coupon Update succesfully");
+       return response()->json(['success'=>'sdfsd']);
     }
-    public function destroy(request $request){
-        $id=$request->coupon_id;
-        coupon::find($id)->delete();
-        return back()->with('message','coupon delete succesfully');
+    public function destroy($id){
+
+        Coupon::findOrFail($id)->delete();
+        return response()->json(['success'=>'success']);
+       
 
     }
     public function coupon(request $request){

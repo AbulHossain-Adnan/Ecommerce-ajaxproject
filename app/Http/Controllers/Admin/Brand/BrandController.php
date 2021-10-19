@@ -10,10 +10,7 @@ use App\Models\Product;
 
 class BrandController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+   
     /**
      * Display a listing of the resource.
      *
@@ -21,10 +18,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('admin/brand/index',[
-            'brands'=>Brand::all(),
-            'products'=>Product::all(),
-        ]);
+        $data=Brand::OrderBy('id','DESC')->get();
+        return response()->json($data);
+        
     }
 
     /**
@@ -34,7 +30,10 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+       return view('admin/brand/index',[
+            'brands'=>Brand::all(),
+            'products'=>Product::all(),
+        ]);
     }
 
     /**
@@ -45,30 +44,16 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        
-   $request->validate([
-            'brand_name'=>'required',
-            'brand_photo'=>'required',
-
-        ]);
-
-       
-     
-
-        $data= new Brand();
-        $data->brand_name=$request->brand_name;
-                                 
-      
-          if ($request->hasFile('brand_photo')) {
-            $image=$request->file('brand_photo');
-            $imagename=time().'.'.$image->extension();
-            $image->move(public_path('images'),$imagename);
-            $data->brand_photo=$imagename;
+$data= new Brand();
+$data->brand_name=$request->input('brand_name');
+if($request->hasfile('brand_photo')){
+    $file=$request->file('brand_photo');
+    $file_name=time().'.'.$file->extension();
+    $file->move(public_path('brand_images/'),$file_name);
+    $data->brand_photo=$file_name;
 }
-       
-        
-        $data->save();
-        return back()->with('message','brand added succefully');
+$data->save();
+return response()->json(['success'=>'sdfs']);     
 
     }
 
@@ -91,6 +76,7 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
+
         $data=Brand::findOrFail($id);
         return response()->json($data);
     }
@@ -104,17 +90,18 @@ class BrandController extends Controller
      */
 
 public function updated(Request $request){
-    $data=Brand::findOrFail($request->id);
+    $data_id=$request->input('id');
+    $data=Brand::findOrFail($data_id);
       if ($request->hasFile('brand_photo')) {
             $image=$request->file('brand_photo');
             $imagename=time().'.'.$image->extension();
-            $image->move(public_path('images'),$imagename);
+            $image->move(public_path('brand_images/'),$imagename);
             $data->brand_photo=$imagename;
 
 }
-$data->brand_name=$request->brand_name;
-$data->save();
-return back()->with('message','brand updated successfully');
+$data->brand_name=$request->input('brand_name');
+$data->update();
+return response()->json(['success'=>'sfds']);
   
 }
 
@@ -131,15 +118,14 @@ return back()->with('message','brand updated successfully');
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
+        $data=Brand::findOrFail($id);
+        unlink('brand_images/'.$data->brand_photo);
+        $data->delete();
+        return response()->json(['success'=>'dsdfs']);
 
-$brand_id=$request->brand_id;
- $data=Brand::findOrFail($brand_id);
-    unlink('images/'.$data->brand_photo);
 
-    $data->delete();
-    return back()->with('message','brand deleted succesfully');
 
     }
 }

@@ -30,7 +30,8 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        $data=Setting::OrderBy('id','DESC')->get();
+        return response()->json($data);
     }
 
     /**
@@ -42,14 +43,12 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $data= new Setting();
-        $data->vat=$request->vat;
-        $data->shipping_charge=$request->vat;
-        $data->shopname=$request->shopname;
-        $data->email=$request->email;
-        $data->phone=$request->phone;
-        $data->address=$request->address;
-       
-
+        $data->vat=$request->input('vat');
+        $data->shipping_charge=$request->input('shipping_charge');
+        $data->shopname=$request->input('shopname');
+        $data->email=$request->input('email');
+        $data->phone=$request->input('phone');
+        $data->address=$request->input('address');
        if ($request->hasFile('logo')) {
        $upload_file=$request->file('logo');
        $new_name=time().'.'.$upload_file->extension();
@@ -59,7 +58,7 @@ class SettingController extends Controller
 }
 
         $data->save();
-         return back()->with('message','data added succefully');
+         return Response()->json(['success'=>'success']);
 
     }
 
@@ -82,7 +81,8 @@ class SettingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Setting::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -92,10 +92,25 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updated(Request $request)
     {
-        //
+        $data_id=$request->input('id');
+        $data= Setting::findOrFail($data_id);
+        $data->vat=$request->input('vat');
+        $data->shipping_charge=$request->input('shipping_charge');
+        $data->shopname=$request->input('shopname');
+        $data->email=$request->input('email');
+        $data->phone=$request->input('phone');
+        $data->address=$request->input('address');
+       if ($request->hasFile('logo')) {
+       $upload_file=$request->file('logo');
+       $new_name=time().'.'.$upload_file->extension();
+       $upload_file->move(public_path('images'),$new_name);
+        $data->logo=$new_name;
     }
+     $data->update();
+         return Response()->json(['success'=>'success']);
+}
 
     /**
      * Remove the specified resource from storage.
@@ -105,6 +120,9 @@ class SettingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data=Setting::find($id);
+        unlink('images/'.$data->logo);
+        $data->delete();
+        return response()->json(['success'=>'success']);
     }
 }

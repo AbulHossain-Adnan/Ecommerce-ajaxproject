@@ -6,6 +6,8 @@ return [
 'front_title'=>'wellcome ecommerce',
 'front_shopnow'=>'Shop Now',
 'front_home'=>'Home',
+'front_shop'=>'shop',
+
 'front_brand'=>'Brand',
 'front_pages'=>'Pages',
 'front_blog'=>'Blog',

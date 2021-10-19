@@ -91,11 +91,12 @@
                 
                   <a class="btn btn-warning btn-sm" href="{{ route('order.show',$item->id) }}"><i class="fa fa-eye"></i></a>
                   @if($item->return==1)
-                   <a class="btn btn-primary btn-sm" href="{{ url('order/return/approve',$item->id) }}">approve</a>
+                   <a class="btn btn-primary btn-sm" href="">approve</a>
                    @elseif($item->return==2)
-                   <a class="btn btn-primary btn-sm" href="{{ url('order/approve/cancel',$item->id) }}">Cancel</a>
+                  <button type="button" class="btn btn-primary btn-sm" id="cancel" data-id="{{$item->id}}" type="button">Cancel</button>
+                   
                        @elseif($item->return==2)
-                    <a class="btn btn-primary btn-sm" href="{{ url('order/return/approve',$item->id) }}">approve</a>
+                    <a type="button" class="btn btn-primary btn-sm" href="{{ url('order/return/approve',$item->id) }}">approve</a>
                      @elseif($item->return==3)
                    <a class="btn btn-primary btn-sm" href="{{ url('order/return/approve',$item->id) }}">approve</a>
 
@@ -117,4 +118,41 @@
           </table>
         </div><!-- table-wrapper -->
       </div><!-- card -->
+
+
+
+
+
+      
+      <script>
+        $(document).ready(function(){
+          $('body').on('click','#cancel',function(){
+            let id = $(this).data('id');
+            $.ajax({
+              type:'GET',
+              datatype:'json',
+              url:"/order/return/cancel"+id,
+              success:function(data){
+                const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Return request cancel succesflly'
+          })
+              }
+            })
+
+          })
+        })
+      </script>
 @endsection

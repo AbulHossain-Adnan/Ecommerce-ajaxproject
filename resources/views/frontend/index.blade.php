@@ -2053,39 +2053,12 @@
                     <!-- Brands Slider -->
 
                     <div class="owl-carousel owl-theme brands_slider">
-
+                        @foreach($brands as $item)
                         <div class="owl-item">
                             <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_1.jpg" alt=""></div>
+                                    src="{{asset('images/'.$item->brand_photo)}}" alt=""></div>
                         </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_2.jpg" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_3.jpg" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_4.jpg" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_5.jpg" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_6.jpg" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_7.jpg" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img
-                                    src="{{ asset('frontend') }}/images/brands_8.jpg" alt=""></div>
-                        </div>
+                      @endforeach
 
                     </div>
 
@@ -2288,6 +2261,8 @@ $(document).ready(function(){
   <li class="list-group-item" >Category Name::<span id="cname"></span></li>
   <li class="list-group-item">Brand name::<span id="bname"></span></li>
   <li class="list-group-item">Stock::<span class="badge badge-success" id="stock"></span></li>
+  <li class="list-group-item">test::<span class="badge badge-success" id="test"></span></li>
+
 
 </ul>
   </div>
@@ -2310,10 +2285,10 @@ $(document).ready(function(){
         </div>
           <div class="form-group">
                 <label for="exampleInputQuantity">Quantity </label>
-               <input type="number" name="qty" id="quantity" class="form-control" value="1" pattern="[0-9]"  >
+               <input type="number"  name="qty" id="quantity" class="form-control" value="1" pattern="[0-9]"  >
         </div>
          
-    <button class="bth btn-primary btn-sm" type="submit" onclick="addtocart()">Addv to card</button>
+    <button class="bth btn-primary btn-sm" id="addtocarttest" type="submit" onclick="addtocart()">Add to card</button>
         
   </div>
   
@@ -2370,8 +2345,21 @@ $.ajaxSetup({
                 $("#cname").text(data.product.category.category_name);
                 $("#bname").text(data.product.brand.brand_name);
                 $("#product_id").val(data.product.id);
-               
                $("#stock").text(data.product.product_quantity);
+
+
+               if( data.product.product_quantity < $('#quantity').val() ){
+                   $("#test").text(data.product.brand.brand_name);  
+               }
+               else{
+                $("#test").text(data.product.product_quantity);
+               }
+
+
+              
+                $("#quantity").focus(function(){
+                $(this).blur(); 
+                    });
 
 
 

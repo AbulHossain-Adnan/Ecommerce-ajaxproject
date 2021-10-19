@@ -10,40 +10,41 @@ use App\Models\Admin;
 
 class UserroleController extends Controller
 {
-      public function __construct()
-    {
-        $this->middleware('auth:admin');
+    
+    public function index(){
+            return view('admin/user_role/all_user');
     }
-    public function createrole(){
-    	return view('admin/user_role/create_role');
+    
+    public function create(){
+    	$data=Admin::all();
+        return response()->json($data);
     }
-    public function userrolestore(Request $Request){
 
 
+
+    
+    public function store(Request $Request){
+ 
     	$data=array();
-    	$data['name']= $Request->name;
-    	$data['email']= $Request->email;
-    	$data['password']=Hash::make($Request->password);
-    	$data['product']= $Request->product;
-    	$data['category']= $Request->category;
-    	$data['coupon']= $Request->coupon;
-    	$data['division']= $Request->division;
-    	$data['orders']= $Request->orders;
-    	$data['seo']= $Request->seo;
-    	$data['reports']= $Request->report;
-    	$data['return_order']= $Request->return_order;
-    	$data['contact_message']= $Request->contact_msg;
-    	$data['product_comment']= $Request->product_comment;
-    	$data['site_setting']= $Request->site_setting;
-        $data['post']= $Request->post;
-        $data['stock']= $Request->stock;
-
+    	$data['name']= $Request->input('name');
+    	$data['email']= $Request->input('email');
+    	$data['password']=Hash::make($Request->input('password'));
+    	$data['product']= $Request->input('product');
+    	$data['category']= $Request->input('category');
+    	$data['coupon']= $Request->input('coupon');
+    	$data['division']= $Request->input('division');
+    	$data['orders']= $Request->input('orders');
+    	$data['seo']= $Request->input('seo');
+    	$data['reports']= $Request->input('report');
+    	$data['return_order']= $Request->input('return_order');
+    	$data['contact_message']= $Request->input('contact_msg');
+    	$data['product_comment']= $Request->input('product_comment');
+    	$data['site_setting']= $Request->input('site_setting');
+        $data['post']= $Request->input('post');
+        $data['stock']= $Request->input('stock');
     	$data['type']=2;
     	DB::table('admins')->insert($data);
-
-    	return back()->with('message','admin chaild inserted successfully');
-
-
+    	return response()->json(['success'=>'sdfsd']);
     }
     public function alluserroll(){
 
@@ -54,10 +55,11 @@ class UserroleController extends Controller
     
     
 }
-public function useredit($id){
-	return view('admin/user_role/edit',[
-		'users'=>Admin::find($id),
-	]);
+public function edit($id){
+	      $data=Admin::findOrFail($id);
+          return response()->json($data);
+
+	
 }
 public function userupdate(Request $Request ,$id){
 
@@ -85,10 +87,36 @@ public function userupdate(Request $Request ,$id){
     	return redirect()->route('alluser.role')->with('message','admin chaild updated successfully');
 
 }
-public function userdelete($id){
+public function destroy($id){
 
 	Admin::find($id)->delete();
-return back()->with('message','user deleted successfully');
+return response()->json(['success'=>'sdfsd']);
+
+}
+public function userroleupdated(Request $Request){
+
+    $data_id=$Request->input('userid');
+    $data=Admin::findOrFail($data_id);
+            
+        $data->name= $Request->input('name');
+        $data->email= $Request->input('email');
+        $data->password=Hash::make($Request->input('password'));
+        $data->product= $Request->input('product');
+        $data->category= $Request->input('category');
+        $data->coupon= $Request->input('coupon');
+        $data->division= $Request->input('division');
+        $data->orders= $Request->input('orders');
+        $data->seo= $Request->input('seo');
+        $data->reports= $Request->input('report');
+        $data->return_order= $Request->input('return_order');
+        $data->contact_message= $Request->input('contact_msg');
+        $data->product_comment= $Request->input('product_comment');
+        $data->site_setting= $Request->input('site_setting');
+        $data->post= $Request->input('post');
+        $data->stock= $Request->input('stock');
+        $data->type=2;
+        $data->update();
+        return response()->json(['success'=>'sdfsd']);
 
 }
 }

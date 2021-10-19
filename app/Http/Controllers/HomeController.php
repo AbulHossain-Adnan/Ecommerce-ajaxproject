@@ -104,7 +104,7 @@ class HomeController extends Controller
         }
 
         if($data->save())
-            return redirect()->route('login')->with('message','sdfsd');
+            return redirect()->route('login')->with('message','your registration complete you can login now');
            
 
 
