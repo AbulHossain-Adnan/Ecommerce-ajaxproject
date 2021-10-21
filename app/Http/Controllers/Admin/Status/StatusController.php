@@ -1,53 +1,43 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Status;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-
 class StatusController extends Controller
 {
-  
 
-    public function active($id){
-       $product = Product::find($id);
+public function active($id){
+$product = Product::find($id);
+if($product->status =='1'){
+$product->update([
+'status'=>'0'
+]);
 
-        if($product->status =='1'){
-           $product->update([
-            'status'=>'0'
-           ]);
-            
-            
-            $notification=array(
-            'message'=>'status updated successfully',
-            'alert-type'=>'success'
 
-           );
-           return back()->with($notification);
-        }
-      
-    }
-     public function deactive($id){
-       
-        $product = Product::find($id);
+$notification=array(
+'message'=>'status updated successfully',
+'alert-type'=>'success'
+);
+return back()->with($notification);
+}
 
-        if($product->status == '0'){
-           
-            
-           $product->update([
-            'status'=>'1'
+}
+public function deactive($id){
 
-           ]);
-           $notification=array(
-            'message'=>'status updated successfully',
-            'alert-type'=>'success'
+$product = Product::find($id);
+if($product->status == '0'){
 
-           );
-           return back()->with($notification);
 
-        }
-        
-        
-    }
+$product->update([
+'status'=>'1'
+]);
+$notification=array(
+'message'=>'status updated successfully',
+'alert-type'=>'success'
+);
+return back()->with($notification);
+}
+
+
+}
 }

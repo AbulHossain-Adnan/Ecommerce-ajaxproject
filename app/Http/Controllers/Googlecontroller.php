@@ -23,15 +23,7 @@ class GoogleController extends Controller
 
 {
 
-    /**
 
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
 
     public function redirectToGoogle()
 
@@ -41,17 +33,7 @@ class GoogleController extends Controller
 
     }
 
-        
 
-    /**
-
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
 
     public function handleGoogleCallback()
 

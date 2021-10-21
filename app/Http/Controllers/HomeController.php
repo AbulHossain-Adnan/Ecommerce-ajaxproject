@@ -20,18 +20,7 @@ use Image;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
- 
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+  
     public function index()
     {
         $id=Auth::id();
@@ -75,7 +64,6 @@ class HomeController extends Controller
         return view('user/register');
     }
     public function registerpost(Request $Request){
-    
         $Request->validate([
 
             'name' => ['required', 'string', 'max:255'],
@@ -85,12 +73,10 @@ class HomeController extends Controller
 
             ]);
       
-
             $data = new user();
             $data->name=$Request->name;
             $data->email=$Request->email;
             $data->password=Hash::make('password');
-
 
         if ($Request->image) {
 
@@ -99,14 +85,10 @@ class HomeController extends Controller
             $image_name = hexdec(uniqid()).'.'.$uploaded_image->extension();
             Image::make($uploaded_image)->resize(100,100)->save(public_path('user_images/'.$image_name));
             $data->image=$image_name;
-
            
         }
-
         if($data->save())
             return redirect()->route('login')->with('message','your registration complete you can login now');
-           
-
 
     }
     public function update_password(Request $Request){
@@ -115,9 +97,6 @@ class HomeController extends Controller
         $newpass=$Request->password;
         $confirm=$Request->password_confirmation;
     
-
-       
-
 
         if(Hash::check($old_password,$password)){
            if($newpass === $confirm){
@@ -131,13 +110,10 @@ class HomeController extends Controller
            return back()->with('message','new password and confirm passsword not same');
 
            }
-
-
         }
         else{
             return back()->with('message','old password not matched');
-        }
-       
+        } 
     }
     public function userprofileimageupdate(Request $Request,$id){
         if($Request->hasfile('image')){
@@ -150,7 +126,6 @@ class HomeController extends Controller
 
         $user->update(['image'=>$image_newname]);
         return back()->with('message','user profile added Successfully');
-
 
     }
 

@@ -26,16 +26,6 @@ class StripePaymentController extends Controller
 {
      
 
-    /**
-
-     * success response method.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
-
     public function stripe()
 
     {
@@ -45,15 +35,6 @@ class StripePaymentController extends Controller
     }
 
 
-    /**
-
-     * success response method.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function stripePost(Request $request)
 
