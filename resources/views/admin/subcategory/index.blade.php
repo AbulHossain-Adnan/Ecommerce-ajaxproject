@@ -215,6 +215,7 @@
     }
     })
     }
+// script for update data
     function updata(){
     $.ajaxSetup({
     headers: {
@@ -228,7 +229,7 @@
     type:"PUT",
     datatype:"json",
     data:{sub_category_name:sub_category_name,category_id:category_id},
-    url:"/subcategory/update/"+id,
+    url:"/subCategory/"+id,
     success:function(data){
     alldata();
     cleardata();

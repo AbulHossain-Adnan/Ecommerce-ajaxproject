@@ -13,7 +13,7 @@ use App\Http\Controllers\Order_detailsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\Admin\Area\AreaController;
-use App\Http\Controllers\Admin\Brand\BrandController;
+
 use Illuminate\Support\Facades\Route;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
@@ -57,7 +57,6 @@ Route::get('/admin/logout', [App\Http\Controllers\Admin\HomeController::class, '
 Route::group(['middleware'=>'auth:admin'],function(){
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
-Route::post('category/{id}',[CategoryController::class,'update']);
 Route::resource('category', CategoryController::class);
 });
 
@@ -68,27 +67,28 @@ Route::get('/product/status/updated/{id}', [App\Http\Controllers\Admin\Product\P
 Route::resource('product',ProductController::class);
 
 
-
-//  //  Route for subcategory 
-// Route::group(['prefix'=>'subcategory'],function(){
-// Route::PUT('/update/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,'update']);
-
-// });
-
+// route for subCategory
 Route::resource('subCategory',SubCategoryController::class);
 
 
 Route::get('/get_subcategory/{id}',[App\Http\Controllers\Admin\Product\ProductController::class,'getsubcat']);
-Route::get('/subcategory/product/show/{id}',[App\Http\Controllers\Admin\Category\SubcategoryController::class,
+Route::get('/subcategory/product/show/{id}',[App\Http\Controllers\Admin\Category\SubCategoryController::class,
   'subcategoryshow']);
 
 
  Route::POST('/user_roll/updated',[App\Http\Controllers\Admin\User_Role\UserroleController::class,'userroleupdated']);
     Route::resource('user_role',UserroleController::class);
 
+
+
 // Route for Brand 
 Route::post('/brand/updated',[App\Http\Controllers\Admin\Brand\BrandController::class,'updated']);
 Route::resource('brand', BrandController::class);
+
+
+
+
+
 
 // route for coupon\ 
 Route::resource('coupon',CouponController::class);
@@ -101,7 +101,6 @@ Route::resource('coupon',CouponController::class);
   Route::resource('district', DistrictController::class);
 
      // route for Admin access area
-
   Route::resource('area', AreaController::class);
 
 
